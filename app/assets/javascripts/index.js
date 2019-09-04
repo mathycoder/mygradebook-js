@@ -6,7 +6,10 @@ $(document).on('turbolinks:load', function() {
   }
 })
 
-
+// Something weird is happening with the scope.  'grades' gets pushed
+// in createJSONObjects.  But we can't access 'grades' outside of the
+// scope.  Hopefully this has something to do with document.ready,
+// because 'grades' is available in the JS console in the browser.
 function getData() {
   const klassId = window.location.href.split("/")[4]
   $.get('/classes/' + klassId + '/grades', function(json){
@@ -18,4 +21,18 @@ function createJSONObjects(json, cla){
   for (i = 0; i<json.length; i++){
     new cla(json[i])
   }
+  displayCurrentGrades()
+}
+
+function displayCurrentGrades() {
+  const gradeTds = $('.score')
+  for (let i=0; i<gradeTds.length; i++){
+    const grade = grades.find(grade => grade.id === Number.parseInt(gradeTds[i].id))
+    gradeTds[i].innerText = grade.score
+    gradeTds[i].click(clickEvent)
+  }
+}
+
+function clickEvent() {
+  alert("ouch!")
 }

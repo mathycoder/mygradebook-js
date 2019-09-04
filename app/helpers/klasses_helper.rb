@@ -98,7 +98,9 @@ module KlassesHelper
 
   def td_display_score(grade, index)
     content_tag(:td, class: td_classes(index, "score"), id: "#{grade.id}") do
-      grade.score.to_s if grade
+      #removed line to put int grades via Rails; JS will do this now!
+      #grade.score.to_s if grade
+      ""
     end
   end
 
