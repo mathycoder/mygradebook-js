@@ -1,7 +1,7 @@
 $(document).on('turbolinks:load', function() {
-  const array = window.location.href.split('/')
+  const array = window.location.href.split("classes/")
   // Checks for the correct show page before running getData()
-  if (array.length === 5 && array[3] === 'classes' && array[4] !== 'new'){
+  if (array.length > 1 && !(array[1].includes("students") || array[1].includes("new") || array[1].includes("grades") || array[1].includes("edit"))){
     getData()
     $('form.grade-input').submit(modifyGrade)
   }
