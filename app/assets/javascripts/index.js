@@ -1,5 +1,6 @@
 // consider using onChange instead of enter
 // currently can't resubmit a grade
+// currently doesn't return error messages
 
 $(document).on('turbolinks:load', function() {
   const array = window.location.href.split("classes/")
@@ -58,6 +59,7 @@ function modifyGrade(event){
    url: this.action,
    data: JSON.stringify(values)
   }).done(function(data) {
+    $(`#${data.id}.score input`)[0].value = data.score
     studentAverages()
     conditionalFormatting()
     })

@@ -6,7 +6,11 @@ class GradesController < ApplicationController
 
   def update
     @grade = Grade.find_by(id: params[:id])
-    @grade.update(score: params[:grade][:score])
-    render json: @grade, status: 201
+    if @grade.update(score: params[:grade][:score])
+      render json: @grade, status: 201
+    else
+      @grade = Grade.find_by(id: params[:id])
+      render json: @grade, status: 201
+    end
   end
 end
