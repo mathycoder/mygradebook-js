@@ -4,9 +4,15 @@
     <%= td_student_average(student, klass_or_lt) %>
     <% collection.each do |lt| %>
       <%= blank_td?(lt) %>
-      <% lt.students_chronological_grades(student).each_with_index do |grade, index| %>
-        <%= td_display_score(grade, index) %>
-      <% end %>
+
+        <%= form_for(:grade) do |f| %>
+          <% lt.students_chronological_grades(student).each_with_index do |grade, index| %>
+            <%= content_tag(:td, class: td_classes(index, "score"), id: "#{grade.id}") do %>
+              <%= f.text_field(:score) %>
+            <% end %>
+          <% end %>
+        <% end %>
+
     <% end %>
   <% end %>
 <% end %>
