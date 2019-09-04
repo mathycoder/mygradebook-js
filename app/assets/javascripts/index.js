@@ -4,10 +4,6 @@ $(document).on('turbolinks:load', function() {
   if (array.length === 5 && array[3] === 'classes' && array[4] !== 'new'){
     getData()
     $('form.grade-input').submit(modifyGrade)
-    $('form.grade-input #grade_score.grade-text-field').keyup(enter_detector);
-    $('form.grade-input input').click(function(){
-      alert('clicked!')
-    })
   }
 })
 
@@ -34,6 +30,7 @@ function displayCurrentGrades() {
   for (let i=0; i<gradeTds.length; i++){
     const grade = grades.find(grade => grade.id === Number.parseInt(gradeTds[i].id))
     gradeTds[i].children[0].value = grade.score
+    $(gradeTds[i]).keyup(enter_detector)
   }
 }
 
@@ -57,9 +54,7 @@ function modifyGrade(event){
 
 function enter_detector(e) {
 // if enter key is pressed lose focus
-  alert("key up!")
   if(e.which==13||e.keyCode==13){
-
-  	this.blur();
+    $(this).children()[0].blur()
   }
 }
