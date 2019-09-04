@@ -6,7 +6,7 @@
       <%= blank_td?(lt) %>
 
         <% lt.students_chronological_grades(student).each_with_index do |grade, index| %>
-          <%= form_for(:grade) do |f| %>
+          <%= form_for(:grade, url: klass_grade_path(klass, grade)) do |f| %>
             <%= content_tag(:td, class: td_classes(index, "score"), id: "#{grade.id}") do %>
               <%= f.text_field(:score, class: "grade-text-field") %>
               <%= f.hidden_field(:id, :value => grade.id) %>

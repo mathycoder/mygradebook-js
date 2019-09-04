@@ -37,5 +37,14 @@ function displayCurrentGrades() {
 function modifyGrade(event){
   event.preventDefault()
   const values = $(this).serialize()
-  console.log(values)
+  const klassId = window.location.href.split("/")[4]
+  $.ajax({
+   type: 'PATCH',
+   url: this.action,
+   data: JSON.stringify(values),
+   processData: false,
+   contentType: 'application/merge-patch+json',
+  }).done(function(data) {
+    console.log(data)
+    })
 }
