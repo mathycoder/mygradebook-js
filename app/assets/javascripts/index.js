@@ -30,15 +30,12 @@ function displayCurrentGrades() {
   for (let i=0; i<gradeTds.length; i++){
     const grade = grades.find(grade => grade.id === Number.parseInt(gradeTds[i].id))
     gradeTds[i].children[0].value = grade.score
-    $(gradeTds[i]).click(clickEvent)
   }
 }
 
-function clickEvent() {
-  console.log(this)
-}
 
 function modifyGrade(event){
   event.preventDefault()
-  alert('tried to submit form')
+  const values = $(this).serialize()
+  console.log(values)
 }

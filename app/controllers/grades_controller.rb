@@ -5,5 +5,6 @@ class GradesController < ApplicationController
   end
 
   def update
+    binding.pry
   end
 end

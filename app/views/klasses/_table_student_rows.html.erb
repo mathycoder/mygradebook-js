@@ -9,6 +9,7 @@
           <%= form_for(:grade) do |f| %>
             <%= content_tag(:td, class: td_classes(index, "score"), id: "#{grade.id}") do %>
               <%= f.text_field(:score, class: "grade-text-field") %>
+              <%= f.hidden_field(:id, :value => grade.id) %>
             <% end %>
             <%= f.submit(nil, class: "hide-submit") %>
           <% end %>
