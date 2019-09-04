@@ -3,7 +3,11 @@ $(document).on('turbolinks:load', function() {
   // Checks for the correct show page before running getData()
   if (array.length === 5 && array[3] === 'classes' && array[4] !== 'new'){
     getData()
-    $('form').submit(modifyGrade)
+    $('form.grade-input').submit(modifyGrade)
+    $('form.grade-input #grade_score.grade-text-field').keyup(enter_detector);
+    $('form.grade-input input').click(function(){
+      alert('clicked!')
+    })
   }
 })
 
@@ -43,6 +47,19 @@ function modifyGrade(event){
    url: this.action,
    data: JSON.stringify(values)
   }).done(function(data) {
-    console.log(data)
+    conditionalFormatting()
+    // console.log(data)
+    // const oldGrade = grades.find(grade => grade.id === data.id)
+    // const td = $(`#${oldGrade.id}`)[0]
+    // td.children[0].value = data.score
     })
+}
+
+function enter_detector(e) {
+// if enter key is pressed lose focus
+  alert("key up!")
+  if(e.which==13||e.keyCode==13){
+
+  	this.blur();
+  }
 }
