@@ -1,10 +1,6 @@
 // Instead of listening to document.ready, we have to listen for when turbolinks
 //load a new page.  Otherwise, testing() only invokes during the initial page load.
 
-$(document).on('turbolinks:load', function() {
-  conditionalFormatting()
-})
-
 function conditionalFormatting() {
   const allTds = $('.assignment-averages')
   for (let i=0; i<=allTds.length; i++) {

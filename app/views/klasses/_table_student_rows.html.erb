@@ -2,6 +2,7 @@
   <%= content_tag(:tr) do %>
     <%= td_link_to_student(klass, student) %>
     <%= td_student_average(student, klass_or_lt) %>
+
     <% collection.each do |lt| %>
       <%= blank_td?(lt) %>
 

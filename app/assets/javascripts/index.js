@@ -1,6 +1,5 @@
 // consider using onChange instead of enter
-
-
+// currently can't resubmit a grade
 
 $(document).on('turbolinks:load', function() {
   const array = window.location.href.split("classes/")
@@ -10,6 +9,20 @@ $(document).on('turbolinks:load', function() {
     $('form.grade-input').submit(modifyGrade)
   }
 })
+
+function studentAverages(){
+  const rows = $('tr')
+  for (let i=3; i<rows.length; i++){
+    let average = 0
+    const tds = $(`tr:nth-child(${i+1}) td input#grade_score`)
+    for (let j=0; j<tds.length; j++){
+      average += Number.parseInt(tds[j].value)
+    }
+    average /= tds.length
+    $(`tr:nth-child(${i+1}) td.average`)[0].innerHTML = `<p><strong>${average.toFixed(2)}</strong></p>`
+  }
+}
+
 
 function getData() {
   const klassId = window.location.href.split("/")[4]
@@ -32,8 +45,9 @@ function displayCurrentGrades() {
     gradeTds[i].children[0].value = grade.score
     $(gradeTds[i]).keyup(enter_detector)
   }
+  studentAverages()
+  conditionalFormatting()
 }
-
 
 function modifyGrade(event){
   event.preventDefault()
@@ -44,11 +58,8 @@ function modifyGrade(event){
    url: this.action,
    data: JSON.stringify(values)
   }).done(function(data) {
+    studentAverages()
     conditionalFormatting()
-    // console.log(data)
-    // const oldGrade = grades.find(grade => grade.id === data.id)
-    // const td = $(`#${oldGrade.id}`)[0]
-    // td.children[0].value = data.score
     })
 }
 
@@ -56,5 +67,6 @@ function enter_detector(e) {
 // if enter key is pressed lose focus
   if(e.which==13||e.keyCode==13){
     $(this).children()[0].blur()
+
   }
 }
