@@ -5,6 +5,8 @@ class GradesController < ApplicationController
   end
 
   def update
-    binding.pry
+    @grade = Grade.find_by(id: params[:id])
+    @grade.update(score: params[:grade][:score])
+    render json: @grade, status: 201
   end
 end

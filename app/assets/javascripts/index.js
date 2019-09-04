@@ -41,9 +41,7 @@ function modifyGrade(event){
   $.ajax({
    type: 'PATCH',
    url: this.action,
-   data: JSON.stringify(values),
-   processData: false,
-   contentType: 'application/merge-patch+json',
+   data: JSON.stringify(values)
   }).done(function(data) {
     console.log(data)
     })
