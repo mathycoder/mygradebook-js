@@ -13,7 +13,6 @@ class ApiScraper < ApplicationRecord
       #   headers: {api_key: ENV['CCSS_KEY']}
       #   )
       # hash = JSON.parse(response)["data"]
-
       response = Faraday.get(url) do |req|
         req.params['api-key'] = ENV['CCSS_KEY']
       end
