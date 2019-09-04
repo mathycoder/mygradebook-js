@@ -32,13 +32,14 @@ module ApplicationHelper
     html_string.html_safe
   end
 
+
   def current_klass(klass)
     klass ? klass : Klass.new
   end
 
   def klass_dropdown(klass)
     content_tag(:div, class: "class-header") do
-      form_for([:klass, current_klass(klass)], url: klass_redirect_path, method: :get) do |f|
+      form_for([:klass, current_klass(klass)], url: klass_redirect_url, method: :get) do |f|
         f.collection_select(:id, current_user.klasses_in_alphabetical_order, :id, :klass_name, {include_blank: "Classes"}, {class: "select-blend", onchange: "this.form.submit();"})
       end
     end

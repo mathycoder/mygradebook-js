@@ -21,6 +21,6 @@
 //= require chartkick
 //= require Chart.bundle
 
-//=require classes
-//=require index
+//= require classes
+//= require index
 //= require formatting

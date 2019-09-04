@@ -1,3 +1,7 @@
+// consider using onChange instead of enter
+
+
+
 $(document).on('turbolinks:load', function() {
   const array = window.location.href.split("classes/")
   // Checks for the correct show page before running getData()
@@ -7,10 +11,6 @@ $(document).on('turbolinks:load', function() {
   }
 })
 
-// Something weird is happening with the scope.  'grades' gets pushed
-// in createJSONObjects.  But we can't access 'grades' outside of the
-// scope.  Hopefully this has something to do with document.ready,
-// because 'grades' is available in the JS console in the browser.
 function getData() {
   const klassId = window.location.href.split("/")[4]
   $.get('/classes/' + klassId + '/grades', function(json){
