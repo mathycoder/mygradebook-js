@@ -6,6 +6,10 @@ input[type=text].grade-text-field {
   border: none;
 }
 
+input[type=submit].hide-submit {
+  display: none;
+}
+
 #new-students-title {
   display: flex;
 }

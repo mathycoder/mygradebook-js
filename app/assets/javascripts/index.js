@@ -3,6 +3,7 @@ $(document).on('turbolinks:load', function() {
   // Checks for the correct show page before running getData()
   if (array.length === 5 && array[3] === 'classes' && array[4] !== 'new'){
     getData()
+    $('form').submit(modifyGrade)
   }
 })
 
@@ -35,4 +36,9 @@ function displayCurrentGrades() {
 
 function clickEvent() {
   console.log(this)
+}
+
+function modifyGrade(event){
+  event.preventDefault()
+  alert('tried to submit form')
 }

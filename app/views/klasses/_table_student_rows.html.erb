@@ -5,11 +5,12 @@
     <% collection.each do |lt| %>
       <%= blank_td?(lt) %>
 
-        <%= form_for(:grade) do |f| %>
-          <% lt.students_chronological_grades(student).each_with_index do |grade, index| %>
+        <% lt.students_chronological_grades(student).each_with_index do |grade, index| %>
+          <%= form_for(:grade) do |f| %>
             <%= content_tag(:td, class: td_classes(index, "score"), id: "#{grade.id}") do %>
               <%= f.text_field(:score, class: "grade-text-field") %>
             <% end %>
+            <%= f.submit(nil, class: "hide-submit") %>
           <% end %>
         <% end %>
 
