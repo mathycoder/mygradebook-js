@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  #grades API
+  resources :klasses, :path => 'classes' do
+    resources :grades, only: [:index, :update]
+  end
+
+
   #student experience routes
   get '/studentklasses', to: "student_klasses#index", as: "s_klasses"
   get '/studentklasses/redirect', to: "student_klasses#redirect", as: "s_klass_redirect"
@@ -47,4 +53,5 @@ Rails.application.routes.draw do
   #omniauth
   get '/auth/facebook/callback' => 'sessions#create'
   root 'sessions#new'
+
 end
