@@ -29,10 +29,10 @@ function displayCurrentGrades() {
   for (let i=0; i<gradeTds.length; i++){
     const grade = grades.find(grade => grade.id === Number.parseInt(gradeTds[i].id))
     gradeTds[i].innerText = grade.score
-    gradeTds[i].click(clickEvent)
+    $(gradeTds[i]).click(clickEvent)
   }
 }
 
 function clickEvent() {
-  alert("ouch!")
+  console.log(this)
 }
