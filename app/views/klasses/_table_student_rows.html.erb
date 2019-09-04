@@ -8,7 +8,7 @@
         <%= form_for(:grade) do |f| %>
           <% lt.students_chronological_grades(student).each_with_index do |grade, index| %>
             <%= content_tag(:td, class: td_classes(index, "score"), id: "#{grade.id}") do %>
-              <%= f.text_field(:score) %>
+              <%= f.text_field(:score, class: "grade-text-field") %>
             <% end %>
           <% end %>
         <% end %>
