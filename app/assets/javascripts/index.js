@@ -62,6 +62,7 @@ function displayCurrentGrades() {
     $(gradeTds[i]).keyup(enter_detector)
   }
   studentAverages()
+  assignmentAverages()
   conditionalFormatting()
 }
 
@@ -81,6 +82,7 @@ function modifyGrade(event){
       $(`#${data.id}.score`).addClass('change-back')
     }, 1000)
     studentAverages()
+    assignmentAverages()
     conditionalFormatting()
   }).fail(function(data){
     $(`#${data.responseJSON.id}.score`).children()[0][2].value = data.responseJSON.score
