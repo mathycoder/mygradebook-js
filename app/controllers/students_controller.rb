@@ -70,7 +70,7 @@ class StudentsController < ApplicationController
 
   def destroy
     @student.destroy
-    redirect_to(new_student_path, alert: "Student Deleted from School")
+    render json: @student, status: 201
   end
 
   private

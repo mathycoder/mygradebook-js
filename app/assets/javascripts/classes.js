@@ -21,10 +21,11 @@ class Student {
   }
 
   trHTML(){
-    return `<td><button class="little-button">edit</button></td>
-            <td>${this.last_name}</td>
+    return `<td>${this.last_name}</td>
             <td>${this.first_name}</td>
             <td>${this.grade}</td>
-            <td>${this.klass}</td>`
+            <td>${this.klass}</td>
+            <td><button id="edit-${this.id}" class="little-button edit-student-button">edit</button></td>
+            <td><button id="delete-${this.id}" class="little-button delete-student-button">delete</button></td>`
   }
 }
