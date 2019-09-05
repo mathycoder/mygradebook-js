@@ -10,7 +10,7 @@ class GradesController < ApplicationController
       render json: @grade, status: 201
     else
       @grade = Grade.find_by(id: params[:id])
-      render json: @grade, status: 201
+      render json: @grade, status: 422
     end
   end
 end

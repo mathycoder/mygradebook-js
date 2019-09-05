@@ -58,18 +58,23 @@ function modifyGrade(event){
    type: 'PATCH',
    url: this.action,
    data: JSON.stringify(values)
-  }).done(function(data) {
-    console.log("PATCH")
+ }).done(function(data) {
     $(`#${data.id}.score input`)[0].value = data.score
     $(`#${data.id}.score`).addClass('color-change')
     setTimeout(function() {
       $(`#${data.id}.score`).removeClass('color-change')
       $(`#${data.id}.score`).addClass('change-back')
-      $(`#${data.id}`).prev().prev().prev()[0].prop('disabled',false)
     }, 1000)
     studentAverages()
     conditionalFormatting()
-    })
+  }).fail(function(data){
+    $(`#${data.responseJSON.id}.score input`)[0].value = data.responseJSON.score
+    $(`#${data.responseJSON.id}.score`).addClass('fail-color-change')
+    setTimeout(function() {
+      $(`#${data.responseJSON.id}.score`).removeClass('fail-color-change')
+      $(`#${data.responseJSON.id}.score`).addClass('change-back')
+    }, 1000)
+  })
 }
 
 
@@ -78,8 +83,5 @@ function enter_detector(e) {
   if(e.which==13||e.keyCode==13){
     $(this).closest('form').submit();
     $(this).children()[0].blur()
-
-    console.log("enter")
-
   }
 }
