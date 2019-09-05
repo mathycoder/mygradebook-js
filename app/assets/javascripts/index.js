@@ -1,5 +1,4 @@
 // consider using onChange instead of enter
-// currently can't resubmit a grade
 // currently doesn't return error messages
 
 $(document).on('turbolinks:load', function() {
@@ -17,26 +16,43 @@ function studentAverages(){
   for (let i=3; i<rows.length; i++){
     let average = 0
     const tds = $(`tr:nth-child(${i+1}) td input#grade_score`)
+    let counter = 0
     for (let j=0; j<tds.length; j++){
-      average += Number.parseFloat(tds[j].value)
+      const num = Number.parseFloat(tds[j].value)
+      if (num){
+        average += num
+        counter++
+      }
     }
-    average /= tds.length
-    $(`tr:nth-child(${i+1}) td.average`)[0].innerHTML = `<p><strong>${average.toFixed(2)}</strong></p>`
+    average /= counter
+    if (average) {
+      $(`tr:nth-child(${i+1}) td.average`)[0].innerHTML = `<p><strong>${average.toFixed(2)}</strong></p>`
+    } else {
+      $(`tr:nth-child(${i+1}) td.average`)[0].innerHTML = `<p><strong></strong></p>`
+    }
   }
 }
 
 function assignmentAverages(){
-  //const columns = $('tr td:first-child')
   const columns = $('tr:nth-child(3) td')
-
   for (let i=2; i<columns.length; i++){
     let average = 0
     const tds = $(`tr:nth-child(n+4) td:nth-child(${i+1}) input#grade_score`)
+    let counter = 0
     for (let j=0; j<tds.length; j++){
-      average += Number.parseFloat(tds[j].value)
+      const num = Number.parseFloat(tds[j].value)
+      if (num){
+        average += num
+        counter++
+      }
     }
-    average /= tds.length
-    $('.assign-average')[i-2].innerHTML = `<strong>${average.toFixed(2)}</strong>`
+    average /= counter
+    if (average) {
+      $('.assign-average')[i-2].innerHTML = `<strong>${average.toFixed(2)}</strong>`
+    } else {
+      $('.assign-average')[i-2].innerHTML = `<strong></strong>`
+    }
+
   }
 }
 
