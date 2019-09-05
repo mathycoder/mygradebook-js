@@ -30,5 +30,12 @@ function displayStudents(){
 
 function addStudent(event){
   event.preventDefault()
-  console.log('did you try to save me?')
+  const values = $(this).serialize()
+  $.ajax({
+   type: 'POST',
+   url: '/students',
+   data: JSON.stringify(values)
+ }).done(function(data) {
+   console.log(data)
+ })
 }

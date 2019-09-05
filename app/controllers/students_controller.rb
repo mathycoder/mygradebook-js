@@ -28,10 +28,9 @@ class StudentsController < ApplicationController
   def create
     @student = Student.new(student_params)
     if @student.save
-      redirect_to(new_student_url, alert: "#{@student.first_name} added to the school")
+      render json: @student, status: 201
     else
-      @students = Student.filter_by(params[:query], nil)
-      render 'new'
+      render json: @student, status: 422
     end
   end
 
