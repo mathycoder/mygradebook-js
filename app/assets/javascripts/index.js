@@ -6,6 +6,7 @@ $(document).on('turbolinks:load', function() {
   const array = window.location.href.split("classes/")
   // Checks for the correct show page before running getData()
   if (array.length > 1 && !(array[1].includes("students") || array[1].includes("new") || array[1].includes("grades") || array[1].includes("edit"))){
+    console.log("I'm running!")
     getData()
     $('form.grade-input').submit(modifyGrade)
   }
@@ -25,8 +26,9 @@ function studentAverages(){
 }
 
 function assignmentAverages(){
-  const columns = $('tr td:first-child')
-//$('tr:nth-child(n+4) td:nth-child(3)')
+  //const columns = $('tr td:first-child')
+  const columns = $('tr:nth-child(3) td')
+
   for (let i=2; i<columns.length; i++){
     let average = 0
     const tds = $(`tr:nth-child(n+4) td:nth-child(${i+1}) input#grade_score`)
@@ -34,7 +36,6 @@ function assignmentAverages(){
       average += Number.parseFloat(tds[j].value)
     }
     average /= tds.length
-
     $('.assign-average')[i-2].innerHTML = `<strong>${average.toFixed(2)}</strong>`
   }
 }
