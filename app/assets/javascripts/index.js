@@ -17,7 +17,7 @@ function studentAverages(){
     let average = 0
     const tds = $(`tr:nth-child(${i+1}) td input#grade_score`)
     for (let j=0; j<tds.length; j++){
-      average += Number.parseInt(tds[j].value)
+      average += Number.parseFloat(tds[j].value)
     }
     average /= tds.length
     $(`tr:nth-child(${i+1}) td.average`)[0].innerHTML = `<p><strong>${average.toFixed(2)}</strong></p>`
@@ -25,7 +25,18 @@ function studentAverages(){
 }
 
 function assignmentAverages(){
+  const columns = $('tr td:first-child')
+//$('tr:nth-child(n+4) td:nth-child(3)')
+  for (let i=2; i<columns.length; i++){
+    let average = 0
+    const tds = $(`tr:nth-child(n+4) td:nth-child(${i+1}) input#grade_score`)
+    for (let j=0; j<tds.length; j++){
+      average += Number.parseFloat(tds[j].value)
+    }
+    average /= tds.length
 
+    $('.assign-average')[i-2].innerHTML = `<strong>${average.toFixed(2)}</strong>`
+  }
 }
 
 
