@@ -2,7 +2,7 @@
   background-color: inherit;
 }
 
-.score.color-change {
+.color-change {
   -webkit-transition: 1.5s;
   -moz-transition: 1.5s;
   -ms-transition: 1.5s;
@@ -11,7 +11,7 @@
   background-color: rgb(125, 230, 240) !important;
 }
 
-.score.fail-color-change {
+.fail-color-change {
   -webkit-transition: 1.5s;
   -moz-transition: 1.5s;
   -ms-transition: 1.5s;
@@ -20,7 +20,7 @@
   background-color: red !important;
 }
 
-.score.change-back {
+.change-back {
   -webkit-transition: 1s;
   -moz-transition: 1s;
   -ms-transition: 1s;

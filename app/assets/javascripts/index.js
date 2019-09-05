@@ -24,6 +24,10 @@ function studentAverages(){
   }
 }
 
+function assignmentAverages(){
+
+}
+
 
 function getData() {
   const klassId = window.location.href.split("/")[4]
@@ -43,7 +47,7 @@ function displayCurrentGrades() {
   const gradeTds = $('.score')
   for (let i=0; i<gradeTds.length; i++){
     const grade = grades.find(grade => grade.id === Number.parseInt(gradeTds[i].id))
-    gradeTds[i].children[0].value = grade.score
+    gradeTds[i].children[0][2].value = grade.score
     $(gradeTds[i]).keyup(enter_detector)
   }
   studentAverages()
@@ -59,7 +63,7 @@ function modifyGrade(event){
    url: this.action,
    data: JSON.stringify(values)
  }).done(function(data) {
-    $(`#${data.id}.score input`)[0].value = data.score
+    $(`#${data.id}.score`).children()[0][2].value = data.score
     $(`#${data.id}.score`).addClass('color-change')
     setTimeout(function() {
       $(`#${data.id}.score`).removeClass('color-change')
@@ -68,7 +72,7 @@ function modifyGrade(event){
     studentAverages()
     conditionalFormatting()
   }).fail(function(data){
-    $(`#${data.responseJSON.id}.score input`)[0].value = data.responseJSON.score
+    $(`#${data.responseJSON.id}.score`).children()[0][2].value = data.responseJSON.score
     $(`#${data.responseJSON.id}.score`).addClass('fail-color-change')
     setTimeout(function() {
       $(`#${data.responseJSON.id}.score`).removeClass('fail-color-change')
@@ -77,11 +81,10 @@ function modifyGrade(event){
   })
 }
 
-
 function enter_detector(e) {
 // if enter key is pressed lose focus
   if(e.which==13||e.keyCode==13){
     $(this).closest('form').submit();
-    $(this).children()[0].blur()
+    $(this).children()[0][2].blur()
   }
 }
