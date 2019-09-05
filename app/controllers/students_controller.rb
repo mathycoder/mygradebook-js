@@ -9,6 +9,10 @@ class StudentsController < ApplicationController
   def new
     @student = Student.new
     @students = Student.filter_by(params[:query], nil)
+    respond_to do |format|
+      format.html
+      format.json {render json: @students}
+    end
   end
 
   def csv
