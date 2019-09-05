@@ -19,4 +19,12 @@ class Student {
     this.klass = attributes.klass
     students.push(this)
   }
+
+  trHTML(){
+    return `<td><button class="little-button">edit</button></td>
+            <td>${this.last_name}</td>
+            <td>${this.first_name}</td>
+            <td>${this.grade}</td>
+            <td>${this.klass}</td>`
+  }
 }

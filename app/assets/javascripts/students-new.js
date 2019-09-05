@@ -1,6 +1,7 @@
 $(document).on('turbolinks:load', function() {
   if (window.location.href === "http://localhost:3000/students/new"){
     getStudentsIndexData()
+    $('.new-student-form').submit(addStudent)
   }
 })
 
@@ -22,11 +23,12 @@ function displayStudents(){
   const table = document.querySelector('table')
   for (let i=0; i<students.length; i++){
     let tr = document.createElement('tr')
-    tr.innerHTML = `<td><button class="little-button">edit</button></td>
-                    <td>${students[i].last_name}</td>
-                    <td>${students[i].first_name}</td>
-                    <td>${students[i].grade}</td>
-                    <td>${students[i].klass}</td>`
+    tr.innerHTML = students[i].trHTML()
     table.appendChild(tr)
   }
+}
+
+function addStudent(event){
+  event.preventDefault()
+  console.log('did you try to save me?')
 }

@@ -17,7 +17,7 @@
 <div class="student-list-container">
   <div class="paper-form">
     <h2>Student</h2>
-    <%= form_for(:student) do |f| %>
+    <%= form_for(:student, :html => {:class => 'new-student-form'}) do |f| %>
       <%# error_display(student) %>
 
       <%= f.text_field(:first_name, {maxlength: "20", class: "text-field", placeholder: "First Name"}) %><br><br>
