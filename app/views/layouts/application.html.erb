@@ -9,7 +9,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body data-turbolinks="false">
     <header>
       <% if logged_in? %>
         <%= render partial: "layouts/header_when_logged_in", locals: {klass: @klass, lt: @lt, student: @student} %>
