@@ -8,3 +8,15 @@ class Grade {
     grades.push(this)
   }
 }
+
+const students = []
+class Student {
+  constructor(attributes){
+    this.id = attributes.id
+    this.first_name = attributes.first_name
+    this.last_name = attributes.last_name
+    this.grade = attributes.grade
+    this.klass = attributes.klass
+    students.push(this)
+  }
+}

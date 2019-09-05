@@ -24,3 +24,5 @@
 //= require classes
 //= require index
 //= require formatting
+
+//= require students-new
