@@ -1,3 +1,25 @@
+.score {
+  background-color: inherit;
+}
+
+.score.color-change {
+  -webkit-transition: 1.5s;
+  -moz-transition: 1.5s;
+  -ms-transition: 1.5s;
+  -o-transition: 1.5s;
+  transition: 1.5s;
+  background-color: rgb(125, 230, 240) !important;
+}
+
+.score.change-back {
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  -ms-transition: 1s;
+  -o-transition: 1s;
+  transition: 1s;
+  background-color: inherit !important;
+}
+
 input[type=text].grade-text-field {
   text-align: center;
   width: 50px;

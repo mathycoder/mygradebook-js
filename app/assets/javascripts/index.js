@@ -59,16 +59,24 @@ function modifyGrade(event){
    url: this.action,
    data: JSON.stringify(values)
   }).done(function(data) {
+    console.log("PATCH")
     $(`#${data.id}.score input`)[0].value = data.score
+    $(`#${data.id}.score`).addClass('color-change')
+    setTimeout(function() {
+      $(`#${data.id}.score`).removeClass('color-change')
+      $(`#${data.id}.score`).addClass('change-back')
+    }, 1000)
     studentAverages()
     conditionalFormatting()
     })
 }
 
+
 function enter_detector(e) {
 // if enter key is pressed lose focus
   if(e.which==13||e.keyCode==13){
     $(this).children()[0].blur()
+    console.log("enter")
 
   }
 }
