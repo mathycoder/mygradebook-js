@@ -36,6 +36,10 @@ function addStudent(event){
    url: '/students',
    data: JSON.stringify(values)
  }).done(function(data) {
-   console.log(data)
+   const table = document.querySelector('table')
+   const newStudent = new Student(data)
+   const tr = document.createElement('tr')
+   tr.innerHTML = students[i].trHTML()
+   table.appendChild(tr)
  })
 }
