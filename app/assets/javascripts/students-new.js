@@ -19,5 +19,14 @@ function createJSONObjectsStudents(json, cla){
 }
 
 function displayStudents(){
-  
+  const table = document.querySelector('table')
+  for (let i=0; i<students.length; i++){
+    let tr = document.createElement('tr')
+    tr.innerHTML = `<td><button class="little-button">edit</button></td>
+                    <td>${students[i].last_name}</td>
+                    <td>${students[i].first_name}</td>
+                    <td>${students[i].grade}</td>
+                    <td>${students[i].klass}</td>`
+    table.appendChild(tr)
+  }
 }

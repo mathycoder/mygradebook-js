@@ -447,7 +447,7 @@ footer {
 }
 
 
-.little-button input[type=submit], input[type=submit].little-button  {
+.little-button input[type=submit], input[type=submit].little-button, .little-button  {
   width: auto;
   background-color: grey;
   color: white;
@@ -586,7 +586,7 @@ input[type=text].text-field, input[type=password].text-field    {
   cursor: pointer;
 }
 
-.big-button input[type=submit]:hover, .little-button input[type=submit]:hover, input[type=submit].little-button:hover  {
+.big-button input[type=submit]:hover, .little-button input[type=submit]:hover, input[type=submit].little-button:hover, .little-button:hover   {
   background-color: black;
   color: white;
 }
