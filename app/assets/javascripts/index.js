@@ -65,6 +65,7 @@ function modifyGrade(event){
     setTimeout(function() {
       $(`#${data.id}.score`).removeClass('color-change')
       $(`#${data.id}.score`).addClass('change-back')
+      $(`#${data.id}`).prev().prev().prev()[0].prop('disabled',false)
     }, 1000)
     studentAverages()
     conditionalFormatting()
@@ -75,7 +76,9 @@ function modifyGrade(event){
 function enter_detector(e) {
 // if enter key is pressed lose focus
   if(e.which==13||e.keyCode==13){
+    $(this).closest('form').submit();
     $(this).children()[0].blur()
+
     console.log("enter")
 
   }
