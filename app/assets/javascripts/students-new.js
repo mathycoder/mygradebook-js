@@ -56,11 +56,8 @@ function addStudent(event){
 
 function editStudent(event){
   const studentId = Number.parseInt(this.id.split('-')[1])
-  const currStudent = students.find(student => student.id === studentId)
-  $('#text-field-first-name')[0].value = currStudent.first_name
-  $('#text-field-last-name')[0].value = currStudent.last_name
-  $('#text-field-grade')[0].value = currStudent.grade
-  $('#text-field-klass')[0].value = currStudent.klass
+  const currStudent = Student.find(studentId)
+  currStudent.fillForm()
   stId = currStudent.id
   const trs = $('tr')
   for (let i=0; i<trs.length; i++){

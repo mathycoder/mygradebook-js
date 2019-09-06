@@ -50,4 +50,11 @@ class Student {
               <td><button id="delete-${this.id}" class="little-button delete-student-button">delete</button></td>
             </tr>`
   }
+
+  fillForm(){
+    $('#text-field-first-name')[0].value = this.first_name
+    $('#text-field-last-name')[0].value = this.last_name
+    $('#text-field-grade')[0].value = this.grade
+    $('#text-field-klass')[0].value = this.klass
+  }
 }
