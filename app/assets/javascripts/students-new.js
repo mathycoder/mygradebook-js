@@ -27,38 +27,29 @@ function displayStudents(){
 }
 
 function addStudent(event){
-  console.log("Add a student!")
   event.preventDefault()
   const values = $(this.parentElement.parentElement).serialize()
-
-  // creates a new student
   if (!stId){
-    $.ajax({
-     type: 'POST',
-     url: '/students',
-     data: JSON.stringify(values)
-     }).done(function(data) {
-       const student = new Student(data)
-       $('#student-list-header').after(student.fullTrHTML())
-       $(`#student-${newStudent.id} .delete-student-button`).click(deleteStudent)
-       $(`#student-${newStudent.id} .edit-student-button`).click(editStudent)
-       $('.new-student-form')[0].reset()
+    $.post('/students', JSON.stringify(values))
+      .done(data => {
+         const student = new Student(data)
+         $('#student-list-header').after(student.fullTrHTML())
+         $(`#student-${student.id} .delete-student-button`).click(deleteStudent)
+         $(`#student-${student.id} .edit-student-button`).click(editStudent)
+         $('.new-student-form')[0].reset()
      })
-   } else { // modifies existing student
+   } else {
      $.ajax({
      type: 'PATCH',
      url: `/students/${stId}`,
      data: JSON.stringify(values)
-   }).done(function(data) {
-     console.log("updated!")
-     const currentStudent = students.find(student => data.id === student.id)
-     currentStudent.first_name = data.first_name
-     currentStudent.last_name = data.last_name
-     currentStudent.grade = data.grade
-     currentStudent.klass = data.klass
-     $(`#student-${data.id}`)[0].innerHTML = currentStudent.trHTML()
-     $('.delete-student-button').click(deleteStudent)
-     $('.edit-student-button').click(editStudent)
+   }).done(data => {
+     const student = Student.find(data.id)
+     student.update(data)
+     $(`#student-${data.id}`)[0].innerHTML = student.trHTML()
+     $(`#student-${student.id} .delete-student-button`).click(deleteStudent)
+     $(`#student-${student.id} .edit-student-button`).click(editStudent)
+     $('.new-student-form')[0].reset()
    })
   }
 }

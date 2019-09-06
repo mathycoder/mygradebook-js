@@ -20,6 +20,17 @@ class Student {
     students.push(this)
   }
 
+  static find(studentId){
+    return students.find(student => studentId === student.id)
+  }
+
+  update(data){
+    this.first_name = data.first_name
+    this.last_name = data.last_name
+    this.grade = data.grade
+    this.klass = data.klass
+  }
+
   trHTML(){
     return `<td>${this.last_name}</td>
             <td>${this.first_name}</td>
