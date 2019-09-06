@@ -28,6 +28,7 @@ function displayStudents(){
     table.appendChild(tr)
   }
   $('.delete-student-button').click(deleteStudent)
+  $('.edit-student-button').click(editStudent)
 }
 
 function addStudent(event){
@@ -47,6 +48,21 @@ function addStudent(event){
      //referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
      tableHeader.parentNode.insertBefore(tr, tableHeader.nextSibling)
    })
+}
+
+function editStudent(event){
+  const studentId = Number.parseInt(this.id.split('-')[1])
+  const currStudent = students.find(student => student.id === studentId)
+  $('#text-field-first-name')[0].value = currStudent.first_name
+  $('#text-field-last-name')[0].value = currStudent.last_name
+  $('#text-field-grade')[0].value = currStudent.grade
+  $('#text-field-klass')[0].value = currStudent.klass
+  const trs = $('tr')
+  for (let i=0; i<trs.length; i++){
+    trs[i].style.backgroundColor = "inherit"
+  }
+  $(this).parent().parent()[0].style.backgroundColor = "yellow"
+
 }
 
 function deleteStudent(event){
