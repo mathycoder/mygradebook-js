@@ -575,7 +575,7 @@ input[type=text].text-field, input[type=password].text-field    {
   height: 25px;
 }
 
-.big-button input[type=submit] {
+.big-button input[type=submit], .big-button {
   width: 150px;
   background-color: grey;
   color: white;
@@ -586,7 +586,7 @@ input[type=text].text-field, input[type=password].text-field    {
   cursor: pointer;
 }
 
-.big-button input[type=submit]:hover, .little-button input[type=submit]:hover, input[type=submit].little-button:hover, .little-button:hover   {
+.big-button input[type=submit]:hover, .big-button:hover, .little-button input[type=submit]:hover, input[type=submit].little-button:hover, .little-button:hover   {
   background-color: black;
   color: white;
 }

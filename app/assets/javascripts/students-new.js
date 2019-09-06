@@ -1,7 +1,7 @@
 $(document).on('turbolinks:load', function() {
   if (window.location.href === "http://localhost:3000/students/new"){
     getStudentsIndexData()
-    $('.new-student-form').submit(addStudent)
+    $('.big-button').click(addStudent)
   }
 })
 
@@ -33,8 +33,9 @@ function displayStudents(){
 }
 
 function addStudent(event){
+  console.log("Add a student!")
   event.preventDefault()
-  const values = $(this).serialize()
+  const values = $(this.parentElement.parentElement).serialize()
 
   // creates a new student
   if (!stId){
@@ -53,6 +54,7 @@ function addStudent(event){
        $(`#student-${newStudent.id} .delete-student-button`).click(deleteStudent)
        $(`#student-${newStudent.id} .edit-student-button`).click(editStudent)
        $('.new-student-form')[0].reset()
+       document.querySelector('.new-student-form').reset()
      })
    } else { // modifies existing student
      $.ajax({
