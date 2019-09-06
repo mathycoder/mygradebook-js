@@ -49,8 +49,10 @@ function addStudent(event){
        const tr = document.createElement('tr')
        tr.id = `student-${newStudent.id}`
        tr.innerHTML = students[i].trHTML()
-       //referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
        tableHeader.parentNode.insertBefore(tr, tableHeader.nextSibling)
+       $(`#student-${newStudent.id} .delete-student-button`).click(deleteStudent)
+       $(`#student-${newStudent.id} .edit-student-button`).click(editStudent)
+       $('.new-student-form')[0].reset()
      })
    } else { // modifies existing student
      $.ajax({
@@ -65,6 +67,8 @@ function addStudent(event){
      currentStudent.grade = data.grade
      currentStudent.klass = data.klass
      $(`#student-${data.id}`)[0].innerHTML = currentStudent.trHTML()
+     $('.delete-student-button').click(deleteStudent)
+     $('.edit-student-button').click(editStudent)
    })
   }
 }
