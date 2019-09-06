@@ -28,4 +28,15 @@ class Student {
             <td><button id="edit-${this.id}" class="little-button edit-student-button">edit</button></td>
             <td><button id="delete-${this.id}" class="little-button delete-student-button">delete</button></td>`
   }
+
+  fullTrHTML(){
+    return `<tr id="student-${this.id}">
+              <td>${this.last_name}</td>
+              <td>${this.first_name}</td>
+              <td>${this.grade}</td>
+              <td>${this.klass}</td>
+              <td><button id="edit-${this.id}" class="little-button edit-student-button">edit</button></td>
+              <td><button id="delete-${this.id}" class="little-button delete-student-button">delete</button></td>
+            </tr>`
+  }
 }

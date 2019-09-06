@@ -21,13 +21,7 @@ function createJSONObjectsStudents(json, cla){
 }
 
 function displayStudents(){
-  const table = document.querySelector('table')
-  for (let i=0; i<students.length; i++){
-    let tr = document.createElement('tr')
-    tr.innerHTML = students[i].trHTML()
-    tr.id = `student-${students[i].id}`
-    table.appendChild(tr)
-  }
+  students.forEach(student => $('table').append(student.fullTrHTML()))
   $('.delete-student-button').click(deleteStudent)
   $('.edit-student-button').click(editStudent)
 }
@@ -44,17 +38,11 @@ function addStudent(event){
      url: '/students',
      data: JSON.stringify(values)
      }).done(function(data) {
-       const table = document.querySelector('table')
-       const tableHeader = document.querySelector('#student-list-header')
-       const newStudent = new Student(data)
-       const tr = document.createElement('tr')
-       tr.id = `student-${newStudent.id}`
-       tr.innerHTML = students[i].trHTML()
-       tableHeader.parentNode.insertBefore(tr, tableHeader.nextSibling)
+       const student = new Student(data)
+       $('#student-list-header').after(student.fullTrHTML())
        $(`#student-${newStudent.id} .delete-student-button`).click(deleteStudent)
        $(`#student-${newStudent.id} .edit-student-button`).click(editStudent)
        $('.new-student-form')[0].reset()
-       document.querySelector('.new-student-form').reset()
      })
    } else { // modifies existing student
      $.ajax({
