@@ -60,10 +60,9 @@ class StudentsController < ApplicationController
     else
       @student = Student.find_by(id: params[:id])
       if @student.update(student_params)
-        redirect_to(new_student_path, alert: "Student updated")
+        render json: @student, status: 201
       else
-        @students = Student.filter_by(params[:query], @klass)
-        render 'edit'
+        render json: @student, status: 422
       end
     end
   end

@@ -5,6 +5,7 @@ $(document).on('turbolinks:load', function() {
   }
 })
 
+let stId
 
 function getStudentsIndexData() {
   $.get('/students/new.json', function(json){
@@ -34,20 +35,38 @@ function displayStudents(){
 function addStudent(event){
   event.preventDefault()
   const values = $(this).serialize()
-  $.ajax({
-   type: 'POST',
-   url: '/students',
-   data: JSON.stringify(values)
+
+  // creates a new student
+  if (!stId){
+    $.ajax({
+     type: 'POST',
+     url: '/students',
+     data: JSON.stringify(values)
+     }).done(function(data) {
+       const table = document.querySelector('table')
+       const tableHeader = document.querySelector('#student-list-header')
+       const newStudent = new Student(data)
+       const tr = document.createElement('tr')
+       tr.id = `student-${newStudent.id}`
+       tr.innerHTML = students[i].trHTML()
+       //referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+       tableHeader.parentNode.insertBefore(tr, tableHeader.nextSibling)
+     })
+   } else { // modifies existing student
+     $.ajax({
+     type: 'PATCH',
+     url: `/students/${stId}`,
+     data: JSON.stringify(values)
    }).done(function(data) {
-     const table = document.querySelector('table')
-     const tableHeader = document.querySelector('#student-list-header')
-     const newStudent = new Student(data)
-     const tr = document.createElement('tr')
-     tr.id = `student-${newStudent.id}`
-     tr.innerHTML = students[i].trHTML()
-     //referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-     tableHeader.parentNode.insertBefore(tr, tableHeader.nextSibling)
+     console.log("updated!")
+     const currentStudent = students.find(student => data.id === student.id)
+     currentStudent.first_name = data.first_name
+     currentStudent.last_name = data.last_name
+     currentStudent.grade = data.grade
+     currentStudent.klass = data.klass
+     $(`#student-${data.id}`)[0].innerHTML = currentStudent.trHTML()
    })
+  }
 }
 
 function editStudent(event){
@@ -57,6 +76,7 @@ function editStudent(event){
   $('#text-field-last-name')[0].value = currStudent.last_name
   $('#text-field-grade')[0].value = currStudent.grade
   $('#text-field-klass')[0].value = currStudent.klass
+  stId = currStudent.id
   const trs = $('tr')
   for (let i=0; i<trs.length; i++){
     trs[i].style.backgroundColor = "inherit"
