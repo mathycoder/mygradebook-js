@@ -24,6 +24,14 @@ class Student {
     return students.find(student => studentId === student.id)
   }
 
+  static displayStudentsInDOM(){
+    students.forEach(student => $('table').append(student.fullTrHTML()))
+  }
+
+  static resetFormFields(){
+    $('.new-student-form')[0].reset()
+  }
+
   update(data){
     this.first_name = data.first_name
     this.last_name = data.last_name

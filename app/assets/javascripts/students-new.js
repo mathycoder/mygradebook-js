@@ -21,7 +21,7 @@ function createJSONObjectsStudents(json, cla){
 }
 
 function displayStudents(){
-  students.forEach(student => $('table').append(student.fullTrHTML()))
+  Student.displayStudentsInDOM()
   $('.delete-student-button').click(deleteStudent)
   $('.edit-student-button').click(editStudent)
 }
@@ -36,7 +36,6 @@ function addStudent(event){
          student.addTrToDOM()
          student.addClickEvents()
          Student.resetFormFields()
-         $('.new-student-form')[0].reset()
      })
    } else {
      $.ajax({
@@ -48,26 +47,23 @@ function addStudent(event){
      student.update(data)
      student.updateTrOnDOM()
      student.addClickEvents()
-     $('.new-student-form')[0].reset()
+     Student.resetFormFields()
+     unhighlightAllTrs()
    })
   }
 }
 
 function editStudent(event){
   const studentId = Number.parseInt(this.id.split('-')[1])
-  const currStudent = Student.find(studentId)
-  currStudent.fillForm()
-  stId = currStudent.id
-  const trs = $('tr')
-  for (let i=0; i<trs.length; i++){
-    trs[i].style.backgroundColor = "inherit"
-  }
+  const student = Student.find(studentId)
+  student.fillForm()
+  stId = student.id
+  unhighlightAllTrs()
   $(this).parent().parent()[0].style.backgroundColor = "yellow"
 
 }
 
 function deleteStudent(event){
-  console.log("you trying to delete me?")
   const studentId = this.id.split('-')[1]
   $.ajax({
    type: 'DELETE',
@@ -75,4 +71,11 @@ function deleteStudent(event){
     }).done(function(data) {
       $(`#student-${data.id}`).remove()
     })
+}
+
+function unhighlightAllTrs(){
+  const trs = $('tr')
+  for (let i=0; i<trs.length; i++){
+    trs[i].style.backgroundColor = "inherit"
+  }
 }
