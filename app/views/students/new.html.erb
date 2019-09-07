@@ -46,7 +46,6 @@
     <%= form_tag(new_student_path, method: "get", class: "filter-form") do %>
       <%= text_field_tag('query', nil, placeholder: "Filter by name or class") %>
       <%= submit_tag("Filter", class: "little-button") %>
-      <%= submit_tag('clear', class: "little-button") %>
     <% end %><br>
 
     <div class="listed-students">

@@ -36,7 +36,6 @@ function filterStudents(){
   url: `/students/new.json`,
   data: values
   }).done(data => {
-    console.log(data)
     students.length = 0
     $('#student-list-header').nextAll().remove()
     createJSONObjectsStudents(data, Student)
