@@ -51,10 +51,23 @@ class Student {
             </tr>`
   }
 
+  addTrToDOM(){
+    $('#student-list-header').after(this.fullTrHTML())
+  }
+
+  updateTrOnDOM(){
+    $(`#student-${this.id}`)[0].innerHTML = this.trHTML()
+  }
+
   fillForm(){
     $('#text-field-first-name')[0].value = this.first_name
     $('#text-field-last-name')[0].value = this.last_name
     $('#text-field-grade')[0].value = this.grade
     $('#text-field-klass')[0].value = this.klass
+  }
+
+  addClickEvents(){
+    $(`#student-${this.id} .delete-student-button`).click(deleteStudent)
+    $(`#student-${this.id} .edit-student-button`).click(editStudent)
   }
 }

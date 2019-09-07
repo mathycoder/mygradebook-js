@@ -33,9 +33,9 @@ function addStudent(event){
     $.post('/students', JSON.stringify(values))
       .done(data => {
          const student = new Student(data)
-         $('#student-list-header').after(student.fullTrHTML())
-         $(`#student-${student.id} .delete-student-button`).click(deleteStudent)
-         $(`#student-${student.id} .edit-student-button`).click(editStudent)
+         student.addTrToDOM()
+         student.addClickEvents()
+         Student.resetFormFields()
          $('.new-student-form')[0].reset()
      })
    } else {
@@ -46,9 +46,8 @@ function addStudent(event){
    }).done(data => {
      const student = Student.find(data.id)
      student.update(data)
-     $(`#student-${data.id}`)[0].innerHTML = student.trHTML()
-     $(`#student-${student.id} .delete-student-button`).click(deleteStudent)
-     $(`#student-${student.id} .edit-student-button`).click(editStudent)
+     student.updateTrOnDOM()
+     student.addClickEvents()
      $('.new-student-form')[0].reset()
    })
   }
