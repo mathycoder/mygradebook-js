@@ -2,6 +2,7 @@ $(document).ready(function() {
   if (window.location.href === "http://localhost:3000/students/new"){
     getStudentsIndexData()
     $('.big-button').click(addStudent)
+    $('.little-button').click(filterStudents)
   }
 })
 
@@ -24,6 +25,22 @@ function displayStudents(){
   Student.displayStudentsInDOM()
   $('.delete-student-button').click(deleteStudent)
   $('.edit-student-button').click(editStudent)
+}
+
+function filterStudents(){
+  event.preventDefault()
+  console.log("filter me!")
+  const values = $(this.parentElement).serialize()
+  $.ajax({
+  type: 'GET',
+  url: `/students/new.json`,
+  data: values
+  }).done(data => {
+    console.log(data)
+    students.length = 0
+    $('#student-list-header').nextAll().remove()
+    createJSONObjectsStudents(data, Student)
+  })
 }
 
 function addStudent(event){

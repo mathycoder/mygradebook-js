@@ -43,7 +43,7 @@
   <div class="students-in-school paper-form">
     <h3>Students in the school</h3>
 
-    <%= form_tag(new_student_path, method: "get") do %>
+    <%= form_tag(new_student_path, method: "get", class: "filter-form") do %>
       <%= text_field_tag('query', nil, placeholder: "Filter by name or class") %>
       <%= submit_tag("Filter", class: "little-button") %>
       <%= submit_tag('clear', class: "little-button") %>

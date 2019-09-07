@@ -7,7 +7,6 @@ class StudentsController < ApplicationController
   require 'csv'
 
   def new
-    @student = Student.new
     @students = Student.filter_by(params[:query], nil)
     respond_to do |format|
       format.html
