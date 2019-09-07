@@ -49,11 +49,14 @@ function addStudent(event){
      student.addClickEvents()
      Student.resetFormFields()
      unhighlightAllTrs()
+     $('#add-student-header').text('Add Student')
+     stId = undefined
    })
   }
 }
 
 function editStudent(event){
+  $('#add-student-header').text('Edit Student')
   const studentId = Number.parseInt(this.id.split('-')[1])
   const student = Student.find(studentId)
   student.fillForm()
@@ -70,6 +73,8 @@ function deleteStudent(event){
    url: `/students/${studentId}`
     }).done(function(data) {
       $(`#student-${data.id}`).remove()
+      $('#add-student-header').text('Add Student')
+      stId = undefined
     })
 }
 
