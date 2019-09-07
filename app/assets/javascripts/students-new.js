@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+$(document).ready(function() {
   if (window.location.href === "http://localhost:3000/students/new"){
     getStudentsIndexData()
     $('.big-button').click(addStudent)
