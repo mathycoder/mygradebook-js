@@ -7,6 +7,10 @@ class Grade {
     this.student_id = attributes.student_id
     grades.push(this)
   }
+
+  static find(gradeId){
+    return grades.find(grade => grade.id === Number.parseInt(gradeId))
+  }
 }
 
 const students = []

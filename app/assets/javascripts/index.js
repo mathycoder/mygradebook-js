@@ -5,7 +5,6 @@ $(document).ready(function() {
   const array = window.location.href.split("classes/")
   // Checks for the correct show page before running getData()
   if (array.length > 1 && !(array[1].includes("students") || array[1].includes("new") || array[1].includes("grades") || array[1].includes("edit"))){
-    console.log("I'm running!")
     getData()
     $('form.grade-input').submit(modifyGrade)
   }
@@ -74,7 +73,7 @@ function createJSONObjects(json, cla){
 function displayCurrentGrades() {
   const gradeTds = $('.score')
   for (let i=0; i<gradeTds.length; i++){
-    const grade = grades.find(grade => grade.id === Number.parseInt(gradeTds[i].id))
+    const grade = Grade.find(gradeTds[i].id)
     gradeTds[i].children[0][2].value = grade.score
     $(gradeTds[i]).keyup(enter_detector)
   }
