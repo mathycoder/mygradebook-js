@@ -93,18 +93,16 @@ function modifyGrade(event){
  }).done(function(data) {
     const grade = Grade.find(data.id)
     grade.update(data)
-    grade.colorChange()
+    grade.colorChange("blue")
     setTimeout(() => grade.colorChangeBack(), 1000)
     studentAverages()
     assignmentAverages()
     conditionalFormatting()
   }).fail(function(data){
-    $(`#${data.responseJSON.id}.score`).children()[0][2].value = data.responseJSON.score
-    $(`#${data.responseJSON.id}.score`).addClass('fail-color-change')
-    setTimeout(function() {
-      $(`#${data.responseJSON.id}.score`).removeClass('fail-color-change')
-      $(`#${data.responseJSON.id}.score`).addClass('change-back')
-    }, 1000)
+    const grade = Grade.find(data.responseJSON.id)
+    grade.update(data.responseJSON)
+    grade.colorChange("red")
+    setTimeout(() => grade.colorChangeBack(), 1000)
   })
 }
 

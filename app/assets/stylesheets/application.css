@@ -2,7 +2,7 @@
   background-color: inherit;
 }
 
-.color-change {
+.color-change-blue {
   -webkit-transition: 1.5s;
   -moz-transition: 1.5s;
   -ms-transition: 1.5s;
@@ -11,7 +11,7 @@
   background-color: rgb(125, 230, 240) !important;
 }
 
-.fail-color-change {
+.color-change-red {
   -webkit-transition: 1.5s;
   -moz-transition: 1.5s;
   -ms-transition: 1.5s;

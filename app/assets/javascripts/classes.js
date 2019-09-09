@@ -17,12 +17,13 @@ class Grade {
     $(`#${this.id}.score`).children()[0][2].value = this.score
   }
 
-  colorChange(){
-    $(`#${this.id}.score`).addClass('color-change')
+  colorChange(color){
+    $(`#${this.id}.score`).addClass(`color-change-${color}`)
   }
 
   colorChangeBack(){
-    $(`#${this.id}.score`).removeClass('color-change')
+    $(`#${this.id}.score`).removeClass('color-change-blue')
+    $(`#${this.id}.score`).removeClass('color-change-red')
     $(`#${this.id}.score`).addClass('change-back')
   }
 }
