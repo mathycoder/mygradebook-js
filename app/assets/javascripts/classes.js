@@ -11,7 +11,23 @@ class Grade {
   static find(gradeId){
     return grades.find(grade => grade.id === Number.parseInt(gradeId))
   }
+
+  update(data){
+    this.score = data.score
+    $(`#${this.id}.score`).children()[0][2].value = this.score
+  }
+
+  colorChange(){
+    $(`#${this.id}.score`).addClass('color-change')
+  }
+
+  colorChangeBack(){
+    $(`#${this.id}.score`).removeClass('color-change')
+    $(`#${this.id}.score`).addClass('change-back')
+  }
 }
+
+
 
 const students = []
 class Student {

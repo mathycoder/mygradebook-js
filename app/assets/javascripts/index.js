@@ -91,12 +91,10 @@ function modifyGrade(event){
    url: this.action,
    data: JSON.stringify(values)
  }).done(function(data) {
-    $(`#${data.id}.score`).children()[0][2].value = data.score
-    $(`#${data.id}.score`).addClass('color-change')
-    setTimeout(function() {
-      $(`#${data.id}.score`).removeClass('color-change')
-      $(`#${data.id}.score`).addClass('change-back')
-    }, 1000)
+    const grade = Grade.find(data.id)
+    grade.update(data)
+    grade.colorChange()
+    setTimeout(() => grade.colorChangeBack(), 1000)
     studentAverages()
     assignmentAverages()
     conditionalFormatting()
