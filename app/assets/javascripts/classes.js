@@ -42,6 +42,12 @@ class Student {
     students.push(this)
   }
 
+  average(){
+    const myGrades = grades.filter(grade => grade.student_id === this.id && grade.score)
+    const sum = myGrades.reduce((acc, grade) => acc + Number.parseFloat(grade.score), 0)
+    return (sum / myGrades.length).toFixed(2)
+  }
+
   static find(studentId){
     return students.find(student => studentId === student.id)
   }

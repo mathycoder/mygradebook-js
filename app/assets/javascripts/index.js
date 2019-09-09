@@ -61,11 +61,13 @@ function getData() {
 
   $.get('/classes/' + klassId + '.json', function(json){
     createJSONObjects(json.students, Student)
+
+    createJSONGradeObjects(json.grades, Grade)
   })
 
 
   $.get('/classes/' + klassId + '/grades', function(json){
-    createJSONGradeObjects(json, Grade)
+    //createJSONGradeObjects(json, Grade)
   })
 
 }
