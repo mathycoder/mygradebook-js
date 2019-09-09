@@ -1,3 +1,13 @@
+const assignments = []
+class Assignment {
+  constructor(attributes){
+    this.name = attributes.name
+    this.date = attributes.date
+    this.learning_target_id = attributes.learning_target_id
+    assignments.push(this)
+  }
+}
+
 const grades = []
 class Grade {
   constructor(attributes){

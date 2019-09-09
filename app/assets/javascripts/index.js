@@ -44,12 +44,15 @@ function assignmentAverages(){
 
 
 function getData() {
+  // klass show page
   const klassId = window.location.href.split("/")[4]
   if (!window.location.href.includes("lts")){
-    $.get('/classes/' + klassId + '.json', function(json){
+    $.get(`/classes/${klassId}.json`, function(json){
       createJSONObjects(json.students, Student)
+      createJSONObjects(json.assignments, Assignment)
       createJSONGradeObjects(json.grades, Grade)
     })
+    // lt show page
   } else {
       const ltId = window.location.href.split("/")[6]
       $.get(`/classes/${klassId}/lts/${ltId}.json`, function(json){
