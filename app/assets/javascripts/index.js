@@ -4,7 +4,6 @@ $(document).ready(function() {
   const array = window.location.href.split("classes/")
   // Checks for the correct show page before running getData()
   if (array.length > 1 && !(array[1].includes("students") || array[1].includes("new") || array[1].includes("grades") || array[1].includes("edit"))){
-
     getData()
     $('form.grade-input').submit(modifyGrade)
   }
@@ -14,12 +13,9 @@ function studentAverages(){
   const rows = $('tr')
   for (let i=3; i<rows.length; i++){
     const student = Student.find(Number.parseInt(rows[i].id.split("-")[1]))
-    const average = student.average()
-    if (average) {
-      $(`tr:nth-child(${i+1}) td.average`)[0].innerHTML = `<p><strong>${average}</strong></p>`
-    } else {
-      $(`tr:nth-child(${i+1}) td.average`)[0].innerHTML = `<p><strong></strong></p>`
-    }
+    let average = student.average()
+    average = average || ""
+    $(`tr:nth-child(${i+1}) td.average`)[0].innerHTML = `<p><strong>${average}</strong></p>`
   }
 }
 
@@ -49,18 +45,18 @@ function assignmentAverages(){
 
 function getData() {
   const klassId = window.location.href.split("/")[4]
-
-  $.get('/classes/' + klassId + '.json', function(json){
-    createJSONObjects(json.students, Student)
-
-    createJSONGradeObjects(json.grades, Grade)
-  })
-
-
-  $.get('/classes/' + klassId + '/grades', function(json){
-    //createJSONGradeObjects(json, Grade)
-  })
-
+  if (!window.location.href.includes("lts")){
+    $.get('/classes/' + klassId + '.json', function(json){
+      createJSONObjects(json.students, Student)
+      createJSONGradeObjects(json.grades, Grade)
+    })
+  } else {
+      const ltId = window.location.href.split("/")[6]
+      $.get(`/classes/${klassId}/lts/${ltId}.json`, function(json){
+        createJSONObjects(json.students, Student)
+        createJSONGradeObjects(json.grades, Grade)
+      })
+  }
 }
 
 function createJSONObjects(json, cla){
