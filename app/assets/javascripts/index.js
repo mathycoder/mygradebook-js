@@ -13,19 +13,10 @@ $(document).ready(function() {
 function studentAverages(){
   const rows = $('tr')
   for (let i=3; i<rows.length; i++){
-    let average = 0
-    const tds = $(`tr:nth-child(${i+1}) td input#grade_score`)
-    let counter = 0
-    for (let j=0; j<tds.length; j++){
-      const num = Number.parseFloat(tds[j].value)
-      if (num){
-        average += num
-        counter++
-      }
-    }
-    average /= counter
+    const student = Student.find(Number.parseInt(rows[i].id.split("-")[1]))
+    const average = student.average()
     if (average) {
-      $(`tr:nth-child(${i+1}) td.average`)[0].innerHTML = `<p><strong>${average.toFixed(2)}</strong></p>`
+      $(`tr:nth-child(${i+1}) td.average`)[0].innerHTML = `<p><strong>${average}</strong></p>`
     } else {
       $(`tr:nth-child(${i+1}) td.average`)[0].innerHTML = `<p><strong></strong></p>`
     }
