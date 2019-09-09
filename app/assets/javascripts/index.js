@@ -20,25 +20,12 @@ function studentAverages(){
 }
 
 function assignmentAverages(){
-  const columns = $('tr:nth-child(3) td')
-  for (let i=2; i<columns.length; i++){
-    let average = 0
-    const tds = $(`tr:nth-child(n+4) td:nth-child(${i+1}) input#grade_score`)
-    let counter = 0
-    for (let j=0; j<tds.length; j++){
-      const num = Number.parseFloat(tds[j].value)
-      if (num){
-        average += num
-        counter++
-      }
-    }
-    average /= counter
-    if (average) {
-      $('.assign-average')[i-2].innerHTML = `<strong>${average.toFixed(2)}</strong>`
-    } else {
-      $('.assign-average')[i-2].innerHTML = `<strong></strong>`
-    }
-
+  const averageTds = $('.assign-average')
+  for (let i=0; i<averageTds.length; i++){
+    const assignment = Assignment.find(Number.parseInt(averageTds[i].id.split("-")[1]))
+    let average = assignment.average()
+    average = average || ""
+    averageTds[i].innerHTML = `<strong>${average}</strong>`
   }
 }
 

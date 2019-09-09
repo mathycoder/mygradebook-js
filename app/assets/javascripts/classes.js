@@ -1,10 +1,22 @@
 const assignments = []
 class Assignment {
   constructor(attributes){
+    this.id = attributes.id
     this.name = attributes.name
     this.date = attributes.date
     this.learning_target_id = attributes.learning_target_id
     assignments.push(this)
+  }
+
+  average(){
+    const assignmentGrades = grades.filter(grade => grade.assignment_id === this.id && grade.score && Student.inKlass(grade.student()))
+    const sum = assignmentGrades.reduce((acc, grade) => acc + Number.parseFloat(grade.score), 0)
+    if (sum === 0) {return undefined}
+    return (sum / assignmentGrades.length).toFixed(2)
+  }
+
+  static find(assignmentId){
+    return assignments.find(assignment => assignment.id === Number.parseInt(assignmentId))
   }
 }
 
@@ -16,6 +28,10 @@ class Grade {
     this.score = attributes.score
     this.student_id = attributes.student_id
     grades.push(this)
+  }
+
+  student(){
+    return students.find(student => student.id === this.student_id)
   }
 
   static find(gradeId){
@@ -61,6 +77,10 @@ class Student {
 
   static find(studentId){
     return students.find(student => studentId === student.id)
+  }
+
+  static inKlass(student){
+    return students.includes(student)
   }
 
   static displayStudentsInDOM(){

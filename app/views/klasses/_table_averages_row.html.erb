@@ -18,9 +18,9 @@
   <% collection.each do |lt| %>
     <%= blank_td?(lt) %>
     <% lt.chronological_assignments.each_with_index do |assignment, index| %>
-      <td class="<%= "start-of-lt" if index == 0 %> assignment-averages assign-average">
+      <td id="assignment-<%= assignment.id %>" class="<%= "start-of-lt" if index == 0 %> assignment-averages assign-average">
         <div>
-          <strong><%= assignment.average(klass) %></strong>
+          <strong></strong>
         </div>
       </td>
     <% end %>
