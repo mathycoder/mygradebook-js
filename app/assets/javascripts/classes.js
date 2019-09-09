@@ -17,6 +17,7 @@ class Grade {
     $(`#${this.id}.score`).children()[0][2].value = this.score
   }
 
+
   colorChange(color){
     $(`#${this.id}.score`).addClass(`color-change-${color}`)
   }
