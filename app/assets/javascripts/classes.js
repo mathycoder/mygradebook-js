@@ -1,3 +1,15 @@
+let klass
+class Klass {
+  constructor(attributes){
+    this.id = attributes.id
+    this.name = attributes.name
+    this.subject = attributes.subject
+    this.grade = attributes.grade
+    this.period = attributes.period
+    klass = this
+  }
+}
+
 const learningTargets = []
 class LearningTarget {
   constructor(attributes){
@@ -12,12 +24,11 @@ class LearningTarget {
   }
 
   colorClass(){
-    let ltIndex = learningTargets.indexOf(this)
+    const ltIndex = learningTargets.indexOf(this)
     if (ltIndex % 3 === 0) {return "red"}
     else if (ltIndex % 3 === 1) {return "green"}
     else {return "blue"}
   }
-
 }
 
 const assignments = []

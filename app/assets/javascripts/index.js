@@ -26,13 +26,13 @@ function renderGradebook(){
       <div id="gradebook-details">
         <h2>
           <strong>
-            702's Gradebook<br>
+            ${klass.name}'s Gradebook<br>
           </strong>
         </h2>
         <div id="class-details">
-          <strong>Subject: </strong> Math
-          <strong>Grade: </strong> 7th
-          <strong>Period: </strong> 1
+          <strong>Subject: </strong> ${klass.subject}
+          <strong>Grade: </strong> ${klass.grade}
+          <strong>Period: </strong> ${klass.period}
           <br><br>
         </div>
       </div>
@@ -96,6 +96,7 @@ function getData() {
   const klassId = window.location.href.split("/")[4]
   if (!window.location.href.includes("lts")){
     $.get(`/classes/${klassId}.json`, function(json){
+      klass = new Klass(json)
       createJSONObjects(json.students, Student)
       createJSONObjects(json.assignments, Assignment)
       createJSONObjects(json.learning_targets, LearningTarget)
