@@ -1,3 +1,12 @@
+const standards = []
+class Standard {
+  constructor(attributes){
+    this.id = attributes.id
+    this.alt_standard_notation = attributes.alt_standard_notation
+    standards.push(this)
+  }
+}
+
 let klass
 class Klass {
   constructor(attributes){

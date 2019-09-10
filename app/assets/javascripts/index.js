@@ -113,6 +113,7 @@ function getData() {
       createJSONObjects(json.students, Student)
       createJSONObjects(json.assignments, Assignment)
       createJSONObjects(json.learning_targets, LearningTarget)
+      createJSONObjects(json.standards, Standard)
       createJSONGradeObjects(json.grades, Grade)
     })
     // lt show page
