@@ -23,6 +23,10 @@ class LearningTarget {
     return assignments.filter(assignment => assignment.learning_target_id === this.id)
   }
 
+  chronologicalAssignments(){
+    return this.assignments().sort((a,b) => a.date - b.date)
+  }
+
   colorClass(){
     const ltIndex = learningTargets.indexOf(this)
     if (ltIndex % 3 === 0) {return "red"}

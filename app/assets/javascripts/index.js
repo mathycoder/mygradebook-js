@@ -1,7 +1,7 @@
 $(document).ready(function() {
   const array = window.location.href.split("classes/")
   // Checks for the correct show page before running getData()
-  if (array.length > 1 && !(array[1].includes("students") || array[1].includes("new") || array[1].includes("grades") || array[1].includes("edit"))){
+  if (array.length > 1 && !(array[1].includes("students") || array[1].includes("lts") || array[1].includes("new") || array[1].includes("grades") || array[1].includes("edit"))){
     getData()
     $('form.grade-input').submit(modifyGrade)
 
@@ -13,12 +13,14 @@ $(document).ready(function() {
 
 
 function renderGradebook(){
+  // sets up table layout
   document.querySelector('main').innerHTML = `
     <div class="gradebook-wrapper">
       <table class="gradebook">
       </table>
     </div>`
 
+  // creates first row: gradebook title and learning targets
   $('.gradebook').append(`<tr></tr>`)
   $('.gradebook tr').append('<th rowspan="2"></th>')
   $('.gradebook tr th').append(`
@@ -45,21 +47,54 @@ function renderGradebook(){
       $('.gradebook tr').append(`
         <th colspan="${target.assignments().length}" class="start-of-lt ${target.colorClass()}">
           <div class="lt-target-label-container">
-            LT link <br>
-            assignment Label
+            <a href="/classes/${klass.id}/lts/${target.id}">${target.name}</a> <br>
+            <div class="assignment-label">Assignments</div>
           </div>
         </th>`)
     })
 
-    // <% collection.each do |target| %>
-    //   <%= content_tag(:th, colspan: target.assignments.length , class: [klass.my_color_class(target), "start-of-lt"]) do %>
-    //     <%= content_tag(:div, class: "lt-target-label-container") do %>
-    //       <%= learning_target_link(klass, target) %>
-    //       <%= assignment_label() %>
+
+    // creates second row: assignments
+    $('.gradebook').append(`
+      <tr>
+        <td></td>
+      </tr>`)
+
+    learningTargets.forEach(lt => {
+      if (lt.assignments().length === 0) {$('.gradebook tr:last-child').append(`<td></td>`)}
+      lt.chronologicalAssignments().forEach((assignment, index) => {
+        $('.gradebook tr:last-child').append(`
+          <td id="assignment-${assignment.id}" class="assignments ${(index===0) ? 'start-of-lt' : ''}">
+            Display Assignment and Date
+          </td>
+          `)
+
+      })
+
+    })
+
+    $('.gradebook tr:last-child').append(``)
+
+}
+
+// def td_classes(index, initial_class=nil)
+//   array = [initial_class]
+//   array << "start-of-lt" if index == 0
+//   array
+// end
+
+
+    // <%= content_tag(:tr) do %>
+    //   <%= tag(:td) %>
+    //   <% collection.each do |lt| %>
+    //     <%= content_tag(:td) if lt.assignments.empty? %>
+    //     <% lt.chronological_assignments.each_with_index do |assignment, index| %>
+    //       <%= content_tag(:td, id: "assignment-#{assignment.id}", class: td_classes(index, "assignments")) do %>
+    //         <%= display_assignment_and_date(klass, assignment) %>
+    //       <% end %>
     //     <% end %>
     //   <% end %>
     // <% end %>
-}
 
 
 
