@@ -3,9 +3,14 @@ $(document).ready(function() {
   // Checks for the correct show page before running getData()
   if (array.length > 1 && !(array[1].includes("students") || array[1].includes("lts") || array[1].includes("new") || array[1].includes("grades") || array[1].includes("edit"))){
     getData()
+    $('.class-header select').change(switchClass)
   }
 })
 
+function switchClass(event){
+  event.preventDefault()
+
+}
 
 function studentAverages(){
   const rows = $('tr')
@@ -28,26 +33,16 @@ function assignmentAverages(){
 }
 
 
-function getData() {
-  // klass show page
-  const klassId = window.location.href.split("/")[4]
-  if (!window.location.href.includes("lts")){
-    $.get(`/classes/${klassId}.json`, function(json){
-      klass = new Klass(json)
-      createJSONObjects(json.students, Student)
-      createJSONObjects(json.assignments, Assignment)
-      createJSONObjects(json.learning_targets, LearningTarget)
-      createJSONObjects(json.standards, Standard)
-      createJSONGradeObjects(json.grades, Grade)
-    })
-    // lt show page
-  } else {
-      const ltId = window.location.href.split("/")[6]
-      $.get(`/classes/${klassId}/lts/${ltId}.json`, function(json){
-        createJSONObjects(json.students, Student)
-        createJSONGradeObjects(json.grades, Grade)
-      })
-  }
+function getData(klassIdFromLink = undefined) {
+  const klassId = klassIdFromLink || window.location.href.split("/")[4]
+  $.get(`/classes/${klassId}.json`, function(json){
+    klass = new Klass(json)
+    createJSONObjects(json.students, Student)
+    createJSONObjects(json.assignments, Assignment)
+    createJSONObjects(json.learning_targets, LearningTarget)
+    createJSONObjects(json.standards, Standard)
+    createJSONGradeObjects(json.grades, Grade)
+  })
 }
 
 function createJSONObjects(json, cla){
