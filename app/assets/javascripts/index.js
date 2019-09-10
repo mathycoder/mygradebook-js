@@ -17,19 +17,19 @@ function renderGradebook(){
   document.querySelector('main').innerHTML = `
     <div class="gradebook-wrapper">
       <table class="gradebook">
+        <tbody>
+        </tbody>
       </table>
     </div>`
 
   // creates first row: gradebook title and learning targets
-  $('.gradebook').append(`<tr></tr>`)
-  $('.gradebook tr').append('<th rowspan="2"></th>')
-  $('.gradebook tr th').append(`
+  $('tbody').append(`<tr></tr>`)
+  $('tbody tr').append('<th rowspan="2"></th>')
+  $('tbody tr th').append(`
     <div class="gradebook-title">
       <div id="gradebook-details">
         <h2>
-          <strong>
-            ${klass.name}'s Gradebook<br>
-          </strong>
+          <strong>${klass.name}'s Gradebook</strong><br>
         </h2>
         <div id="class-details">
           <strong>Subject: </strong> ${klass.subject}
@@ -43,8 +43,10 @@ function renderGradebook(){
       </div>
     </div>`)
 
+    $('tbody tr').append('<th></th>')
+
     learningTargets.forEach(target => {
-      $('.gradebook tr').append(`
+      $('tbody tr').append(`
         <th colspan="${target.assignments().length}" class="start-of-lt ${target.colorClass()}">
           <div class="lt-target-label-container">
             <a href="/classes/${klass.id}/lts/${target.id}">
@@ -58,7 +60,7 @@ function renderGradebook(){
 
 
     // creates second row: assignments
-    $('.gradebook').append(`
+    $('tbody').append(`
       <tr>
         <td></td>
       </tr>`)
@@ -76,14 +78,57 @@ function renderGradebook(){
             </a>
           </td>
           `)
-
       })
-
     })
 
-    $('.gradebook tr:last-child').append(``)
+    // assignment averages row
+    $('tbody').append(`<tr></tr>`)
+    $('.gradebook tr:last-child').append(`
+      <td>
+        <div>
+          <strong>Students</strong>
+          <span onclick="rowSorter('highest', 'name')" class="arrow"> 	&#x2B06 </span>
+          <span onclick="rowSorter('lowest', 'name')" class="arrow"> 	&#x2B07 </span>
+        </div>
+      </td>
 
+      <td>
+        <div>
+          <strong> Average </strong>
+          <span onclick="rowSorter('highest', 'average')" class="arrow"> 	&#x2B06 </span>
+          <span onclick="rowSorter('lowest', 'average')" class="arrow"> 	&#x2B07 </span>
+        </div>
+      </td>
+      `)
+
+      learningTargets.forEach(lt => {
+        if (lt.assignments().length === 0) {
+          $('.gradebook tr:last-child').append(`<td></td>`)
+        }
+
+        lt.chronologicalAssignments().forEach((assignment, index) => {
+          $('.gradebook tr:last-child').append(`
+            <td id="${assignment.id}" class="${index === 0 ? 'start-of-lt' : ''} assignment-averages assign-average">
+              <div><strong></strong></div>
+            </td>
+            `)
+        })
+      })
 }
+
+// <% collection.each do |lt| %>
+//   <%= blank_td?(lt) %>
+//   <% lt.chronological_assignments.each_with_index do |assignment, index| %>
+//     <td id="assignment-<%= assignment.id %>" class="<%= "start-of-lt" if index == 0 %> assignment-averages assign-average">
+//       <div>
+//         <strong></strong>
+//       </div>
+//     </td>
+//   <% end %>
+// <% end %>
+// </tr>
+
+
 
 
 function studentAverages(){
