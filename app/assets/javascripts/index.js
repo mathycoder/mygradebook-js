@@ -48,9 +48,9 @@ function renderGradebook(){
         <th colspan="${target.assignments().length}" class="start-of-lt ${target.colorClass()}">
           <div class="lt-target-label-container">
             <a href="/classes/${klass.id}/lts/${target.id}">
-              ${learningTargets[0].standard().alt_standard_notation}<br>
+              ${target.standard().alt_standard_notation}<br>
               ${target.name}
-            </a> <br>
+            </a>
             <div class="assignment-label">Assignments</div>
           </div>
         </th>`)
