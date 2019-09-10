@@ -65,7 +65,12 @@ function renderGradebook(){
       lt.chronologicalAssignments().forEach((assignment, index) => {
         $('.gradebook tr:last-child').append(`
           <td id="assignment-${assignment.id}" class="assignments ${(index===0) ? 'start-of-lt' : ''}">
-            Display Assignment and Date
+            <a href="/classes/${klass.id}/assignments/${assignment.id}/edit">
+              <div class="assignment-header">
+                <div>${assignment.name}</div>
+                <div class="date">${assignment.dateDisplay()}</div>
+              </div>
+            </a>
           </td>
           `)
 
@@ -76,33 +81,6 @@ function renderGradebook(){
     $('.gradebook tr:last-child').append(``)
 
 }
-
-// def td_classes(index, initial_class=nil)
-//   array = [initial_class]
-//   array << "start-of-lt" if index == 0
-//   array
-// end
-
-
-    // <%= content_tag(:tr) do %>
-    //   <%= tag(:td) %>
-    //   <% collection.each do |lt| %>
-    //     <%= content_tag(:td) if lt.assignments.empty? %>
-    //     <% lt.chronological_assignments.each_with_index do |assignment, index| %>
-    //       <%= content_tag(:td, id: "assignment-#{assignment.id}", class: td_classes(index, "assignments")) do %>
-    //         <%= display_assignment_and_date(klass, assignment) %>
-    //       <% end %>
-    //     <% end %>
-    //   <% end %>
-    // <% end %>
-
-
-
-
-
-
-
-
 
 
 function studentAverages(){

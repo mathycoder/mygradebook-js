@@ -24,7 +24,7 @@ class LearningTarget {
   }
 
   chronologicalAssignments(){
-    return this.assignments().sort((a,b) => a.date - b.date)
+    return this.assignments().sort((a,b) => new Date(a.date) - new Date(b.date))
   }
 
   colorClass(){
@@ -43,6 +43,13 @@ class Assignment {
     this.date = attributes.date
     this.learning_target_id = attributes.learning_target_id
     assignments.push(this)
+  }
+
+  dateDisplay(){
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const date = new Date(this.date)
+    return `${months[date.getMonth()]} ${date.getDate()}`
+
   }
 
   average(){
