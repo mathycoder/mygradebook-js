@@ -1,5 +1,3 @@
-// currently doesn't return error messages
-
 $(document).ready(function() {
   const array = window.location.href.split("classes/")
   // Checks for the correct show page before running getData()
@@ -8,6 +6,21 @@ $(document).ready(function() {
     $('form.grade-input').submit(modifyGrade)
   }
 })
+
+// Okay, we're trying to render the whole page with JS!
+// Here's where I try to do that!
+
+
+
+
+
+
+
+
+
+
+
+
 
 function studentAverages(){
   const rows = $('tr')
