@@ -6,6 +6,22 @@ class LearningTarget {
     this.learning_target_id = attributes.learning_target_id
     learningTargets.push(this)
   }
+
+  assignments(){
+    return assignments.filter(assignment => assignment.learning_target_id === this.id)
+  }
+
+  colorClass(){
+    let ltIndex = 0
+    learningTargets.forEach((learningTarget, index) => {
+      if (learningTarget === this) {ltIndex = 0}
+      else {ltIndex = learningTargets.length}
+    })
+    if (ltIndex % 3 === 0) {return "red"}
+    else if (ltIndex % 3 === 1) {return "green"}
+    else {return "blue"}
+  }
+
 }
 
 const assignments = []

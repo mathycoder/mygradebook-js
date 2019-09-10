@@ -4,7 +4,7 @@ $(document).ready(function() {
   if (array.length > 1 && !(array[1].includes("students") || array[1].includes("new") || array[1].includes("grades") || array[1].includes("edit"))){
     getData()
     $('form.grade-input').submit(modifyGrade)
-    renderGradebook()
+
   }
 })
 
@@ -19,7 +19,46 @@ function renderGradebook(){
       </table>
     </div>`
 
-  
+  $('.gradebook').append(`<tr></tr>`)
+  $('.gradebook tr').append('<th rowspan="2"></th>')
+  $('.gradebook tr th').append(`
+    <div class="gradebook-title">
+      <div id="gradebook-details">
+        <h2>
+          <strong>
+            702's Gradebook<br>
+          </strong>
+        </h2>
+        <div id="class-details">
+          <strong>Subject: </strong> Math
+          <strong>Grade: </strong> 7th
+          <strong>Period: </strong> 1
+          <br><br>
+        </div>
+      </div>
+      <div id="book-logo">
+        <img src="/assets/open-book2.png">
+      </div>
+    </div>`)
+
+    learningTargets.forEach(target => {
+      $('.gradebook tr').append(`
+        <th colspan="${target.assignments().length}" class: "start-of-lt ${target.colorClass()}">
+          <div class="lt-target-label-container">
+            LT link <br>
+            assignment Label
+          </div>
+        </th>`)
+    })
+
+    // <% collection.each do |target| %>
+    //   <%= content_tag(:th, colspan: target.assignments.length , class: [klass.my_color_class(target), "start-of-lt"]) do %>
+    //     <%= content_tag(:div, class: "lt-target-label-container") do %>
+    //       <%= learning_target_link(klass, target) %>
+    //       <%= assignment_label() %>
+    //     <% end %>
+    //   <% end %>
+    // <% end %>
 }
 
 
@@ -82,6 +121,7 @@ function createJSONGradeObjects(json, cla){
   for (i = 0; i<json.length; i++){
     new cla(json[i])
   }
+  renderGradebook()
   displayCurrentGrades()
 }
 
