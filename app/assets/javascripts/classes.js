@@ -36,9 +36,20 @@ class LearningTarget {
     return assignments.filter(assignment => assignment.learning_target_id === this.id)
   }
 
+
   chronologicalAssignments(){
     return this.assignments().sort((a,b) => new Date(a.date) - new Date(b.date))
   }
+
+  studentsChronologicalGrades(student){
+    return this.chronologicalAssignments().map(assignment => assignment.grade(student))
+  }
+
+  // def students_chronological_grades(student)
+  //   self.grades.includes(:assignment).where("student_id = ?", student.id).order(date: :asc)
+  // end
+
+
 
   colorClass(){
     const ltIndex = learningTargets.indexOf(this)
@@ -56,6 +67,14 @@ class Assignment {
     this.date = attributes.date
     this.learning_target_id = attributes.learning_target_id
     assignments.push(this)
+  }
+
+  grades(){
+    return grades.filter(grade => grade.assignment_id === this.id)
+  }
+
+  grade(student){
+    return this.grades().find(grade => grade.student_id === student.id)
   }
 
   dateDisplay(){
@@ -123,6 +142,14 @@ class Student {
     this.grade = attributes.grade
     this.klass = attributes.klass
     students.push(this)
+  }
+
+  static byLastName(){
+    return students.sort((a,b) => a.last_name.localeCompare(b.last_name))
+  }
+
+  fullName(){
+    return `${this.last_name}, ${this.first_name}`
   }
 
   average(){

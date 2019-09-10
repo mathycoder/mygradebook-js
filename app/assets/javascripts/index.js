@@ -108,25 +108,62 @@ function renderGradebook(){
 
         lt.chronologicalAssignments().forEach((assignment, index) => {
           $('.gradebook tr:last-child').append(`
-            <td id="${assignment.id}" class="${index === 0 ? 'start-of-lt' : ''} assignment-averages assign-average">
+            <td id="assignment-${assignment.id}" class="${index === 0 ? 'start-of-lt' : ''} assignment-averages assign-average">
               <div><strong></strong></div>
             </td>
             `)
         })
       })
+
+      // student rows
+      Student.byLastName().forEach(student => {
+        $('tbody').append(`
+          <tr id="student-${student.id}">
+            <td class="student-name">
+              <a href="/classes/${klass.id}/students/${student.id}">
+                <div class="student-column">
+                  ${student.fullName()}
+                </div>
+              </a>
+            </td>
+
+            <td class="average assignment-averages">
+              <p>
+                <strong></strong>
+              </p>
+            </td>
+          </tr>
+          `)
+
+        learningTargets.forEach(lt => {
+          if (lt.assignments().length === 0) {$('tbody tr:last-child').append(`<td></td>`)}
+
+          
+
+
+        })
+      })
 }
 
-// <% collection.each do |lt| %>
-//   <%= blank_td?(lt) %>
-//   <% lt.chronological_assignments.each_with_index do |assignment, index| %>
-//     <td id="assignment-<%= assignment.id %>" class="<%= "start-of-lt" if index == 0 %> assignment-averages assign-average">
-//       <div>
-//         <strong></strong>
-//       </div>
-//     </td>
+
+// <% klass.students_by_last_name.each do |student| %>
+//   <%= content_tag(:tr, id: "student-#{student.id}") do %>
+//     <%= td_link_to_student(klass, student) %>
+//     <%= td_student_average(student, klass_or_lt) %>
+//
+//     <% collection.each do |lt| %>
+//       <%= blank_td?(lt) %>
+//         <% lt.students_chronological_grades(student).each_with_index do |grade, index| %>
+//           <%= content_tag(:td, class: td_classes(index, ["score","col-#{index}"]), id: "#{grade.id}") do %>
+//             <%= form_for(:grade, url: klass_grade_path(klass, grade), html: {class: "grade-input"}) do |f| %>
+//               <%= f.text_field(:score, class: "grade-text-field") %>
+//               <%= f.hidden_field(:id, :value => grade.id) %>
+//             <% end %>
+//           <% end %>
+//         <% end %>
+//     <% end %>
 //   <% end %>
 // <% end %>
-// </tr>
 
 
 
