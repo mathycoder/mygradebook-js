@@ -1,0 +1,110 @@
+$(document).ready(function() {
+  const array = window.location.href.split("classes/")
+  // Checks for the correct show page before running getData()
+  if (array.length > 1 && !(array[1].includes("students") || array[1].includes("lts") || array[1].includes("new") || array[1].includes("grades") || array[1].includes("edit"))){
+    getData()
+  }
+})
+
+
+function studentAverages(){
+  const rows = $('tr')
+  for (let i=3; i<rows.length; i++){
+    const student = Student.find(Number.parseInt(rows[i].id.split("-")[1]))
+    let average = student.average()
+    average = average || ""
+    $(`tr:nth-child(${i+1}) td.average`)[0].innerHTML = `<p><strong>${average}</strong></p>`
+  }
+}
+
+function assignmentAverages(){
+  const averageTds = $('.assign-average')
+  for (let i=0; i<averageTds.length; i++){
+    const assignment = Assignment.find(Number.parseInt(averageTds[i].id.split("-")[1]))
+    let average = assignment.average()
+    average = average || ""
+    averageTds[i].innerHTML = `<strong>${average}</strong>`
+  }
+}
+
+
+function getData() {
+  // klass show page
+  const klassId = window.location.href.split("/")[4]
+  if (!window.location.href.includes("lts")){
+    $.get(`/classes/${klassId}.json`, function(json){
+      klass = new Klass(json)
+      createJSONObjects(json.students, Student)
+      createJSONObjects(json.assignments, Assignment)
+      createJSONObjects(json.learning_targets, LearningTarget)
+      createJSONObjects(json.standards, Standard)
+      createJSONGradeObjects(json.grades, Grade)
+    })
+    // lt show page
+  } else {
+      const ltId = window.location.href.split("/")[6]
+      $.get(`/classes/${klassId}/lts/${ltId}.json`, function(json){
+        createJSONObjects(json.students, Student)
+        createJSONGradeObjects(json.grades, Grade)
+      })
+  }
+}
+
+function createJSONObjects(json, cla){
+  for (i = 0; i<json.length; i++){
+    new cla(json[i])
+  }
+}
+
+function createJSONGradeObjects(json, cla){
+  for (i = 0; i<json.length; i++){
+    new cla(json[i])
+  }
+  renderGradebook()
+  $('form.grade-input').submit(modifyGrade)
+  displayCurrentGrades()
+}
+
+function displayCurrentGrades() {
+  const gradeTds = $('.score')
+  for (let i=0; i<gradeTds.length; i++){
+    const grade = Grade.find(gradeTds[i].id)
+    gradeTds[i].children[0][1].value = grade.score
+    $(gradeTds[i]).keyup(enter_detector)
+  }
+
+  studentAverages()
+  assignmentAverages()
+  conditionalFormatting()
+}
+
+function modifyGrade(event){
+  event.preventDefault()
+  const values = $(this).serialize()
+  const klassId = window.location.href.split("/")[4]
+  $.ajax({
+   type: 'PATCH',
+   url: this.action,
+   data: JSON.stringify(values)
+ }).done(function(data) {
+    const grade = Grade.find(data.id)
+    grade.update(data)
+    grade.colorChange("blue")
+    setTimeout(() => grade.colorChangeBack(), 1000)
+    studentAverages()
+    assignmentAverages()
+    conditionalFormatting()
+  }).fail(function(data){
+    const grade = Grade.find(data.responseJSON.id)
+    grade.update(data.responseJSON)
+    grade.colorChange("red")
+    setTimeout(() => grade.colorChangeBack(), 1000)
+  })
+}
+
+function enter_detector(e) {
+  if(e.which==13||e.keyCode==13){
+    $(this).closest('form').submit();
+    $(this).children()[0][1].blur()
+  }
+}

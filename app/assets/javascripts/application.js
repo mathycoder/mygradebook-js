@@ -12,17 +12,15 @@
 //
 
 //= require jquery3
-
 //= require rails-ujs
 //= require activestorage
-// require turbolinks
-// require_tree .
-
 //= require chartkick
 //= require Chart.bundle
 
-//= require classes
-//= require index
-//= require formatting
+//= require_tree ./models
 
-//= require students-new
+//= require klasses/index-gradebook
+//= require klasses/index
+//= require klasses/formatting
+
+//= require students/students-new
