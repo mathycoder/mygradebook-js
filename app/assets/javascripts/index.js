@@ -43,7 +43,7 @@ function renderGradebook(){
 
     learningTargets.forEach(target => {
       $('.gradebook tr').append(`
-        <th colspan="${target.assignments().length}" class: "start-of-lt ${target.colorClass()}">
+        <th colspan="${target.assignments().length}" class="start-of-lt ${target.colorClass()}">
           <div class="lt-target-label-container">
             LT link <br>
             assignment Label

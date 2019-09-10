@@ -12,11 +12,7 @@ class LearningTarget {
   }
 
   colorClass(){
-    let ltIndex = 0
-    learningTargets.forEach((learningTarget, index) => {
-      if (learningTarget === this) {ltIndex = 0}
-      else {ltIndex = learningTargets.length}
-    })
+    let ltIndex = learningTargets.indexOf(this)
     if (ltIndex % 3 === 0) {return "red"}
     else if (ltIndex % 3 === 1) {return "green"}
     else {return "blue"}
