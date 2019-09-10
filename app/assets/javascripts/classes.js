@@ -45,12 +45,6 @@ class LearningTarget {
     return this.chronologicalAssignments().map(assignment => assignment.grade(student))
   }
 
-  // def students_chronological_grades(student)
-  //   self.grades.includes(:assignment).where("student_id = ?", student.id).order(date: :asc)
-  // end
-
-
-
   colorClass(){
     const ltIndex = learningTargets.indexOf(this)
     if (ltIndex % 3 === 0) {return "red"}

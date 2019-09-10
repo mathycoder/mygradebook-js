@@ -138,34 +138,21 @@ function renderGradebook(){
         learningTargets.forEach(lt => {
           if (lt.assignments().length === 0) {$('tbody tr:last-child').append(`<td></td>`)}
 
-          
-
-
+          lt.studentsChronologicalGrades(student).forEach((grade, index) =>{
+            $('tbody tr:last-child').append(`
+              <td id="${grade.id}" class="score col-${index} ${index === 0 ? 'start-of-lt' : ''}">
+                <form class="grade-input" method="GET" action="/classes/${klass.id}/grades/${grade.id}">
+                  <input name="utf8" type="hidden" value="✓"
+                  <input name="hidden" name="authenticity_token" value="">
+                  <input type="text" class="grade-text-field" name="grade[score]" id="grade_score">
+                  <input type="hidden" name="grade[id]" value="${grade.id}" id="grade_id">
+                </form>
+              </td>
+              `)
+          })
         })
       })
 }
-
-
-// <% klass.students_by_last_name.each do |student| %>
-//   <%= content_tag(:tr, id: "student-#{student.id}") do %>
-//     <%= td_link_to_student(klass, student) %>
-//     <%= td_student_average(student, klass_or_lt) %>
-//
-//     <% collection.each do |lt| %>
-//       <%= blank_td?(lt) %>
-//         <% lt.students_chronological_grades(student).each_with_index do |grade, index| %>
-//           <%= content_tag(:td, class: td_classes(index, ["score","col-#{index}"]), id: "#{grade.id}") do %>
-//             <%= form_for(:grade, url: klass_grade_path(klass, grade), html: {class: "grade-input"}) do |f| %>
-//               <%= f.text_field(:score, class: "grade-text-field") %>
-//               <%= f.hidden_field(:id, :value => grade.id) %>
-//             <% end %>
-//           <% end %>
-//         <% end %>
-//     <% end %>
-//   <% end %>
-// <% end %>
-
-
 
 
 function studentAverages(){
@@ -229,7 +216,7 @@ function displayCurrentGrades() {
   const gradeTds = $('.score')
   for (let i=0; i<gradeTds.length; i++){
     const grade = Grade.find(gradeTds[i].id)
-    gradeTds[i].children[0][2].value = grade.score
+    gradeTds[i].children[0][1].value = grade.score
     $(gradeTds[i]).keyup(enter_detector)
   }
 
@@ -265,6 +252,6 @@ function modifyGrade(event){
 function enter_detector(e) {
   if(e.which==13||e.keyCode==13){
     $(this).closest('form').submit();
-    $(this).children()[0][2].blur()
+    $(this).children()[0][1].blur()
   }
 }
