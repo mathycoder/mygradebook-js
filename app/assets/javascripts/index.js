@@ -3,8 +3,6 @@ $(document).ready(function() {
   // Checks for the correct show page before running getData()
   if (array.length > 1 && !(array[1].includes("students") || array[1].includes("lts") || array[1].includes("new") || array[1].includes("grades") || array[1].includes("edit"))){
     getData()
-    $('form.grade-input').submit(modifyGrade)
-
   }
 })
 
@@ -209,6 +207,7 @@ function createJSONGradeObjects(json, cla){
     new cla(json[i])
   }
   renderGradebook()
+  $('form.grade-input').submit(modifyGrade)
   displayCurrentGrades()
 }
 
