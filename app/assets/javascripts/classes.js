@@ -24,8 +24,12 @@ class LearningTarget {
   constructor(attributes){
     this.id = attributes.id
     this.name = attributes.name
-    this.learning_target_id = attributes.learning_target_id
+    this.standard_id = attributes.standard_id
     learningTargets.push(this)
+  }
+
+  standard(){
+    return standards.find(standard => standard.id === this.standard_id)
   }
 
   assignments(){
