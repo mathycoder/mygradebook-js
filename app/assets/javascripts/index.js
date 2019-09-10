@@ -37,6 +37,7 @@ function getData() {
     $.get(`/classes/${klassId}.json`, function(json){
       createJSONObjects(json.students, Student)
       createJSONObjects(json.assignments, Assignment)
+      createJSONObjects(json.learning_targets, LearningTarget)
       createJSONGradeObjects(json.grades, Grade)
     })
     // lt show page
