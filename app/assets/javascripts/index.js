@@ -4,6 +4,7 @@ $(document).ready(function() {
   if (array.length > 1 && !(array[1].includes("students") || array[1].includes("new") || array[1].includes("grades") || array[1].includes("edit"))){
     getData()
     $('form.grade-input').submit(modifyGrade)
+    renderGradebook()
   }
 })
 
@@ -11,7 +12,15 @@ $(document).ready(function() {
 // Here's where I try to do that!
 
 
+function renderGradebook(){
+  document.querySelector('main').innerHTML = `
+    <div class="gradebook-wrapper">
+      <table class="gradebook">
+      </table>
+    </div>`
 
+  
+}
 
 
 
