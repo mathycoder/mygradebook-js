@@ -9,6 +9,18 @@ $(document).ready(function() {
 
 function switchClass(event){
   event.preventDefault()
+  if (!this.value){
+    window.location.href = "http://localhost:3000/classes"
+  } else {
+    $('main')[0].innerHTML = ''
+    klass = undefined
+    learningTargets.length = 0
+    assignments.length = 0
+    students.length = 0
+    grades.length = 0
+    standards.length = 0
+    getData(this.value)
+  }
 
 }
 

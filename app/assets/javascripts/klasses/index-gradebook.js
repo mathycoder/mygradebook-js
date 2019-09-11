@@ -1,4 +1,13 @@
 function renderGradebook(){
+  // sets up table layout
+  document.querySelector('main').innerHTML = `
+    <div class="gradebook-wrapper">
+      <table class="gradebook">
+        <tbody>
+        </tbody>
+      </table>
+    </div>`
+    
   // creates first row: gradebook title and learning targets
   $('tbody').append(`<tr></tr>`)
   $('tbody tr').append('<th rowspan="2"></th>')
