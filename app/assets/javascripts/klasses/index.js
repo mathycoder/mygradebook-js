@@ -93,12 +93,14 @@ function displayCurrentGrades() {
 
   //adjust LTs in dropdown
   $('.select-lts option:first-child').nextAll().remove()
+  $('.select-lts').parent()[0].action = `http://localhost:3000/classes/${klass.id}/lts/redirect`
   learningTargets.forEach(lt => {
     $('.select-lts option:first-child').parent().append(`<option value="${lt.id}">${lt.name}</option>`)
   })
 
-  //adjust students in dropdown
+  // //adjust students in dropdown
   $('.select-students option:first-child').nextAll().remove()
+  $('.select-students').parent()[0].action = `http://localhost:3000/classes/${klass.id}/students/redirect`
   students.forEach(st => {
     $('.select-students option:first-child').parent().append(`<option value="${st.id}">${st.fullName()}</option>`)
   })
