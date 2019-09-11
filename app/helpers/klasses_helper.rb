@@ -90,8 +90,7 @@ module KlassesHelper
     content_tag(:td, class: ["average", "assignment-averages"]) do
       content_tag(:p) do
         content_tag(:strong) do
-          #student.average(klass_or_lt)
-          ""
+          student.average(klass_or_lt)
         end
       end
     end
@@ -99,9 +98,7 @@ module KlassesHelper
 
   def td_display_score(grade, index)
     content_tag(:td, class: td_classes(index, "score"), id: "#{grade.id}") do
-      #removed line to put int grades via Rails; JS will do this now!
-      #grade.score.to_s if grade
-      ""
+      grade.score.to_s if grade
     end
   end
 

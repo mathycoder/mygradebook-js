@@ -20,7 +20,7 @@
     <% lt.chronological_assignments.each_with_index do |assignment, index| %>
       <td id="assignment-<%= assignment.id %>" class="<%= "start-of-lt" if index == 0 %> assignment-averages assign-average">
         <div>
-          <strong></strong>
+          <strong><%= assignment.average(klass) %></strong>
         </div>
       </td>
     <% end %>

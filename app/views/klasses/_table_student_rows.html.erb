@@ -1,18 +1,12 @@
 <% klass.students_by_last_name.each do |student| %>
-  <%= content_tag(:tr, id: "student-#{student.id}") do %>
+  <%= content_tag(:tr) do %>
     <%= td_link_to_student(klass, student) %>
     <%= td_student_average(student, klass_or_lt) %>
-
     <% collection.each do |lt| %>
       <%= blank_td?(lt) %>
-        <% lt.students_chronological_grades(student).each_with_index do |grade, index| %>
-          <%= content_tag(:td, class: td_classes(index, ["score","col-#{index}"]), id: "#{grade.id}") do %>
-            <%= form_for(:grade, url: klass_grade_path(klass, grade), html: {class: "grade-input"}) do |f| %>
-              <%= f.text_field(:score, class: "grade-text-field") %>
-              <%= f.hidden_field(:id, :value => grade.id) %>
-            <% end %>
-          <% end %>
-        <% end %>
+      <% lt.students_chronological_grades(student).each_with_index do |grade, index| %>
+        <%= td_display_score(grade, index) %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
