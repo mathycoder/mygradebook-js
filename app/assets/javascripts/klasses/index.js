@@ -9,7 +9,8 @@ $(document).ready(function() {
 
 function switchClass(event){
   event.preventDefault()
-  if (!this.value){
+  const classId = this.value
+  if (!classId){
     window.location.href = "http://localhost:3000/classes"
   } else {
     $('main')[0].innerHTML = ''
@@ -19,7 +20,11 @@ function switchClass(event){
     students.length = 0
     grades.length = 0
     standards.length = 0
-    getData(this.value)
+    getData(classId)
+    $('.header-logo').parent()[0].href = `http://localhost:3000/classes/${classId}`
+    $('header div form')[0].action = `http://localhost:3000/classes/${classId}/assignments/new`
+    $('header div form')[1].action = `http://localhost:3000/classes/${classId}/lts/new`
+    $('header div form')[2].action = `http://localhost:3000/classes/${classId}/students`
   }
 
 }
