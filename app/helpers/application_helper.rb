@@ -52,7 +52,7 @@ module ApplicationHelper
   def lt_dropdown(klass, lt)
     content_tag(:div, class: "header-select") do
       form_for([:learning_target, current_lt(klass, lt)], url: lt_redirect_path(klass), method: :get) do |f|
-        f.collection_select(:name, klass.learning_targets, :name, :name, {include_blank: "All Learning Targets", prompt: "Learning Targets"}, {class: "select-blend", onchange: "this.form.submit();"})
+        f.collection_select(:name, klass.learning_targets, :name, :name, {include_blank: "All Learning Targets", prompt: "Learning Targets"}, {class: ["select-blend", "select-lts"], onchange: "this.form.submit();"})
       end
     end
   end
@@ -64,7 +64,7 @@ module ApplicationHelper
   def student_dropdown(klass, student)
     content_tag(:div, class: "header-select") do
       form_for([:student, current_student(klass, student)], url: student_redirect_path(klass), method: :get) do |f|
-        f.collection_select(:id, klass.students, :id, :first_last_name, {prompt: "Students"}, {class: "select-blend", onchange: "this.form.submit();"})
+        f.collection_select(:id, klass.students, :id, :first_last_name, {prompt: "Students"}, {class: ["select-blend", "select-students"], onchange: "this.form.submit();"})
       end
     end
   end

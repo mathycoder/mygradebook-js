@@ -25,6 +25,8 @@ function switchClass(event){
     $('header div form')[0].action = `http://localhost:3000/classes/${classId}/assignments/new`
     $('header div form')[1].action = `http://localhost:3000/classes/${classId}/lts/new`
     $('header div form')[2].action = `http://localhost:3000/classes/${classId}/students`
+
+
   }
 
 }
@@ -88,6 +90,18 @@ function displayCurrentGrades() {
   studentAverages()
   assignmentAverages()
   conditionalFormatting()
+
+  //adjust LTs in dropdown
+  $('.select-lts option:first-child').nextAll().remove()
+  learningTargets.forEach(lt => {
+    $('.select-lts option:first-child').parent().append(`<option value="${lt.id}">${lt.name}</option>`)
+  })
+
+  //adjust students in dropdown
+  $('.select-students option:first-child').nextAll().remove()
+  students.forEach(st => {
+    $('.select-students option:first-child').parent().append(`<option value="${st.id}">${st.fullName()}</option>`)
+  })
 }
 
 function modifyGrade(event){
