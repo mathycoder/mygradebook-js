@@ -18,7 +18,7 @@ class Grade {
 
   update(data){
     this.score = data.score
-    $(`#${this.id}.score`).children()[0][2].value = this.score
+    $(`#${this.id}.score`).children()[0][1].value = this.score
   }
 
 
