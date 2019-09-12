@@ -28,26 +28,6 @@ function switchClass(event){
 
 }
 
-function studentAverages(){
-  const rows = $('tr')
-  for (let i=3; i<rows.length; i++){
-    const student = Student.find(Number.parseInt(rows[i].id.split("-")[1]))
-    let average = student.average()
-    average = average || ""
-    $(`tr:nth-child(${i+1}) td.average`)[0].innerHTML = `<p><strong>${average}</strong></p>`
-  }
-}
-
-function assignmentAverages(){
-  const averageTds = $('.assign-average')
-  for (let i=0; i<averageTds.length; i++){
-    const assignment = Assignment.find(Number.parseInt(averageTds[i].id.split("-")[1]))
-    let average = assignment.average()
-    average = average || ""
-    averageTds[i].innerHTML = `<strong>${average}</strong>`
-  }
-}
-
 
 function getData(klassIdFromLink = undefined) {
   const klassId = klassIdFromLink || window.location.href.split("/")[4]
@@ -84,8 +64,8 @@ function displayCurrentGrades() {
     $(gradeTds[i]).keyup(enter_detector)
   }
 
-  studentAverages()
-  assignmentAverages()
+  Student.averages()
+  Assignment.averages()
   conditionalFormatting()
 
   //adjust LTs in dropdown
@@ -115,8 +95,8 @@ function modifyGrade(event){
     grade.update(data)
     grade.colorChange("blue")
     setTimeout(() => grade.colorChangeBack(), 1000)
-    studentAverages()
-    assignmentAverages()
+    Student.averages()
+    Assignment.averages()
     conditionalFormatting()
   }).fail(function(data){
     const grade = Grade.find(data.responseJSON.id)

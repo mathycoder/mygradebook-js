@@ -8,6 +8,16 @@ class Assignment {
     assignments.push(this)
   }
 
+  static averages(){
+    const averageTds = $('.assign-average')
+    for (let i=0; i<averageTds.length; i++){
+      const assignment = Assignment.find(Number.parseInt(averageTds[i].id.split("-")[1]))
+      let average = assignment.average()
+      average = average || ""
+      averageTds[i].innerHTML = `<strong>${average}</strong>`
+    }
+  }
+
   grades(){
     return grades.filter(grade => grade.assignment_id === this.id)
   }
