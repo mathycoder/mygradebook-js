@@ -9,7 +9,7 @@ class Student {
     students.push(this)
   }
 
-  static averages(){
+  static renderAverages(){
     const rows = $('tr')
     for (let i=3; i<rows.length; i++){
       const student = Student.find(Number.parseInt(rows[i].id.split("-")[1]))

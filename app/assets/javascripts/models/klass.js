@@ -161,7 +161,7 @@ class Klass {
               <form class="grade-input" method="GET" action="/classes/${this.id}/grades/${grade.id}">
                 <input name="utf8" type="hidden" value="✓"
                 <input name="hidden" name="authenticity_token" value="">
-                <input type="text" class="grade-text-field" name="grade[score]" id="grade_score">
+                <input type="text" class="grade-text-field" name="grade[score]" id="grade_score" value="${grade.score || ''}">
                 <input type="hidden" name="grade[id]" value="${grade.id}" id="grade_id">
               </form>
             </td>

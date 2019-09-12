@@ -18,31 +18,21 @@ function getData(klassIdFromLink = undefined) {
   })
 }
 
-function createJSONObjects(json, cla, klassCollection){
+function createJSONObjects(json, cla){
   for (i = 0; i<json.length; i++){
     new cla(json[i])
   }
 }
 
-function createJSONGradeObjects(json, cla, klassCollection){
+function createJSONGradeObjects(json, cla){
   for (i = 0; i<json.length; i++){
     new cla(json[i])
   }
   $('main').append(klass.formatShow())
   $('form.grade-input').submit(modifyGrade)
-  displayCurrentGrades()
-}
-
-function displayCurrentGrades() {
-  const gradeTds = $('.score')
-  for (let i=0; i<gradeTds.length; i++){
-    const grade = Grade.find(gradeTds[i].id)
-    gradeTds[i].children[0][1].value = grade.score
-    $(gradeTds[i]).keyup(enter_detector)
-  }
-
-  Student.averages()
-  Assignment.averages()
+  $(`.score`).keyup(enter_detector)
+  Student.renderAverages()
+  Assignment.renderAverages()
   conditionalFormatting()
   adjustHeader()
   history.pushState(null, null, `http://localhost:3000/classes/${klass.id}`)
@@ -50,6 +40,7 @@ function displayCurrentGrades() {
 
 function enter_detector(e) {
   if(e.which==13||e.keyCode==13){
+    console.log("enter!")
     $(this).closest('form').submit();
     $(this).children()[0][1].blur()
   }
@@ -74,7 +65,6 @@ function adjustHeader(){
 function modifyGrade(event){
   event.preventDefault()
   const values = $(this).serialize()
-  const klassId = window.location.href.split("/")[4]
   $.ajax({
    type: 'PATCH',
    url: this.action,
@@ -84,8 +74,8 @@ function modifyGrade(event){
     grade.update(data)
     grade.colorChange("blue")
     setTimeout(() => grade.colorChangeBack(), 1000)
-    Student.averages()
-    Assignment.averages()
+    Student.renderAverages()
+    Assignment.renderAverages()
     conditionalFormatting()
   }).fail(function(data){
     const grade = Grade.find(data.responseJSON.id)
@@ -102,12 +92,13 @@ function switchClass(event){
     window.location.href = "http://localhost:3000/classes"
   } else {
     $('main')[0].innerHTML = ''
-    resetCollections()
+    clearData()
     getData(classId)
   }
 }
 
-function resetCollections(){
+function clearData(){
+  klass = undefined
   learningTargets.length = 0
   assignments.length = 0
   students.length = 0

@@ -8,7 +8,7 @@ class Assignment {
     assignments.push(this)
   }
 
-  static averages(){
+  static renderAverages(){
     const averageTds = $('.assign-average')
     for (let i=0; i<averageTds.length; i++){
       const assignment = Assignment.find(Number.parseInt(averageTds[i].id.split("-")[1]))
