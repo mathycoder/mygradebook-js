@@ -1,7 +1,8 @@
 $().ready(() => {
   $('.class-header select').change(switchClass)
   const array = window.location.href.split("classes/")
-  if (array.length > 1 && !(array[1].includes("students") || array[1].includes("lts") || array[1].includes("new") || array[1].includes("grades") || array[1].includes("edit"))){
+  // array.length > 1 && !(array[1].includes("students") || array[1].includes("lts") || array[1].includes("new") || array[1].includes("grades") || array[1].includes("edit"))
+  if (/^http:\/\/localhost:3000\/classes\/\d$/.test(window.location.href)){
     getData()
   }
 })
@@ -14,7 +15,8 @@ function getData(klassIdFromLink = undefined) {
     createJSONObjects(json.assignments, Assignment)
     createJSONObjects(json.learning_targets, LearningTarget)
     createJSONObjects(json.standards, Standard)
-    createJSONGradeObjects(json.grades, Grade)
+    createJSONObjects(json.grades, Grade)
+    renderShowPage()
   })
 }
 
@@ -24,10 +26,7 @@ function createJSONObjects(json, cla){
   }
 }
 
-function createJSONGradeObjects(json, cla){
-  for (i = 0; i<json.length; i++){
-    new cla(json[i])
-  }
+function renderShowPage(){
   $('main').append(klass.formatShow())
   $('form.grade-input').submit(modifyGrade)
   $(`.score`).keyup(enter_detector)
@@ -40,7 +39,6 @@ function createJSONGradeObjects(json, cla){
 
 function enter_detector(e) {
   if(e.which==13||e.keyCode==13){
-    console.log("enter!")
     $(this).closest('form').submit();
     $(this).children()[0][1].blur()
   }
