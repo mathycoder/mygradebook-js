@@ -1,33 +1,10 @@
 $().ready(() => {
+  $('.class-header select').change(switchClass)
   const array = window.location.href.split("classes/")
   if (array.length > 1 && !(array[1].includes("students") || array[1].includes("lts") || array[1].includes("new") || array[1].includes("grades") || array[1].includes("edit"))){
     getData()
-    $('.class-header select').change(switchClass)
   }
 })
-
-function switchClass(event){
-  event.preventDefault()
-  const classId = this.value
-  if (!classId){
-    window.location.href = "http://localhost:3000/classes"
-  } else {
-    $('main')[0].innerHTML = ''
-    klass = undefined
-    learningTargets.length = 0
-    assignments.length = 0
-    students.length = 0
-    grades.length = 0
-    standards.length = 0
-    getData(classId)
-    $('.header-logo').parent()[0].href = `http://localhost:3000/classes/${classId}`
-    $('header div form')[0].action = `http://localhost:3000/classes/${classId}/assignments/new`
-    $('header div form')[1].action = `http://localhost:3000/classes/${classId}/lts/new`
-    $('header div form')[2].action = `http://localhost:3000/classes/${classId}/students`
-  }
-
-}
-
 
 function getData(klassIdFromLink = undefined) {
   const klassId = klassIdFromLink || window.location.href.split("/")[4]
@@ -41,13 +18,13 @@ function getData(klassIdFromLink = undefined) {
   })
 }
 
-function createJSONObjects(json, cla){
+function createJSONObjects(json, cla, klassCollection){
   for (i = 0; i<json.length; i++){
     new cla(json[i])
   }
 }
 
-function createJSONGradeObjects(json, cla){
+function createJSONGradeObjects(json, cla, klassCollection){
   for (i = 0; i<json.length; i++){
     new cla(json[i])
   }
@@ -67,19 +44,31 @@ function displayCurrentGrades() {
   Student.averages()
   Assignment.averages()
   conditionalFormatting()
+  adjustHeader()
+  history.pushState(null, null, `http://localhost:3000/classes/${klass.id}`)
+}
 
+function enter_detector(e) {
+  if(e.which==13||e.keyCode==13){
+    $(this).closest('form').submit();
+    $(this).children()[0][1].blur()
+  }
+}
+
+function adjustHeader(){
+  // adjust logo and buttons
+  $('.header-logo').parent()[0].href = `http://localhost:3000/classes/${klass.id}`
+  $('header div form')[0].action = `http://localhost:3000/classes/${klass.id}/assignments/new`
+  $('header div form')[1].action = `http://localhost:3000/classes/${klass.id}/lts/new`
+  $('header div form')[2].action = `http://localhost:3000/classes/${klass.id}/students`
   //adjust LTs in dropdown
   $('.select-lts option:first-child').nextAll().remove()
   $('.select-lts').parent()[0].action = `http://localhost:3000/classes/${klass.id}/learning_targets/redirect`
-  learningTargets.forEach(lt => {
-    $('.select-lts option:first-child').parent().append(`<option value="${lt.name}">${lt.name}</option>`)
-  })
-
-  // //adjust students in dropdown
+  learningTargets.forEach(lt => $('.select-lts option:first-child').parent().append(`<option value="${lt.name}">${lt.name}</option>`))
+  // adjust students in dropdown
   $('.select-students option:first-child').nextAll().remove()
   $('.select-students').parent()[0].action = `http://localhost:3000/classes/${klass.id}/students/redirect`
   students.forEach(st => $('.select-students option:first-child').parent().append(`<option value="${st.id}">${st.fullName()}</option>`))
-  history.pushState(null, null, `http://localhost:3000/classes/${klass.id}`)
 }
 
 function modifyGrade(event){
@@ -106,9 +95,23 @@ function modifyGrade(event){
   })
 }
 
-function enter_detector(e) {
-  if(e.which==13||e.keyCode==13){
-    $(this).closest('form').submit();
-    $(this).children()[0][1].blur()
+function switchClass(event){
+  event.preventDefault()
+  const classId = this.value
+  if (!classId){
+    window.location.href = "http://localhost:3000/classes"
+  } else {
+    $('main')[0].innerHTML = ''
+    resetCollections()
+    getData(classId)
   }
+}
+
+function resetCollections(){
+  learningTargets.length = 0
+  assignments.length = 0
+  students.length = 0
+  grades.length = 0
+  standards.length = 0
+  klasses.length = 0
 }
