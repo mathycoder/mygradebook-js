@@ -34,29 +34,62 @@ class Klass {
                   </div>
                 </div>
               </th>
-              <th></th>`
+              <th></th>
+              ${this.learningTargetHeaders()}
+            </tr>
+            <tr>
+              <td></td>
+              ${this.assignmentHeaders()}
+            </tr>
 
-          learningTargets.forEach(target => {
-            html += `
-              <th colspan="${target.assignments().length}" class="start-of-lt ${target.colorClass()}">
-                <div class="lt-target-label-container">
-                  <a href="/classes/${this.id}/lts/${target.id}">
-                    ${target.standard().standardNotationClean()}<br>
-                    ${target.name}
-                  </a>
-                  <div class="assignment-label">Assignments</div>
+            <tr>
+              <td>
+                <div>
+                  <strong>Students</strong>
+                  <span onclick="rowSorter('highest', 'name')" class="arrow"> 	&#x2B06 </span>
+                  <span onclick="rowSorter('lowest', 'name')" class="arrow"> 	&#x2B07 </span>
                 </div>
-              </th>`
+              </td>
 
-          })
+              <td>
+                <div>
+                  <strong> Average </strong>
+                  <span onclick="rowSorter('highest', 'average')" class="arrow"> 	&#x2B06 </span>
+                  <span onclick="rowSorter('lowest', 'average')" class="arrow"> 	&#x2B07 </span>
+                </div>
+              </td>
+              ${this.assignmentAveragesHtml()}
+            </tr>
+            ${this.studentRowsHtml()}
+              `
+      html += `
+            </tr>
+          </tbody>
+        </table>
+      </div>`
 
-          html += `</tr>`
+      return html
+  }
 
-// creates second row: assignments
+  learningTargetHeaders(){
+    let html = ''
+    learningTargets.forEach(target => {
+      html += `
+        <th colspan="${target.assignments().length}" class="start-of-lt ${target.colorClass()}">
+          <div class="lt-target-label-container">
+            <a href="/classes/${this.id}/lts/${target.id}">
+              ${target.standard().standardNotationClean()}<br>
+              ${target.name}
+            </a>
+            <div class="assignment-label">Assignments</div>
+          </div>
+        </th>`
+      })
+      return html
+  }
 
-    html += `<tr>
-              <td></td>`
-
+  assignmentHeaders(){
+    let html = ''
     learningTargets.forEach(lt => {
       if (lt.assignments().length === 0) {html += `<td></td>`}
       lt.chronologicalAssignments().forEach((assignment, index) => {
@@ -72,88 +105,64 @@ class Klass {
           `
       })
     })
-        html += `</tr>`
-
-
-        html += `
-        <tr>
-          <td>
-            <div>
-              <strong>Students</strong>
-              <span onclick="rowSorter('highest', 'name')" class="arrow"> 	&#x2B06 </span>
-              <span onclick="rowSorter('lowest', 'name')" class="arrow"> 	&#x2B07 </span>
-            </div>
-          </td>
-
-          <td>
-            <div>
-              <strong> Average </strong>
-              <span onclick="rowSorter('highest', 'average')" class="arrow"> 	&#x2B06 </span>
-              <span onclick="rowSorter('lowest', 'average')" class="arrow"> 	&#x2B07 </span>
-            </div>
-          </td>
-          `
-
-          learningTargets.forEach(lt => {
-            if (lt.assignments().length === 0) {
-              html += `<td></td>`
-            }
-
-            lt.chronologicalAssignments().forEach((assignment, index) => {
-              html += `
-                <td id="assignment-${assignment.id}" class="${index === 0 ? 'start-of-lt' : ''} assignment-averages assign-average">
-                  <div><strong></strong></div>
-                </td>
-                `
-            })
-          })
-
-          html += `</tr>`
-
-        // student rows
-        Student.byLastName().forEach(student => {
-          html += `
-            <tr id="student-${student.id}">
-              <td class="student-name">
-                <a href="/classes/${this.id}/students/${student.id}">
-                  <div class="student-column">
-                    ${student.fullName()}
-                  </div>
-                </a>
-              </td>
-
-              <td class="average assignment-averages">
-                <p>
-                  <strong></strong>
-                </p>
-              </td>
-            `
-
-          learningTargets.forEach(lt => {
-            if (lt.assignments().length === 0) {html += `<td></td>`}
-
-            lt.studentsChronologicalGrades(student).forEach((grade, index) =>{
-              html += `
-                <td id="${grade.id}" class="score col-${index} ${index === 0 ? 'start-of-lt' : ''}">
-                  <form class="grade-input" method="GET" action="/classes/${this.id}/grades/${grade.id}">
-                    <input name="utf8" type="hidden" value="✓"
-                    <input name="hidden" name="authenticity_token" value="">
-                    <input type="text" class="grade-text-field" name="grade[score]" id="grade_score">
-                    <input type="hidden" name="grade[id]" value="${grade.id}" id="grade_id">
-                  </form>
-                </td>
-                `
-            })
-          })
-        })
-
-      html += `
-            </tr>
-          </tbody>
-        </table>
-      </div>`
-
-      return html
+    return html
   }
 
+  assignmentAveragesHtml(){
+    let html = ''
+    learningTargets.forEach(lt => {
+      if (lt.assignments().length === 0) {
+        html += `<td></td>`
+      }
+
+      lt.chronologicalAssignments().forEach((assignment, index) => {
+        html += `
+          <td id="assignment-${assignment.id}" class="${index === 0 ? 'start-of-lt' : ''} assignment-averages assign-average">
+            <div><strong></strong></div>
+          </td>
+          `
+      })
+    })
+    return html
+  }
+
+  studentRowsHtml(){
+    let html = ''
+    Student.byLastName().forEach(student => {
+      html += `
+        <tr id="student-${student.id}">
+          <td class="student-name">
+            <a href="/classes/${this.id}/students/${student.id}">
+              <div class="student-column">
+                ${student.fullName()}
+              </div>
+            </a>
+          </td>
+
+          <td class="average assignment-averages">
+            <p>
+              <strong></strong>
+            </p>
+          </td>
+        `
+
+      learningTargets.forEach(lt => {
+        if (lt.assignments().length === 0) {html += `<td></td>`}
+
+        lt.studentsChronologicalGrades(student).forEach((grade, index) =>{
+          html += `
+            <td id="${grade.id}" class="score col-${index} ${index === 0 ? 'start-of-lt' : ''}">
+              <form class="grade-input" method="GET" action="/classes/${this.id}/grades/${grade.id}">
+                <input name="utf8" type="hidden" value="✓"
+                <input name="hidden" name="authenticity_token" value="">
+                <input type="text" class="grade-text-field" name="grade[score]" id="grade_score">
+                <input type="hidden" name="grade[id]" value="${grade.id}" id="grade_id">
+              </form>
+            </td>
+            `
+        })
+      })
+    })
+    return html
+  }
 }
