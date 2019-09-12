@@ -35,11 +35,11 @@ class Klass {
                 </div>
               </th>
               <th></th>
-              ${this.learningTargetHeaders()}
+              ${this.learningTargetHeadersHtml()}
             </tr>
             <tr>
               <td></td>
-              ${this.assignmentHeaders()}
+              ${this.assignmentHeadersHtml()}
             </tr>
 
             <tr>
@@ -71,7 +71,7 @@ class Klass {
       return html
   }
 
-  learningTargetHeaders(){
+  learningTargetHeadersHtml(){
     let html = ''
     learningTargets.forEach(target => {
       html += `
@@ -88,7 +88,7 @@ class Klass {
       return html
   }
 
-  assignmentHeaders(){
+  assignmentHeadersHtml(){
     let html = ''
     learningTargets.forEach(lt => {
       if (lt.assignments().length === 0) {html += `<td></td>`}

@@ -1,6 +1,5 @@
-$(document).ready(function() {
+$().ready(() => {
   const array = window.location.href.split("classes/")
-  // Checks for the correct show page before running getData()
   if (array.length > 1 && !(array[1].includes("students") || array[1].includes("lts") || array[1].includes("new") || array[1].includes("grades") || array[1].includes("edit"))){
     getData()
     $('.class-header select').change(switchClass)
@@ -25,8 +24,6 @@ function switchClass(event){
     $('header div form')[0].action = `http://localhost:3000/classes/${classId}/assignments/new`
     $('header div form')[1].action = `http://localhost:3000/classes/${classId}/lts/new`
     $('header div form')[2].action = `http://localhost:3000/classes/${classId}/students`
-
-
   }
 
 }
@@ -101,9 +98,8 @@ function displayCurrentGrades() {
   // //adjust students in dropdown
   $('.select-students option:first-child').nextAll().remove()
   $('.select-students').parent()[0].action = `http://localhost:3000/classes/${klass.id}/students/redirect`
-  students.forEach(st => {
-    $('.select-students option:first-child').parent().append(`<option value="${st.id}">${st.fullName()}</option>`)
-  })
+  students.forEach(st => $('.select-students option:first-child').parent().append(`<option value="${st.id}">${st.fullName()}</option>`))
+  history.pushState(null, null, `http://localhost:3000/classes/${klass.id}`)
 }
 
 function modifyGrade(event){
