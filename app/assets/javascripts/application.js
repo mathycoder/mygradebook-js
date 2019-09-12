@@ -19,8 +19,7 @@
 
 //= require_tree ./models
 
-//= require klasses/index-gradebook
-//= require klasses/index
+//= require klasses/show
 //= require klasses/formatting
 
 //= require students/students-new

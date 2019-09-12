@@ -74,7 +74,7 @@ function createJSONGradeObjects(json, cla){
   for (i = 0; i<json.length; i++){
     new cla(json[i])
   }
-  renderGradebook()
+  $('main').append(klass.formatShow())
   $('form.grade-input').submit(modifyGrade)
   displayCurrentGrades()
 }
