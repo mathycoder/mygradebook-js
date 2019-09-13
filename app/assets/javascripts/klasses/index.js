@@ -68,17 +68,25 @@ function renderKlassShowHeader(klassId){
     </form>
   </div>
   <div class="header-select">
-    <form class="new_learning_target" id="new_learning_target" action="" method="get">
+    <form class="new_learning_target" id="new_learning_target" action="http://localhost:3000/classes/${klass.id}/learning_targets/redirect" method="get">
       <select class="select-blend select-lts" onchange="this.form.submit();" name="learning_target[name]">
         <option>Learning Targets</option>
+      </select>
     </form>
   </div>
   <div class="header-select">
-    <form class="new_student" id="new_student" action="" method="get">
+    <form class="new_student" id="new_student" method="get" action="http://localhost:3000/classes/2/students/redirect">
+      <input name="utf8" type="hidden" value="✓">
       <select class="select-blend select-students" onchange="this.form.submit();" name="student[name]">
         <option>Students</option>
+      </select>
     </form>
   </div>
+  <a href="/teachers/1">
+    <div class="header-profile">
+      <img src="/assets/uploads/Screen Shot 2019-07-22 at 2.27.08 PM-3da2e3a55d0e5b69298347a62b3c77a0e47e3d9b310f0c18c8bc2676d113e720.png">
+    </div>
+  </a>
   `
 
   $('header').append(html)
