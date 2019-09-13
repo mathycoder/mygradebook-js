@@ -15,12 +15,12 @@ class Klass {
     klass = this
   }
 
-  static formatIndex(){
+  static formatIndex(teacher){
     let html = `
 
       <div class="open-book">
         <div class="open-book-title">
-          <h1>${'Someone'}'s classes</h1>
+          <h1>${teacher}'s classes</h1>
         </div>
         <div class="open-book-table">
           <table>
@@ -34,7 +34,7 @@ class Klass {
             <tr>
               <td>${klass.period}</td>
               <td>
-                <a href="/classes/${klass.id}">${klass.name}</a>
+                <a class="class-link" data-id="${klass.id}" href="/classes/${klass.id}">${klass.name}</a>
               </td>
               <td>
                 <a href="/classes/${klass.id}/edit">edit</a>

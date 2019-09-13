@@ -83,13 +83,13 @@ function modifyGrade(event){
 
 function switchClass(event){
   event.preventDefault()
-  const classId = this.value
-  if (!classId){
+  const klassId = this.value
+  if (!klassId){
     window.location.href = "http://localhost:3000/classes"
   } else {
     $('main')[0].innerHTML = ''
     clearData()
-    getData(classId)
+    getData(klassId)
   }
 }
 
