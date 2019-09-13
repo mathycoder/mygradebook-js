@@ -15,6 +15,47 @@ class Klass {
     klass = this
   }
 
+  static formatIndex(){
+    let html = `
+
+      <div class="open-book">
+        <div class="open-book-title">
+          <h1>${'Someone'}'s classes</h1>
+        </div>
+        <div class="open-book-table">
+          <table>
+            <tr>
+              <th>Period</th>
+              <th>Class</th>
+            </tr>`
+
+          klasses.forEach(klass => {
+            html += `
+            <tr>
+              <td>${klass.period}</td>
+              <td>
+                <a href="/classes/${klass.id}">${klass.name}</a>
+              </td>
+              <td>
+                <a href="/classes/${klass.id}/edit">edit</a>
+              </td>
+            </tr>`
+          })
+
+      html += `
+
+        </table>
+      </div>
+
+      <div class="open-book-links">
+        <p><a href="/classes/new">Add a New Class</a></p>
+        <p><a href="/students/new">Add New Student to School</a></p>
+      </div>
+    </div>`
+
+    return html
+  }
+
   formatShow(){
     let html = ''
     html += `
