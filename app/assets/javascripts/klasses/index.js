@@ -83,6 +83,11 @@ function renderKlassShowHeader(klassId){
       </select>
     </form>
   </div>
+
+  <div class="header-logout">
+    <a href="/logout">Log Out</a>
+  </div>
+
   <a href="/teachers/1">
     <div class="header-profile">
       <img src="/assets/uploads/Screen Shot 2019-07-22 at 2.27.08 PM-3da2e3a55d0e5b69298347a62b3c77a0e47e3d9b310f0c18c8bc2676d113e720.png">
