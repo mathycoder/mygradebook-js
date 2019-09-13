@@ -19,6 +19,7 @@
 
 //= require_tree ./models
 
+//= require klasses/index
 //= require klasses/show
 //= require klasses/formatting
 

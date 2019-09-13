@@ -1,7 +1,5 @@
 $().ready(() => {
   $('.class-header select').change(switchClass)
-  const array = window.location.href.split("classes/")
-  // array.length > 1 && !(array[1].includes("students") || array[1].includes("lts") || array[1].includes("new") || array[1].includes("grades") || array[1].includes("edit"))
   if (/^http:\/\/localhost:3000\/classes\/\d$/.test(window.location.href)){
     getData()
   }
