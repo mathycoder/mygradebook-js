@@ -163,7 +163,7 @@ class Klass {
     let html = ''
     learningTargets.forEach(lt => {
       if (lt.assignments().length === 0) {
-        html += `<td></td>`
+        html += `<td class="start-of-lt"></td>`
       }
 
       lt.chronologicalAssignments().forEach((assignment, index) => {
@@ -198,7 +198,7 @@ class Klass {
         `
 
       learningTargets.forEach(lt => {
-        if (lt.assignments().length === 0) {html += `<td></td>`}
+        if (lt.assignments().length === 0) {html += `<td class="start-of-lt"></td>`}
 
         lt.studentsChronologicalGrades(student).forEach((grade, index) =>{
           html += `
