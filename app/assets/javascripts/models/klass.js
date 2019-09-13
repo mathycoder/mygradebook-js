@@ -15,12 +15,12 @@ class Klass {
     klass = this
   }
 
-  static formatIndex(teacher){
+  static formatIndex(){
     let html = `
 
       <div class="open-book">
         <div class="open-book-title">
-          <h1>${teacher}'s classes</h1>
+          <h1>${teacher.name}'s classes</h1>
         </div>
         <div class="open-book-table">
           <table>
