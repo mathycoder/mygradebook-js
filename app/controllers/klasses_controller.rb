@@ -26,7 +26,7 @@ class KlassesController < ApplicationController
     respond_to do |format|
       format.html
       format.json {render json: @klasses.to_json(only: [:id, :name, :subject, :grade, :period],
-                                                 include: [teachers: {only: [:name, :id]}])}
+                                                 include: [teachers: {only: [:name, :id, :picture_url]}])}
     end
   end
 
