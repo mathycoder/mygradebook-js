@@ -10,6 +10,7 @@ function getData(klassIdFromLink = undefined) {
   const klassId = klassIdFromLink || window.location.href.split("/")[4]
   $.get(`/classes/${klassId}.json`, function(json){
     klass = new Klass(json)
+    new Teacher(json.teachers[0])
     createJSONObjects(json.students, Student)
     createJSONObjects(json.assignments, Assignment)
     createJSONObjects(json.learning_targets, LearningTarget)
@@ -87,6 +88,9 @@ function switchClass(event){
   const klassId = this.value
   clearData()
   if (!klassId){
+    $('header')[0].innerHTML = ''
+    const headerHtml = Klass.renderIndexHeader()
+    $('header').append(headerHtml)
     getIndexData()
   } else {
     getData(klassId)
@@ -95,10 +99,10 @@ function switchClass(event){
 
 function clearData(){
   klass = undefined
+  klasses.length = 0
   learningTargets.length = 0
   assignments.length = 0
   students.length = 0
   grades.length = 0
   standards.length = 0
-  klasses.length = 0
 }

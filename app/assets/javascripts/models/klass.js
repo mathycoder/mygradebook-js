@@ -288,4 +288,30 @@ class Klass {
 
     return html
   }
+
+  static renderIndexHeader(){
+    let html = `
+
+    <a href="http://localhost:3000/classes">
+      <div class="header-logo">
+        <img src="/assets/open-book2.png">
+      </div>
+    </a>
+
+    <div class="mygradebook">
+      <h3>MyGradebook</h3>
+    </div>
+
+    <div class="header-logout">
+      <a href="/logout">Log Out</a>
+    </div>
+
+    <a href="/teachers/1">
+      <div class="header-profile">
+        <img src="/assets/${teacher.picture_url}">
+      </div>
+    </a>
+    `
+    return html
+  }
 }
