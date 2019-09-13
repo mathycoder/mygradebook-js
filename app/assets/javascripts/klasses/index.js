@@ -20,12 +20,11 @@ function clickOnClass(e){
   e.preventDefault()
   const klassId = this.dataset.id
   $('main')[0].innerHTML = ''
-  clearData()
-  modifyHeader(klassId)
+  renderKlassShowHeader(klassId)
   getData(klassId)
 }
 
-function modifyHeader(klassId){
+function renderKlassShowHeader(klassId){
   $('header')[0].innerHTML = ''
   let html = ''
 
@@ -53,7 +52,33 @@ function modifyHeader(klassId){
         <input type="submit" name="commit" value="+S" class="fancy-button" data-disable-with="+S">
       </form>
     </div>
+    <div class="class-header">
+    <form class="edit_klass" action="http://localhost:3000/classes/redirect" method="get">
+      <select class="select-blend" name="klass[id]" id="klass_id">
+        <option value="">Classes</option>`
 
+      klasses.forEach(klass => {
+        html += `
+          <option ${klass.id === Number.parseInt(klassId) ? 'selected="selected"' : ''}" value="${klass.id}">Class ${klass.name}</option>
+        `
+      })
+
+      html += `
+      </select>
+    </form>
+  </div>
+  <div class="header-select">
+    <form class="new_learning_target" id="new_learning_target" action="" method="get">
+      <select class="select-blend select-lts" onchange="this.form.submit();" name="learning_target[name]">
+        <option>Learning Targets</option>
+    </form>
+  </div>
+  <div class="header-select">
+    <form class="new_student" id="new_student" action="" method="get">
+      <select class="select-blend select-students" onchange="this.form.submit();" name="student[name]">
+        <option>Students</option>
+    </form>
+  </div>
   `
 
   $('header').append(html)
