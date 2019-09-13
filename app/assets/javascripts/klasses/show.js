@@ -6,6 +6,7 @@ $().ready(() => {
 })
 
 function getData(klassIdFromLink = undefined) {
+  $('main')[0].innerHTML = ''
   const klassId = klassIdFromLink || window.location.href.split("/")[4]
   $.get(`/classes/${klassId}.json`, function(json){
     klass = new Klass(json)
@@ -84,11 +85,10 @@ function modifyGrade(event){
 function switchClass(event){
   event.preventDefault()
   const klassId = this.value
+  clearData()
   if (!klassId){
-    window.location.href = "http://localhost:3000/classes"
+    getIndexData()
   } else {
-    $('main')[0].innerHTML = ''
-    clearData()
     getData(klassId)
   }
 }

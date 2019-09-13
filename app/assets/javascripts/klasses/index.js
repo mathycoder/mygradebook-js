@@ -10,10 +10,15 @@ function getIndexData(){
     for (i = 0; i<json.length; i++){
       klasses.push(new Klass(json[i]))
     }
-    let indexHtml = Klass.formatIndex(json[0].teachers[0].name)
-    $('main').append(indexHtml)
-    $('.class-link').click(clickOnClass)
+    renderIndexPage(json[0].teachers[0].name)
   })
+}
+
+function renderIndexPage(teacher){
+  const indexHtml = Klass.formatIndex(teacher)
+  $('main').append(indexHtml)
+  $('.class-link').click(clickOnClass)
+  history.pushState(null, null, `http://localhost:3000/classes`)
 }
 
 function clickOnClass(e){
