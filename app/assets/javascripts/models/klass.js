@@ -135,8 +135,8 @@ class Klass {
             <div class="assignment-label">Assignments</div>
           </div>
         </th>`
-      })
-      return html
+    })
+    return html
   }
 
   assignmentHeadersHtml(){

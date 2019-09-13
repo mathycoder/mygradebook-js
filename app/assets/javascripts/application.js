@@ -23,6 +23,4 @@
 //= require klasses/show
 //= require klasses/formatting
 
-//= require lts/show
-
 //= require students/students-new
