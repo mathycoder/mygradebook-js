@@ -22,5 +22,6 @@
 //= require klasses/index
 //= require klasses/show
 //= require klasses/formatting
+//= require headers
 
 //= require students/students-new
