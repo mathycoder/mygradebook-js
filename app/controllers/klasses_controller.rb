@@ -23,6 +23,10 @@ class KlassesController < ApplicationController
 
   def index
     @klasses = current_user.klasses.sorted_by_period
+    respond_to do |format|
+      format.html
+      format.json {render json: @klasses.to_json(only: [:id, :name, :subject, :grade, :period])}
+    end
   end
 
   def show
