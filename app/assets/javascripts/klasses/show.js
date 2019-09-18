@@ -87,7 +87,9 @@ function switchClass(event){
   event.preventDefault()
   const klassId = this.value
   clearData()
-  if (!klassId){
+  if (!klassId && !teacher) {
+    window.location.replace("http://localhost:3000/classes")
+  } else if (!klassId){
     $('header')[0].innerHTML = ''
     const headerHtml = Klass.renderIndexHeader()
     $('header').append(headerHtml)
