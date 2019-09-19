@@ -6,7 +6,6 @@ $().ready(() => {
   }
 })
 
-
 function getClassStudentsIndexData() {
   const klassId = window.location.href.split("/")[4]
   $.get(`/classes/${klassId}/students.json`, function(json){
@@ -20,7 +19,7 @@ function createStudentsInSchool(json, cla){
     let student = new cla(json[i])
     $('#students-in-school tbody').append(student.fullTrInSchoolHTML())
   }
-  $('.add-student-button').click(addStudentToKlass)
+  $('.add-student-button').click(changeKlassStatus)
 }
 
 function createStudentsInKlass(json, cla){
@@ -28,7 +27,7 @@ function createStudentsInKlass(json, cla){
     let student = new cla(json[i])
     $('#students-in-klass tbody').append(student.fullTrInKlassHTML())
   }
-  $('.remove-student-button').click(removeStudentFromKlass)
+  $('.remove-student-button').click(changeKlassStatus)
 }
 
 function filterIndexStudents(e){
@@ -46,35 +45,21 @@ function filterIndexStudents(e){
   })
 }
 
-function addStudentToKlass(){
-  const element = this
+function changeKlassStatus(){
   $(this).parent().parent().remove()
-  changeKlassStatus(element)
-}
-
-function removeStudentFromKlass(){
-  const element = this
-  $(this).parent().parent().remove()
-  changeKlassStatus(element)
-}
-
-function changeKlassStatus(element){
   const klassId = window.location.href.split("/")[4]
-  const studentId = element.id.split("-")[1]
+  const studentId = this.id.split("-")[1]
    $.ajax({
    type: 'PATCH',
    url: `/classes/${klassId}/students/${studentId}`
  }).done((data, status, xhr) => {
+   const student = new Student(data)
    if (xhr.status === 201){
-     console.log("added student!")
-     const student = new Student(data)
      $('#students-in-klass tr:first-child').after(student.fullTrInKlassHTML())
-     $(`#student-${student.id} .remove-student-button`).click(removeStudentFromKlass)
+     $(`#student-${student.id} .remove-student-button`).click(changeKlassStatus)
    } else if (xhr.status === 200){
-     console.log("removed student!")
-     const student = new Student(data)
      $('#students-in-school tr:first-child').after(student.fullTrInSchoolHTML())
-     $(`#student-${student.id} .add-student-button`).click(addStudentToKlass)
+     $(`#student-${student.id} .add-student-button`).click(changeKlassStatus)
    }
  })
 }

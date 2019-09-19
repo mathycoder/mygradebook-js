@@ -18,23 +18,9 @@
             <th>Grade</th>
             <th>HR</th>
           </tr>
-          <% @students.each do |student| %>
-            <tr>
-              <td>
-                <%= form_for([@klass, student]) do |f| %>
-                  <%= f.submit("Add", class: "little-button") %>
-                <% end %>
-              </td>
-              <td><%= student.last_name %></td>
-              <td><%= student.first_name %></td>
-              <td><%= student.grade %></td>
-              <td><%= student.klass %></td>
-            </tr>
-          <% end %>
         </table>
       </div>
     </div>
-
 
     <div class="students-in-class paper-form">
       <h3>Students in this class</h3>
@@ -47,19 +33,6 @@
             <th>Grade</th>
             <th>HR</th>
           </tr>
-          <% @mystudents.each do |student| %>
-            <tr>
-              <td>
-                <%= form_for([@klass, student]) do |f| %>
-                  <%= f.submit("Remove", class: "little-button") %>
-                <% end %>
-              </td>
-              <td><%= student.last_name %></td>
-              <td><%= student.first_name %></td>
-              <td><%= student.grade %></td>
-              <td><%= student.klass %></td>
-            </tr>
-          <% end %>
         </table>
       </div>
     </div>
