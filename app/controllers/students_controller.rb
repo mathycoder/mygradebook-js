@@ -41,6 +41,11 @@ class StudentsController < ApplicationController
   def index
     @students = Student.filter_by(params[:query], @klass)
     @mystudents = @klass.students_by_last_name
+    respond_to do |format|
+      format.html
+      format.json {render json: {inschool: @students,
+                                 inklass: @mystudents}}
+    end
   end
 
   def show

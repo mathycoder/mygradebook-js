@@ -29,7 +29,6 @@ function displayStudents(){
 
 function filterStudents(){
   event.preventDefault()
-  console.log("filter me!")
   const values = $(this.parentElement).serialize()
   $.ajax({
   type: 'GET',

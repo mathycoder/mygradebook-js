@@ -25,3 +25,4 @@
 
 
 //= require students/students-new
+//= require students/index
