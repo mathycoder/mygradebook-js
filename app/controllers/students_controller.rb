@@ -59,8 +59,13 @@ class StudentsController < ApplicationController
     if params[:klass_id]
       find_klass_nested_route
       find_student
-      @klass.students.include?(@student) ? @klass.students.delete(@student) : add_student_to_klass
-      redirect_to(klass_students_path(@klass))
+      if @klass.students.include?(@student)
+        @klass.students.delete(@student)
+        render json: @student, status: 200
+      else
+        add_student_to_klass
+        render json: @student, status: 201
+      end
     else
       @student = Student.find_by(id: params[:id])
       if @student.update(student_params)

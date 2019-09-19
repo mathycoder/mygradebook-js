@@ -20,6 +20,7 @@ function createStudentsInSchool(json, cla){
     let student = new cla(json[i])
     $('#students-in-school tbody').append(student.fullTrInSchoolHTML())
   }
+  $('.add-student-button').click(changeKlassStatus)
 }
 
 function createStudentsInKlass(json, cla){
@@ -27,6 +28,7 @@ function createStudentsInKlass(json, cla){
     let student = new cla(json[i])
     $('#students-in-klass tbody').append(student.fullTrInKlassHTML())
   }
+  $('.remove-student-button').click(changeKlassStatus)
 }
 
 function filterIndexStudents(e){
@@ -44,8 +46,17 @@ function filterIndexStudents(e){
   })
 }
 
-// function displayIndexStudents(){
-//   Student.displayStudentsInDOM()
-//   $('.delete-student-button').click(deleteStudent)
-//   $('.edit-student-button').click(editStudent)
-// }
+function changeKlassStatus(){
+  const klassId = window.location.href.split("/")[4]
+  const studentId = this.id.split("-")[1]
+   $.ajax({
+   type: 'PATCH',
+   url: `/classes/${klassId}/students/${studentId}`
+ }).done((data, status, xhr) => {
+   if (xhr.status === 201){
+     console.log("added student!")
+   } else if (xhr.status === 200){
+     console.log("removed student!")
+   }
+ })
+}
