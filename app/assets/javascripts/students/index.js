@@ -2,6 +2,7 @@ $().ready(() => {
   if (/http:\/\/localhost:3000\/classes\/\d\/students/.test(window.location.href)){
     $('.listed-students tr:first-child').nextAll().remove()
     getClassStudentsIndexData()
+    $('#filter-students').click(filterIndexStudents)
   }
 })
 
@@ -26,6 +27,21 @@ function createStudentsInKlass(json, cla){
     let student = new cla(json[i])
     $('#students-in-klass tbody').append(student.fullTrInKlassHTML())
   }
+}
+
+function filterIndexStudents(e){
+  e.preventDefault()
+  const values = $(this.parentElement).serialize()
+  const klassId = window.location.href.split("/")[4]
+  $.ajax({
+  type: 'GET',
+  url: `/classes/${klassId}/students.json`,
+  data: values
+}).done(json => {
+    students.length = 0
+    $('#students-in-school tr:first-child').nextAll().remove()
+    createStudentsInSchool(json.inschool, Student)
+  })
 }
 
 // function displayIndexStudents(){
