@@ -9,6 +9,14 @@ class Student {
     students.push(this)
   }
 
+  fullName(){
+    return `${this.last_name}, ${this.first_name}`
+  }
+
+  static byLastName(){
+    return students.sort((a,b) => a.last_name.localeCompare(b.last_name))
+  }
+
   static renderAverages(){
     const rows = $('tr')
     for (let i=3; i<rows.length; i++){
@@ -17,14 +25,6 @@ class Student {
       average = average || ""
       $(`tr:nth-child(${i+1}) td.average`)[0].innerHTML = `<p><strong>${average}</strong></p>`
     }
-  }
-
-  static byLastName(){
-    return students.sort((a,b) => a.last_name.localeCompare(b.last_name))
-  }
-
-  fullName(){
-    return `${this.last_name}, ${this.first_name}`
   }
 
   average(){

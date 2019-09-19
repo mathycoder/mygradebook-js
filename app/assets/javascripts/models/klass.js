@@ -7,11 +7,6 @@ class Klass {
     this.subject = attributes.subject
     this.grade = attributes.grade
     this.period = attributes.period
-    this.learningTargets = []
-    this.standards = []
-    this.students = []
-    this.assignments = []
-    this.grades = []
     klass = this
   }
 
