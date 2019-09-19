@@ -77,6 +77,26 @@ class Student {
             </tr>`
   }
 
+  fullTrInSchoolHTML(){
+    return `<tr id="student-${this.id}">
+              <td><button id="add-${this.id}" class="little-button add-student-button">Add</button></td>
+              <td>${this.last_name}</td>
+              <td>${this.first_name}</td>
+              <td>${this.grade}</td>
+              <td>${this.klass}</td>
+            </tr>`
+  }
+
+  fullTrInKlassHTML(){
+    return `<tr id="student-${this.id}">
+              <td><button id="add-${this.id}" class="little-button remove-student-button">Remove</button></td>
+              <td>${this.last_name}</td>
+              <td>${this.first_name}</td>
+              <td>${this.grade}</td>
+              <td>${this.klass}</td>
+            </tr>`
+  }
+
   addTrToDOM(){
     $('#student-list-header').after(this.fullTrHTML())
   }
