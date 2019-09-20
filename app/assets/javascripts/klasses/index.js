@@ -29,6 +29,6 @@ function clickOnClass(e){
   $('header')[0].innerHTML = ''
   const headerHtml = klass.renderShowHeader()
   $('header').append(headerHtml)
-  getData(klass.id)
+  getKlassData(klass.id)
   $('.class-header select').change(switchClass)
 }

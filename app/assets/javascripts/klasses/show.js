@@ -1,11 +1,11 @@
 $().ready(() => {
   $('.class-header select').change(switchClass)
   if (/^http:\/\/localhost:3000\/classes\/\d$/.test(window.location.href)){
-    getData()
+    getKlassData()
   }
 })
 
-function getData(klassIdFromLink = undefined) {
+function getKlassData(klassIdFromLink = undefined) {
   $('main')[0].innerHTML = ''
   const klassId = klassIdFromLink || window.location.href.split("/")[4]
   $.get(`/classes/${klassId}.json`, function(json){
@@ -97,7 +97,7 @@ function switchClass(event){
     $('header').append(headerHtml)
     getIndexData()
   } else {
-    getData(klassId)
+    getKlassData(klassId)
   }
 }
 

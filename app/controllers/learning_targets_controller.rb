@@ -32,7 +32,7 @@ class LearningTargetsController < ApplicationController
   def show
     respond_to do |format|
       format.html
-      format.json {render json: @lt, serializer: LearningTargetShowSerializer}
+      format.json {render json: @lt}
     end
   end
 
