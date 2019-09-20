@@ -12,6 +12,10 @@ class Grade {
     return students.find(student => student.id === this.student_id)
   }
 
+  assignment(){
+    return assignments.find(assignment => assignment.id === this.assignment_id)
+  }
+
   static find(gradeId){
     return grades.find(grade => grade.id === Number.parseInt(gradeId))
   }

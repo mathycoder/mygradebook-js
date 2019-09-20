@@ -18,6 +18,10 @@ class Assignment {
     }
   }
 
+  learningTarget(){
+    return learningTargets.find(lt => lt.id === this.learning_target_id)
+  }
+
   grades(){
     return grades.filter(grade => grade.assignment_id === this.id)
   }

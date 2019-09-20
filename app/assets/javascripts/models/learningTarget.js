@@ -59,11 +59,11 @@ class LearningTarget {
             <div>LT Average: </div>
             <div><strong>${this.classAverage()}</strong></div>
             <div>Level 3s and up: </div>
-            <div><strong><%= lt.percent_of_students_on_level(@klass, 3.0)%></strong></div>
+            <div><strong>${this.percentOfStudentsOnLevel(3.0)}</strong></div>
             <div>Level 2s: </div>
-            <div><strong><%= lt.percent_of_students_on_level(@klass, 2.0)%></strong></div>
+            <div><strong>${this.percentOfStudentsOnLevel(2.0)}</strong></div>
             <div>Level 1s: </div>
-            <div><strong><%= lt.percent_of_students_on_level(@klass, 1.0)%></strong></div>
+            <div><strong>${this.percentOfStudentsOnLevel(1.0)}</strong></div>
           </div>
 
           <div>
@@ -72,6 +72,15 @@ class LearningTarget {
 
       `
     return html
+  }
+
+  percentOfStudentsOnLevel(level){
+    const levelUp = (level === 3.0? 1.1 : 1.0)
+    let averages = students.map(student => Number.parseFloat(student.average(this)))
+    averages = averages.filter(average => !!average)
+    const highAverages = averages.filter(average => average >= level && average < (level+ levelUp))
+    const percentage = ((highAverages.length / averages.length)*100).toFixed(1)
+    return `${percentage}%`
   }
 
   classAverage(){
@@ -85,14 +94,6 @@ class LearningTarget {
       return ave.toFixed(2)
     }
   }
-  //   averages = self.assignments.map{|assignment| assignment.average(klass).to_f}.compact
-  //   if !averages.empty?
-  //     avg = averages.sum / averages.length
-  //     '%.2f' % avg
-  //   else
-  //     nil
-  //   end
-  // end
 
   lineChart(){
      new Chartkick.LineChart("chart-1", this.graphData(), {xtitle: "Date",
