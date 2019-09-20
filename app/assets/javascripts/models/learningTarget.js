@@ -5,6 +5,10 @@ class LearningTarget {
     this.id = attributes.id
     this.name = attributes.name
     this.standard_id = attributes.standard_id
+    this.level1 = attributes.level1
+    this.level2 = attributes.level2
+    this.level3 = attributes.level3
+    this.level4 = attributes.level4 
     learningTargets.push(this)
   }
 
@@ -69,7 +73,33 @@ class LearningTarget {
         <div class="lt-show-gradebook">
         </div>
 
+        <div class="lt-show-rub-st-container">
+          <div class="lt-show-rubric">
+            <div class="rubric-title ${this.colorClass()}">
+              <h2>${this.name}</h2>
+            </div>
+            ${this.rubricLevels()}
+          </div>
+        </div>
+
       `
+    return html
+  }
+
+  rubricLevels(){
+    let html = ''
+    const levels = [this.level4, this.level3, this.level2, this.level1]
+    levels.forEach((level, index) => {
+      html += `
+        <div class="rubric-score">
+          <h2>${4 - index}</h2>
+        </div>
+
+        <div class="rubric-score-desc">
+          <p>${level}</p>
+        </div>
+      `
+    })
     return html
   }
 
@@ -164,10 +194,10 @@ class LearningTarget {
   //   <%= render partial: "klasses/table", locals: {klass: @klass, lt: @lt, collection: [@lt], klass_or_lt: @lt} %>
   // </div>
 //
-//   <div class="lt-show-rub-st-container">
-//     <div class="lt-show-rubric">
-//       <%= render partial: "learning_targets/rubric", locals: {klass: @klass, lt: @lt} %>
-//     </div>
+  // <div class="lt-show-rub-st-container">
+  //   <div class="lt-show-rubric">
+  //     <%= render partial: "learning_targets/rubric", locals: {klass: @klass, lt: @lt} %>
+  //   </div>
 //
 //     <% if @lt.standard %>
 //       <div class="lt-show-standard">
