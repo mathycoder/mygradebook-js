@@ -32,5 +32,6 @@ function getKlassDataAfterLt(klassIdFromLink = undefined){
 
 function renderLtShowPage(){
   $('main').append(currLt.formatShow())
+  $('.lt-show-gradebook').append(klass.formatShow(currLt))
   currLt.lineChart()
 }

@@ -70,6 +70,9 @@ class LearningTarget {
           </div>
         </div>
 
+        <div class="lt-show-gradebook">
+        </div>
+
       `
     return html
   }
@@ -161,9 +164,9 @@ class LearningTarget {
 //   </div>
 //
 //
-//   <div class="lt-show-gradebook">
-//     <%= render partial: "klasses/table", locals: {klass: @klass, lt: @lt, collection: [@lt], klass_or_lt: @lt} %>
-//   </div>
+  // <div class="lt-show-gradebook">
+  //   <%= render partial: "klasses/table", locals: {klass: @klass, lt: @lt, collection: [@lt], klass_or_lt: @lt} %>
+  // </div>
 //
 //   <div class="lt-show-rub-st-container">
 //     <div class="lt-show-rubric">

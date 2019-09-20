@@ -55,7 +55,9 @@ class Klass {
     return html
   }
 
-  formatShow(){
+  formatShow(lt = undefined){
+    const collection = (lt ? [lt] : learningTargets)
+    if (lt) {const collection = [lt]}
     let html = ''
     html += `
       <div class="gradebook-wrapper">
@@ -81,11 +83,11 @@ class Klass {
                 </div>
               </th>
               <th></th>
-              ${this.learningTargetHeadersHtml()}
+              ${this.learningTargetHeadersHtml(collection)}
             </tr>
             <tr>
               <td></td>
-              ${this.assignmentHeadersHtml()}
+              ${this.assignmentHeadersHtml(collection)}
             </tr>
 
             <tr>
@@ -104,9 +106,9 @@ class Klass {
                   <span onclick="rowSorter('lowest', 'average')" class="arrow"> 	&#x2B07 </span>
                 </div>
               </td>
-              ${this.assignmentAveragesHtml()}
+              ${this.assignmentAveragesHtml(collection)}
             </tr>
-            ${this.studentRowsHtml()}
+            ${this.studentRowsHtml(collection)}
               `
       html += `
             </tr>
@@ -117,9 +119,9 @@ class Klass {
       return html
   }
 
-  learningTargetHeadersHtml(){
+  learningTargetHeadersHtml(collection = undefined){
     let html = ''
-    learningTargets.forEach(target => {
+    collection.forEach(target => {
       html += `
         <th colspan="${target.assignments().length}" class="start-of-lt ${target.colorClass()}">
           <div class="lt-target-label-container">
@@ -134,9 +136,9 @@ class Klass {
     return html
   }
 
-  assignmentHeadersHtml(){
+  assignmentHeadersHtml(collection = undefined){
     let html = ''
-    learningTargets.forEach(lt => {
+    collection.forEach(lt => {
       if (lt.assignments().length === 0) {html += `<td></td>`}
       lt.chronologicalAssignments().forEach((assignment, index) => {
         html += `
@@ -154,9 +156,9 @@ class Klass {
     return html
   }
 
-  assignmentAveragesHtml(){
+  assignmentAveragesHtml(collection = undefined){
     let html = ''
-    learningTargets.forEach(lt => {
+    collection.forEach(lt => {
       if (lt.assignments().length === 0) {
         html += `<td class="start-of-lt"></td>`
       }
@@ -172,7 +174,7 @@ class Klass {
     return html
   }
 
-  studentRowsHtml(){
+  studentRowsHtml(collection = undefined){
     let html = ''
     Student.byLastName().forEach(student => {
       html += `
@@ -192,7 +194,7 @@ class Klass {
           </td>
         `
 
-      learningTargets.forEach(lt => {
+      collection.forEach(lt => {
         if (lt.assignments().length === 0) {html += `<td class="start-of-lt"></td>`}
 
         lt.studentsChronologicalGrades(student).forEach((grade, index) =>{
