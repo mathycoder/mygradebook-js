@@ -52,11 +52,47 @@ class LearningTarget {
           <div class="lt-graph">
             <div id="chart-1" style="height: 300px; width: 400px;"></div>
           </div>
+
+
+          <div class="averages">
+            <div class="rubric-title ${this.colorClass()}"><strong>${klass.name} LT Stats</strong></div>
+            <div>LT Average: </div>
+            <div><strong>${this.classAverage()}</strong></div>
+            <div>Level 3s and up: </div>
+            <div><strong><%= lt.percent_of_students_on_level(@klass, 3.0)%></strong></div>
+            <div>Level 2s: </div>
+            <div><strong><%= lt.percent_of_students_on_level(@klass, 2.0)%></strong></div>
+            <div>Level 1s: </div>
+            <div><strong><%= lt.percent_of_students_on_level(@klass, 1.0)%></strong></div>
+          </div>
+
+          <div>
+          </div>
         </div>
 
       `
     return html
   }
+
+  classAverage(){
+    let averages = this.assignments().map(assignment => Number.parseFloat(assignment.average()))
+    averages = averages.filter(average => !!average)
+    if (averages.length === 0){
+      return undefined
+    } else {
+      const sum = averages.reduce((agg, el) => agg + el)
+      const ave = sum / averages.length
+      return ave.toFixed(2)
+    }
+  }
+  //   averages = self.assignments.map{|assignment| assignment.average(klass).to_f}.compact
+  //   if !averages.empty?
+  //     avg = averages.sum / averages.length
+  //     '%.2f' % avg
+  //   else
+  //     nil
+  //   end
+  // end
 
   lineChart(){
      new Chartkick.LineChart("chart-1", this.graphData(), {xtitle: "Date",
@@ -64,12 +100,6 @@ class LearningTarget {
                              colors: [this.colorClass(), this.colorClass()], min: 0, max: 4,
                              library: { scales: { yAxes: [{ gridLines: { display: true },ticks: { maxTicksLimit: 5 } }]}}
                            })
-
-
-    // return line_chart(this.graphData(), width: "400px", xtitle: "Date",
-    //           ytitle: "Avg Score", messages: {empty: "No data"},
-    //           colors: [this.colorClass(), this.colorClass()], min: 0, max: 4,
-    //           library: { scales: { yAxes: [{ gridLines: { display: true },ticks: { maxTicksLimit: 5 } }]}})
 
   }
 
@@ -80,6 +110,7 @@ class LearningTarget {
     })
     return data
   }
+
     // data = self.assignments.map do |assignment|
     //   if student
     //     student_score = assignment.grades.where("student_id = ?", student.id).limit(1).first
@@ -104,25 +135,25 @@ class LearningTarget {
 //
 // <div class="lt-show-container">
 //   <div class="lt-stats">
-    // <div class="lt-graph">
-    //    <%= line_chart(lt.graph_data(@klass), width: "400px", xtitle: "Date",
-    //              ytitle: "Avg Score", messages: {empty: "No data"},
-    //              colors: [@klass.my_color_class(lt), @klass.my_color_class(lt)], min: 0, max: 4,
-    //              library: { scales: { yAxes: [{ gridLines: { display: true },ticks: { maxTicksLimit: 5 } }]}}) %>
-    //
-    // </div>
+//     <div class="lt-graph">
+//        <%= line_chart(lt.graph_data(@klass), width: "400px", xtitle: "Date",
+//                  ytitle: "Avg Score", messages: {empty: "No data"},
+//                  colors: [@klass.my_color_class(lt), @klass.my_color_class(lt)], min: 0, max: 4,
+//                  library: { scales: { yAxes: [{ gridLines: { display: true },ticks: { maxTicksLimit: 5 } }]}}) %>
 //
-    // <div class="averages">
-    //   <div class="rubric-title <%= @klass.my_color_class(lt) %>"><strong><%= @klass.name %> LT Stats</strong></div>
-    //   <div>LT Average: </div>
-    //   <div><strong><%= lt.class_average(klass) %></strong></div>
-    //   <div>Level 3s and up: </div>
-    //   <div><strong><%= lt.percent_of_students_on_level(@klass, 3.0)%></strong></div>
-    //   <div>Level 2s: </div>
-    //   <div><strong><%= lt.percent_of_students_on_level(@klass, 2.0)%></strong></div>
-    //   <div>Level 1s: </div>
-    //   <div><strong><%= lt.percent_of_students_on_level(@klass, 1.0)%></strong></div>
-    // </div>
+//     </div>
+//
+//     <div class="averages">
+//       <div class="rubric-title <%= @klass.my_color_class(lt) %>"><strong><%= @klass.name %> LT Stats</strong></div>
+//       <div>LT Average: </div>
+//       <div><strong><%= lt.class_average(klass) %></strong></div>
+//       <div>Level 3s and up: </div>
+//       <div><strong><%= lt.percent_of_students_on_level(@klass, 3.0)%></strong></div>
+//       <div>Level 2s: </div>
+//       <div><strong><%= lt.percent_of_students_on_level(@klass, 2.0)%></strong></div>
+//       <div>Level 1s: </div>
+//       <div><strong><%= lt.percent_of_students_on_level(@klass, 1.0)%></strong></div>
+//     </div>
 //
 //     <div>
 //     </div>
