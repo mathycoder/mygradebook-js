@@ -1,6 +1,5 @@
 $().ready(() => {
   if (/^http:\/\/localhost:3000\/classes\/\d\/lts\/\d$/.test(window.location.href)){
-    let currLt
     getLtData()
   }
 })
@@ -33,6 +32,8 @@ function getKlassDataAfterLt(klassIdFromLink = undefined){
 function renderLtShowPage(){
   $('main').append(currLt.formatShow())
   $('.lt-show-gradebook').append(klass.formatShow(currLt))
+  $('form.grade-input').submit(modifyGrade)
+  $(`.score`).keyup(enter_detector)
   Student.renderAverages(currLt)
   Assignment.renderAverages()
   conditionalFormatting()

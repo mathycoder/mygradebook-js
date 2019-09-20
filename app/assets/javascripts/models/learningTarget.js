@@ -1,9 +1,5 @@
-// import Chartkick from "chartkick"
-// import Chart from "chart.js"
-//
-// Chartkick.use(Chart)
-
 const learningTargets = []
+let currLt
 class LearningTarget {
   constructor(attributes){
     this.id = attributes.id
