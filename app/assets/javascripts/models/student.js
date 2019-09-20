@@ -17,11 +17,11 @@ class Student {
     return students.sort((a,b) => a.last_name.localeCompare(b.last_name))
   }
 
-  static renderAverages(){
+  static renderAverages(lt = undefined){
     const rows = $('tr')
     for (let i=3; i<rows.length; i++){
       const student = Student.find(Number.parseInt(rows[i].id.split("-")[1]))
-      let average = student.average()
+      let average = (lt ? student.average(lt) : student.average())
       average = average || ""
       $(`tr:nth-child(${i+1}) td.average`)[0].innerHTML = `<p><strong>${average}</strong></p>`
     }
