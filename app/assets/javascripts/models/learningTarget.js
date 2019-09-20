@@ -8,7 +8,7 @@ class LearningTarget {
     this.level1 = attributes.level1
     this.level2 = attributes.level2
     this.level3 = attributes.level3
-    this.level4 = attributes.level4 
+    this.level4 = attributes.level4
     learningTargets.push(this)
   }
 
@@ -79,6 +79,10 @@ class LearningTarget {
               <h2>${this.name}</h2>
             </div>
             ${this.rubricLevels()}
+          </div>
+          <div class="lt-show-standard">
+            <h3>${this.standard().standardNotationClean()}</h3>
+            <p>${this.standard().description}</p>
           </div>
         </div>
 

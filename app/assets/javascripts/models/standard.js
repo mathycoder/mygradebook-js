@@ -2,6 +2,7 @@ const standards = []
 class Standard {
   constructor(attributes){
     this.id = attributes.id
+    this.description = attributes.description
     this.standard_notation = attributes.standard_notation
     this.alt_standard_notation = attributes.alt_standard_notation
     standards.push(this)
