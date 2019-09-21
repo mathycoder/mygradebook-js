@@ -57,6 +57,8 @@ function clickLt(event){
   event.preventDefault()
   const klassId = this.href.split('/')[4]
   const ltId = this.href.split('/')[6]
+  const lt = LearningTarget.find(ltId)
+  $(`.lt-header option[value='${lt.name}'`)[0].selected = "selected"
   clearData()
   getLtData(klassId, ltId)
 }

@@ -12,6 +12,10 @@ class LearningTarget {
     learningTargets.push(this)
   }
 
+  static find(ltId){
+    return learningTargets.find(lt => lt.id === Number.parseInt(ltId))
+  }
+
   standard(){
     return standards.find(standard => standard.id === this.standard_id)
   }
