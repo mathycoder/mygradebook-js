@@ -44,12 +44,11 @@ function renderLtShowPage(){
 
 function switchLt(event){
   event.preventDefault()
-  const ltName = this.value
+  const ltId = this.value
   const klassId = window.location.href.split("/")[4]
-  if (ltName && ltName !== "Learning Targets"){
-    const newLt = learningTargets.find(lt => ltName === lt.name)
+  if (ltId){
     clearData()
-    getLtData(klassId, newLt.id)
+    getLtData(klassId, ltId)
   }
 }
 
@@ -58,7 +57,7 @@ function clickLt(event){
   const klassId = this.href.split('/')[4]
   const ltId = this.href.split('/')[6]
   const lt = LearningTarget.find(ltId)
-  $(`.lt-header option[value='${lt.name}'`)[0].selected = "selected"
+  $(`.lt-header option[value='${lt.id}'`)[0].selected = "selected"
   clearData()
   getLtData(klassId, ltId)
 }

@@ -56,7 +56,7 @@ function adjustHeader(){
   $('.select-lts option:first-child')[0].innerText = "Learning Targets"
   $('.select-lts option:first-child').nextAll().remove()
   $('.select-lts').parent()[0].action = `http://localhost:3000/classes/${klass.id}/learning_targets/redirect`
-  learningTargets.forEach(lt => $('.select-lts option:first-child').parent().append(`<option value="${lt.name}">${lt.name}</option>`))
+  learningTargets.forEach(lt => $('.select-lts option:first-child').parent().append(`<option value="${lt.id}">${lt.name}</option>`))
   // adjust students in dropdown
   $('.select-students option:first-child')[0].innerText = "Students"
   $('.select-students option:first-child').nextAll().remove()
@@ -90,7 +90,7 @@ function modifyGrade(event){
 function goHome(event){
   event.preventDefault()
   const klassId = parseInt(window.location.href.split("/")[4])
-  if (klassId && !window.location.href.split("/")[5]){
+  if (klassId && window.location.href.split("/")[5] != "edit"){
     clearData()
     getKlassData()
   } else {
