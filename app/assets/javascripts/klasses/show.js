@@ -31,6 +31,7 @@ function renderShowPage(){
   $('main').append(klass.formatShow())
   $('form.grade-input').submit(modifyGrade)
   $(`.score`).keyup(enter_detector)
+  $('.lt-target-label-container a').click(clickLt)
   Student.renderAverages()
   Assignment.renderAverages()
   conditionalFormatting()

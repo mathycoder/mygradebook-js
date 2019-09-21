@@ -51,5 +51,12 @@ function switchLt(event){
     clearData()
     getLtData(klassId, newLt.id)
   }
+}
 
+function clickLt(event){
+  event.preventDefault()
+  const klassId = this.href.split('/')[4]
+  const ltId = this.href.split('/')[6]
+  clearData()
+  getLtData(klassId, ltId)
 }
