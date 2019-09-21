@@ -89,9 +89,13 @@ function modifyGrade(event){
 
 function goHome(event){
   event.preventDefault()
-  if (window.location.href.split("/")[4]){
+  const klassId = parseInt(window.location.href.split("/")[4])
+  if (klassId && !window.location.href.split("/")[5]){
     clearData()
     getKlassData()
+  } else {
+    clearData()
+    getIndexData()
   }
 }
 
