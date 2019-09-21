@@ -50,9 +50,9 @@ module ApplicationHelper
   end
 
   def lt_dropdown(klass, lt)
-    content_tag(:div, class: "header-select") do
+    content_tag(:div, class: ["header-select", "lt-header"]) do
       form_for([:learning_target, current_lt(klass, lt)], url: lt_redirect_path(klass), method: :get) do |f|
-        f.collection_select(:name, klass.learning_targets, :name, :name, {include_blank: "All Learning Targets", prompt: "Learning Targets"}, {class: ["select-blend", "select-lts"], onchange: "this.form.submit();"})
+        f.collection_select(:name, klass.learning_targets, :name, :name, {include_blank: "All Learning Targets", prompt: "Learning Targets"}, {class: ["select-blend", "select-lts"]})
       end
     end
   end

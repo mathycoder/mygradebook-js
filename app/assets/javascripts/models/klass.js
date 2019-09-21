@@ -256,9 +256,9 @@ class Klass {
         </select>
       </form>
     </div>
-    <div class="header-select">
+    <div class="header-select lt-header">
       <form class="new_learning_target" id="new_learning_target" action="http://localhost:3000/classes/${klass.id}/learning_targets/redirect" method="get">
-        <select class="select-blend select-lts" onchange="this.form.submit();" name="learning_target[name]">
+        <select class="select-blend select-lts" name="learning_target[name]">
           <option>Learning Targets</option>
         </select>
       </form>

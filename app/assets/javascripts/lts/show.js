@@ -1,4 +1,5 @@
 $().ready(() => {
+  $('.lt-header select').change(switchLt)
   if (/^http:\/\/localhost:3000\/classes\/\d\/lts\/\d$/.test(window.location.href)){
     getLtData()
   }
@@ -38,4 +39,16 @@ function renderLtShowPage(){
   Assignment.renderAverages()
   conditionalFormatting()
   currLt.lineChart()
+}
+
+function switchLt(event){
+  event.preventDefault()
+  const ltName = this.value
+  const klassId = window.location.href.split("/")[4]
+  if (ltName && ltName !== "Learning Targets"){
+    const newLt = learningTargets.find(lt => ltName === lt.name)
+    clearData()
+    getLtData(klassId, newLt.id)
+  }
+
 }

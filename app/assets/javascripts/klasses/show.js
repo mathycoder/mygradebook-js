@@ -74,7 +74,7 @@ function modifyGrade(event){
     grade.update(data)
     grade.colorChange("blue")
     setTimeout(() => grade.colorChangeBack(), 1000)
-    currLt ? Student.renderAverages(currLt) : Student.renderAverages() 
+    currLt ? Student.renderAverages(currLt) : Student.renderAverages()
     Assignment.renderAverages()
     conditionalFormatting()
   }).fail(function(data){

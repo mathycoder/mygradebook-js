@@ -31,4 +31,5 @@ function clickOnClass(e){
   $('header').append(headerHtml)
   getKlassData(klass.id)
   $('.class-header select').change(switchClass)
+  $('.lt-header select').change(switchLt)
 }
