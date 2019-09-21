@@ -30,6 +30,7 @@ function clickOnClass(e){
   const headerHtml = klass.renderShowHeader()
   $('header').append(headerHtml)
   getKlassData(klass.id)
+  $('.header-logo').parent().click(goHome)
   $('.class-header select').change(switchClass)
   $('.lt-header select').change(switchLt)
 }

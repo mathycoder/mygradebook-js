@@ -1,5 +1,6 @@
 $().ready(() => {
   $('.class-header select').change(switchClass)
+  $('.header-logo').parent().click(goHome)
   if (/^http:\/\/localhost:3000\/classes\/\d$/.test(window.location.href)){
     getKlassData()
   }
@@ -83,6 +84,14 @@ function modifyGrade(event){
     grade.colorChange("red")
     setTimeout(() => grade.colorChangeBack(), 1000)
   })
+}
+
+function goHome(event){
+  event.preventDefault()
+  if (window.location.href.split("/")[4]){
+    clearData()
+    getKlassData()
+  }
 }
 
 function switchClass(event){
