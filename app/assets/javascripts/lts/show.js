@@ -39,6 +39,7 @@ function renderLtShowPage(){
   Assignment.renderAverages()
   conditionalFormatting()
   currLt.lineChart()
+  history.pushState(null, null, `http://localhost:3000/classes/${klass.id}/lts/${currLt.id}`)
 }
 
 function switchLt(event){
