@@ -36,6 +36,10 @@ class Student {
     return (sum / myGrades.length).toFixed(2)
   }
 
+  grades(){
+    return grades.filter(grade => grade.student_id === this.id && grade.score)
+  }
+
   static find(studentId){
     return students.find(student => studentId === student.id)
   }
@@ -127,6 +131,18 @@ class Student {
         <div id="student-summary-graph" class="student-show-studentbox">
           <div id="student-summary-chart" style="height: 300px; width: 400px;"></div>
         </div>
+
+        <div class="student-show averages">
+          <div class="rubric-title"><strong>Student Stats</strong></div>
+          <div>Overall Grade </div>
+          <div><strong>${this.average()}</strong></div>
+          <div>level 3 and up<br>Assignments</div>
+          <div><strong>${this.percentOfAssignmentsOnLevel(3.0)}</strong></div>
+          <div>level 2<br>Assignments </div>
+          <div><strong>${this.percentOfAssignmentsOnLevel(2.0)}</strong></div>
+          <div>level 1<br>Assignments</div>
+          <div><strong>${this.percentOfAssignmentsOnLevel(1.0)}</strong></div>
+        </div>
     `
     return html
   }
@@ -154,5 +170,14 @@ class Student {
       graphColors.push(colors[i % 3])
     }
     return graphColors
+  }
+
+  percentOfAssignmentsOnLevel(level){
+    const levelUp = (level === 3.0? 1.1 : 1.0)
+    let scores = this.grades().map(grade => grade.score)
+    scores = scores.filter(score => score!==undefined)
+    const targetScores = scores.filter(score => score >= level && score < (level + levelUp))
+    let percentage = (targetScores.length / scores.length)*100
+    return `${percentage.toFixed(1)}%`
   }
 }
