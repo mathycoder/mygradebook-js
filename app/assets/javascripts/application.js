@@ -25,5 +25,6 @@
 
 //= require students/students-new
 //= require students/index
+//= require students/show
 
 //= require lts/show

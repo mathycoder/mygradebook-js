@@ -1,4 +1,5 @@
 const students = []
+let currStudent
 class Student {
   constructor(attributes){
     this.id = attributes.id
@@ -116,5 +117,13 @@ class Student {
   addClickEvents(){
     $(`#student-${this.id} .delete-student-button`).click(deleteStudent)
     $(`#student-${this.id} .edit-student-button`).click(editStudent)
+  }
+
+  formatShow(){
+    let html = ''
+    html += `
+      <h1>${this.first_name} ${this.last_name}</h1>
+    `
+    return html
   }
 }

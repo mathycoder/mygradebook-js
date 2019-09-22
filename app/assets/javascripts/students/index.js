@@ -1,5 +1,6 @@
 $().ready(() => {
-  if (/http:\/\/localhost:3000\/classes\/\d\/students/.test(window.location.href)){
+  if (/^http:\/\/localhost:3000\/classes\/\d\/students$/.test(window.location.href)){
+
     $('.listed-students tr:first-child').nextAll().remove()
     getClassStudentsIndexData()
     $('#filter-students').click(filterIndexStudents)
