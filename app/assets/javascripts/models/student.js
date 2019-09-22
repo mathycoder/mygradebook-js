@@ -144,6 +144,61 @@ class Student {
           <div><strong>${this.percentOfAssignmentsOnLevel(1.0)}</strong></div>
         </div>
     `
+
+    learningTargets.forEach(lt => {
+      html += `
+      <div class="student-show-gradebook-container">
+        <table class="gradebook">
+          <tr>
+            <th colspan="${lt.assignments().length}" class="${lt.colorClass()} start-of-lt">
+              <div class="lt-target-label-container">
+                <div class="lt-target-label">
+                  ${lt.standard().standardNotationClean()}<br>
+                  ${lt.name}<br>
+                </div>
+                <div class="assignment-label">
+                  Assignments
+                </div>
+              </div>
+            </th>
+          </tr>
+          <tr>
+            ${lt.assignments().length === 0 ? '<td></td>' : ''}`
+
+            lt.chronologicalAssignments().forEach((assignment, index) => {
+              html += `
+                <td class="assignments ${index === 0 ? "start-of-lt" : ""}">
+                  <div class="assignment-header">
+                    <div>
+                      ${assignment.name}
+                    </div>
+                    <div class="date">${assignment.dateDisplay()}</div>
+                  </div>
+                </td>
+              `
+            })
+          html += `
+          </tr>
+          <tr>
+            ${lt.assignments().length === 0 ? '<td class="start-of-lt"></td>' : ''}
+            `
+
+            lt.studentsChronologicalGrades(this).forEach((grade, index) => {
+              html += `
+                <td class="score ${index === 0 ? 'start-of-lt' : ''}">
+                  ${grade.score ? grade.score : ''}
+                </td>
+              `
+            })
+
+          html += `
+          </tr>
+        </table>
+      </div>
+          `
+    })
+
+
     return html
   }
 

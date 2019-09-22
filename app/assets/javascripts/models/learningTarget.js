@@ -36,6 +36,7 @@ class LearningTarget {
   studentAverage(student){
     let grades = this.studentsChronologicalGrades(student)
     grades = grades.map(grade => parseFloat(grade.score))
+    grades = grades.filter(grade => !!grade)
     const sum = grades.reduce((acc, grade) => acc + grade)
     const ave = sum / grades.length
     return ave.toFixed(2)
