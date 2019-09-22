@@ -33,6 +33,14 @@ class LearningTarget {
     return this.chronologicalAssignments().map(assignment => assignment.grade(student))
   }
 
+  studentAverage(student){
+    let grades = this.studentsChronologicalGrades(student)
+    grades = grades.map(grade => parseFloat(grade.score))
+    const sum = grades.reduce((acc, grade) => acc + grade)
+    const ave = sum / grades.length
+    return ave.toFixed(2)
+  }
+
   colorClass(){
     // const ltIndex = learningTargets.indexOf(this)
     const ltIndex = learningTargets.indexOf(learningTargets.find(lt => lt.id === this.id))
@@ -138,7 +146,6 @@ class LearningTarget {
                              colors: [this.colorClass(), this.colorClass()], min: 0, max: 4,
                              library: { scales: { yAxes: [{ gridLines: { display: true },ticks: { maxTicksLimit: 5 } }]}}
                            })
-
   }
 
   graphData(){

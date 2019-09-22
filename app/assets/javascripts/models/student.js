@@ -123,7 +123,36 @@ class Student {
     let html = ''
     html += `
       <h1>${this.first_name} ${this.last_name}</h1>
+      <div class="student-show-container">
+        <div id="student-summary-graph" class="student-show-studentbox">
+          <div id="student-summary-chart" style="height: 300px; width: 400px;"></div>
+        </div>
     `
     return html
+  }
+
+  summaryChart(){
+    new Chartkick.ColumnChart("student-summary-chart", this.summaryChartData(), {
+                              min: 0, max: 4,
+                              ytitle: "Average", messages: {empty: "No data"},
+                              colors: this.studentBarGraphColors(),
+                              library: { scales: { yAxes: [{ gridLines: { display: true },ticks: { maxTicksLimit: 5 } }]}}
+                          })
+  }
+
+  summaryChartData(){
+    let data = learningTargets.map(lt => {
+      return {name: lt.name, data: {"Learning Targets": lt.studentAverage(this)}}
+    })
+    return data
+  }
+
+  studentBarGraphColors(){
+    const colors = ["rgb(217, 106, 94)", "rgb(85, 170, 104)", "rgb(71, 125, 179)"]
+    let graphColors = []
+    for (let i=0; i<learningTargets.length; i++){
+      graphColors.push(colors[i % 3])
+    }
+    return graphColors
   }
 }
