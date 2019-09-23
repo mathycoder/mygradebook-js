@@ -1,5 +1,5 @@
 $().ready(() => {
-  if (/^http:\/\/localhost:3000\/classes\/\d\/students$/.test(window.location.href)){
+  if (/^http:\/\/localhost:3000\/classes\/\d\/students$/.test(window.location.href) || /^http:\/\/localhost:3000\/classes\/\d\/students\?utf8\=%E2%9C%93&commit\=%2BS$/.test(window.location.href)){
 
     $('.listed-students tr:first-child').nextAll().remove()
     getClassStudentsIndexData()
