@@ -37,6 +37,7 @@ class LearningTarget {
     let grades = this.studentsChronologicalGrades(student)
     grades = grades.map(grade => parseFloat(grade.score))
     grades = grades.filter(grade => !!grade)
+    if (grades.length === 0) { return 0 }
     const sum = grades.reduce((acc, grade) => acc + grade)
     const ave = sum / grades.length
     return ave.toFixed(2)

@@ -32,6 +32,7 @@ function renderShowPage(){
   $('form.grade-input').submit(modifyGrade)
   $(`.score`).keyup(enter_detector)
   $('.lt-target-label-container a').click(clickLt)
+  $('.student-name a').click(clickStudent)
   Student.renderAverages()
   Assignment.renderAverages()
   conditionalFormatting()

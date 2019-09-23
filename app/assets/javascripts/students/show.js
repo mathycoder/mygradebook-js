@@ -45,3 +45,23 @@ function switchSt(event){
     getStudentShowData(klassId, stId)
   }
 }
+
+function clickStudent(event){
+  event.preventDefault()
+  const klassId = this.href.split('/')[4]
+  const stId = this.href.split('/')[6]
+  const st = Student.find(parseInt(stId))
+ $(`.student-header option[value='${st.id}'`)[0].selected = "selected"
+  clearData()
+  getStudentShowData(klassId, stId)
+}
+
+// function clickLt(event){
+//   event.preventDefault()
+  // const klassId = this.href.split('/')[4]
+  // const ltId = this.href.split('/')[6]
+  // const lt = LearningTarget.find(ltId)
+  // $(`.lt-header option[value='${lt.id}'`)[0].selected = "selected"
+  // clearData()
+  // getLtData(klassId, ltId)
+// }
