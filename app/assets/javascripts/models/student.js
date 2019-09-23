@@ -195,10 +195,14 @@ class Student {
           </tr>
         </table>
       </div>
+
+      <div class="student-show-lt-graph">
+        <div id="chart-${lt.id}" style="height: 300px; width: 400px;"></div>
+      </div>
           `
     })
 
-
+    html += `</div>`
     return html
   }
 

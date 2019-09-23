@@ -30,6 +30,7 @@ function getStudentShowData(klassIdFromLink = undefined, stIdFromLink = undefine
   function renderStudentShowPage(){
     $('main').append(currStudent.formatShow())
     currStudent.summaryChart()
+    learningTargets.forEach(lt => lt.lineChart(currStudent))
     history.pushState(null, null, `http://localhost:3000/classes/${klass.id}/students/${currStudent.id}`)
   }
 }

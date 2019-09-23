@@ -54,7 +54,7 @@ class LearningTarget {
     let html = ''
     html += `
       <h1>
-        ${currLt.name}
+        ${this.name}
         <div style="display: inline">
           <a href="/classes/${klass.id}/lts/${currLt.id}/edit">edit</a>
         </div>
@@ -63,7 +63,7 @@ class LearningTarget {
       <div class="lt-show-container">
         <div class="lt-stats">
           <div class="lt-graph">
-            <div id="chart-1" style="height: 300px; width: 400px;"></div>
+            <div id="chart-${this.id}" style="height: 300px; width: 400px;"></div>
           </div>
 
 
@@ -141,19 +141,26 @@ class LearningTarget {
     }
   }
 
-  lineChart(){
-     new Chartkick.LineChart("chart-1", this.graphData(), {xtitle: "Date",
+  lineChart(st = undefined){
+     new Chartkick.LineChart(`chart-${this.id}`, this.graphData(st), {xtitle: "Date",
                              ytitle: "Avg Score", messages: {empty: "No data"},
                              colors: [this.colorClass(), this.colorClass()], min: 0, max: 4,
                              library: { scales: { yAxes: [{ gridLines: { display: true },ticks: { maxTicksLimit: 5 } }]}}
                            })
   }
 
-  graphData(){
-    const data = this.assignments().map(assignment => {
-      const score = assignment.average()
+  graphData(st){
+    const data = this.chronologicalAssignments().map(assignment => {
+      let score
+      if (st) {
+        const studentScore = assignment.grades().find(grade => grade.student_id === st.id)
+        if (studentScore) { score = studentScore.score }
+      } else {
+        score = assignment.average()
+      }
       return [assignment.dateDisplay() , score]
     })
+    data.length === 0 ? [[0,0]] : data
     return data
   }
 
