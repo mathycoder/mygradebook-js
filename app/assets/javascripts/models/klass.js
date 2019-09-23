@@ -263,10 +263,10 @@ class Klass {
         </select>
       </form>
     </div>
-    <div class="header-select">
+    <div class="header-select student-header">
       <form class="new_student" id="new_student" method="get" action="http://localhost:3000/classes/2/students/redirect">
         <input name="utf8" type="hidden" value="✓">
-        <select class="select-blend select-students" onchange="this.form.submit();" name="student[name]">
+        <select class="select-blend select-students" name="student[name]">
           <option>Students</option>
         </select>
       </form>

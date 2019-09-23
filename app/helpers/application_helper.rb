@@ -62,9 +62,9 @@ module ApplicationHelper
   end
 
   def student_dropdown(klass, student)
-    content_tag(:div, class: "header-select") do
+    content_tag(:div, class: ["header-select", "student-header"]) do
       form_for([:student, current_student(klass, student)], url: student_redirect_path(klass), method: :get) do |f|
-        f.collection_select(:id, klass.students, :id, :first_last_name, {prompt: "Students"}, {class: ["select-blend", "select-students"], onchange: "this.form.submit();"})
+        f.collection_select(:id, klass.students, :id, :first_last_name, {prompt: "Students"}, {class: ["select-blend", "select-students"]})
       end
     end
   end

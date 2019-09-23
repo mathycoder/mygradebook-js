@@ -33,4 +33,5 @@ function clickOnClass(e){
   $('.header-logo').parent().click(goHome)
   $('.class-header select').change(switchClass)
   $('.lt-header select').change(switchLt)
+  $('.student-header select').change(switchSt)
 }

@@ -1,4 +1,5 @@
 $().ready(() => {
+  $('.student-header select').change(switchSt)
   if (/http:\/\/localhost:3000\/classes\/\d\/students\/\d/.test(window.location.href)){
     getStudentShowData()
   }
@@ -11,26 +12,36 @@ function getStudentShowData(klassIdFromLink = undefined, stIdFromLink = undefine
   $.get(`/classes/${klassId}/students/${stId}.json`, function(json){
     currStudent = new Student(json)
     students.pop()
-    getKlassDataAfterStudent()
+    getKlassDataAfterStudent(klassId)
   })
+}
 
-  function getKlassDataAfterStudent(klassIdFromLink = undefined){
-    $.get(`/classes/${klassId}.json`, function(json){
-      klass = new Klass(json)
-      new Teacher(json.teachers[0])
-      createJSONObjects(json.students, Student)
-      createJSONObjects(json.assignments, Assignment)
-      createJSONObjects(json.learning_targets, LearningTarget)
-      createJSONObjects(json.standards, Standard)
-      createJSONObjects(json.grades, Grade)
-      renderStudentShowPage()
-    })
-  }
+function getKlassDataAfterStudent(klassId){
+  $.get(`/classes/${klassId}.json`, function(json){
+    klass = new Klass(json)
+    new Teacher(json.teachers[0])
+    createJSONObjects(json.students, Student)
+    createJSONObjects(json.assignments, Assignment)
+    createJSONObjects(json.learning_targets, LearningTarget)
+    createJSONObjects(json.standards, Standard)
+    createJSONObjects(json.grades, Grade)
+    renderStudentShowPage()
+  })
+}
 
-  function renderStudentShowPage(){
-    $('main').append(currStudent.formatShow())
-    currStudent.summaryChart()
-    learningTargets.forEach(lt => lt.lineChart(currStudent))
-    history.pushState(null, null, `http://localhost:3000/classes/${klass.id}/students/${currStudent.id}`)
+function renderStudentShowPage(){
+  $('main').append(currStudent.formatShow())
+  currStudent.summaryChart()
+  learningTargets.forEach(lt => lt.lineChart(currStudent))
+  history.pushState(null, null, `http://localhost:3000/classes/${klass.id}/students/${currStudent.id}`)
+}
+
+function switchSt(event){
+  event.preventDefault()
+  const stId = this.value
+  const klassId = window.location.href.split("/")[4]
+  if (stId){
+    clearData()
+    getStudentShowData(klassId, stId)
   }
 }
