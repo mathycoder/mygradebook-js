@@ -1,6 +1,6 @@
 $().ready(() => {
   if (/http:\/\/localhost:3000\/classes\/\d\/students\/\d/.test(window.location.href)){
-    //getStudentShowData()
+    getStudentShowData()
   }
 })
 
