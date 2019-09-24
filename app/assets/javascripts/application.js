@@ -28,3 +28,5 @@
 //= require students/show
 
 //= require lts/show
+
+//= require layout/header

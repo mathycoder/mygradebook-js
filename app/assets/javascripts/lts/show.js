@@ -1,6 +1,7 @@
 $().ready(() => {
   $('.lt-header select').change(switchLt)
   if (/^http:\/\/localhost:3000\/classes\/\d\/lts\/\d$/.test(window.location.href)){
+    getIndexData(forHeader = true)
     getLtData()
   }
 })
@@ -40,6 +41,7 @@ function renderLtShowPage(){
   conditionalFormatting()
   currLt.lineChart()
   history.pushState(null, null, `http://localhost:3000/classes/${klass.id}/lts/${currLt.id}`)
+  adjustHeader()
 }
 
 function switchLt(event){

@@ -46,7 +46,8 @@ Project Specs:
 
 * Must render at least one show page (show resource - 'one specific thing') via JavaScript and an Active Model Serialization JSON Backend.
 
-  - My app renders the klasses/show page using JS and AMS.  
+  - My app renders the klasses/show page using JS and AMS.
+  - After submission of my project, students/show and learning_targets/show are also rendered using JSON.  
 
 * Your Rails application must reveal at least one `has-many` relationship through JSON that is then rendered to the page.
 

@@ -4,14 +4,14 @@ $().ready(() => {
   }
 })
 
-function getIndexData(){
+function getIndexData(forHeader = false){
   $('main')[0].innerHTML = ''
   $.get(`/classes.json`, function(json){
     for (i = 0; i<json.length; i++){
       klasses.push(new Klass(json[i]))
     }
     new Teacher(json[0].teachers[0])
-    renderIndexPage()
+    forHeader ? renderHeader() : renderIndexPage()
   })
 }
 
@@ -26,12 +26,6 @@ function clickOnClass(e){
   e.preventDefault()
   klass = Klass.find(this.dataset.id)
   $('main')[0].innerHTML = ''
-  $('header')[0].innerHTML = ''
-  const headerHtml = klass.renderShowHeader()
-  $('header').append(headerHtml)
+  renderHeader()
   getKlassData(klass.id)
-  $('.header-logo').parent().click(goHome)
-  $('.class-header select').change(switchClass)
-  $('.lt-header select').change(switchLt)
-  $('.student-header select').change(switchSt)
 }

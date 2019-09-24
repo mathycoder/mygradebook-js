@@ -1,6 +1,7 @@
 $().ready(() => {
   $('.student-header select').change(switchSt)
   if (/http:\/\/localhost:3000\/classes\/\d\/students\/\d/.test(window.location.href)){
+    getIndexData(forHeader = true)
     getStudentShowData()
   }
 })
@@ -34,6 +35,7 @@ function renderStudentShowPage(){
   currStudent.summaryChart()
   learningTargets.forEach(lt => lt.lineChart(currStudent))
   history.pushState(null, null, `http://localhost:3000/classes/${klass.id}/students/${currStudent.id}`)
+  adjustHeader()
 }
 
 function switchSt(event){
