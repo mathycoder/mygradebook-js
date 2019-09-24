@@ -13,9 +13,16 @@ function renderHeader(){
 
 function addShowHeaderListeners(){
   $('.header-logo').parent().click(goHome)
+  $('.add-assignment-button').click(addAssignment)
   $('.class-header select').change(switchClass)
   $('.lt-header select').change(switchLt)
   $('.student-header select').change(switchSt)
+}
+
+function addAssignment(e){
+  clearData()
+  getIndexData(forHeader = true)
+  getAssignmentFormData()
 }
 
 function adjustHeader(){

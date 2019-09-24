@@ -6,11 +6,22 @@ class AssignmentsController < ApplicationController
   def new
     @assignment = Assignment.new
     @assignment.grades.build
+    respond_to do |format|
+      format.html
+      format.json {render json: @klass}
+    end
   end
 
   def create
     @assignment = Assignment.new(assignment_params)
-    @assignment.save ? (redirect_to(klass_path(@klass), alert: "Assignment successfully added")) : (render 'new')
+
+    if @assignment.save
+      render json: @assignment, status: 201
+    else
+      render json: @assignment, status: 422
+    end
+
+    #@assignment.save ? (redirect_to(klass_path(@klass), alert: "Assignment successfully added")) : (render 'new')
   end
 
   def edit

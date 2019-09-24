@@ -3,6 +3,7 @@ $(document).ready(function() {
     getStudentsIndexData()
     $('.big-button').click(addStudent)
     $('.little-button').click(filterStudents)
+    $('.filter-form input:nth-child(2)').change(filterStudents)
     $('.sort-by-name').click(sortByName)
   }
 })
@@ -14,19 +15,16 @@ function sortByName(){
   type: 'GET',
   url: `/students/new.json`
   }).done(data => {
-
     data.sort(function(a, b) {
-      var nameA = a.first_name.toUpperCase(); // ignore upper and lowercase
-      var nameB = b.first_name.toUpperCase(); // ignore upper and lowercase
+      var nameA = a.first_name.toUpperCase();
+      var nameB = b.first_name.toUpperCase();
       if (nameA < nameB) {
         return -1;
-      }
-      if (nameA > nameB) {
+      } else if (nameA > nameB) {
         return 1;
+      } else {
+        return 0;
       }
-
-      // names must be equal
-      return 0;
     });
 
     students.length = 0
@@ -56,6 +54,7 @@ function displayStudents(){
 
 function filterStudents(){
   event.preventDefault()
+  console.log("filtering!")
   const values = $(this.parentElement).serialize()
   $.ajax({
   type: 'GET',

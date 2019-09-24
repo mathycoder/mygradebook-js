@@ -482,7 +482,7 @@ footer {
 }
 
 
-.fancy-button input[type=submit], input[type=submit].fancy-button  {
+.fancy-button input[type=submit], input[type=submit].fancy-button, button.fancy-button  {
   font-size: 14px;
 	font-family: "Roboto", helvetica, arial, sans-serif;
 	font-weight: 400;
@@ -535,7 +535,7 @@ footer {
 .select-css::-ms-expand {
 	display: none;
 }
-.select-css:hover, .fancy-button input[type=submit]:hover, input[type=submit].fancy-button:hover  {
+.select-css:hover, .fancy-button input[type=submit]:hover, input[type=submit].fancy-button:hover, button.fancy-button:hover  {
 	border-color: #888;
 }
 .select-css:focus, .fancy-button input[type=submit]:focus, input[type=submit].fancy-button:focus  {

@@ -29,4 +29,6 @@
 
 //= require lts/show
 
+//= require assignments/new
+
 //= require layout/header

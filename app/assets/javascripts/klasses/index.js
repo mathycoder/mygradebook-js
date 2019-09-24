@@ -11,6 +11,7 @@ function getIndexData(forHeader = false){
       klasses.push(new Klass(json[i]))
     }
     new Teacher(json[0].teachers[0])
+    klass = Klass.find(window.location.href.split("/")[4])
     forHeader ? renderHeader() : renderIndexPage()
   })
 }

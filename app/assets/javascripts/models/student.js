@@ -171,7 +171,7 @@ class Student {
                 <td class="assignments ${index === 0 ? "start-of-lt" : ""}">
                   <div class="assignment-header">
                     <div>
-                      ${assignment.name}
+                      <a href="/classes/${klass.id}/assignments/${assignment.id}/edit">${assignment.name}</a>
                     </div>
                     <div class="date">${assignment.dateDisplay()}</div>
                   </div>

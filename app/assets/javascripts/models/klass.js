@@ -223,19 +223,16 @@ class Klass {
           <img src="/assets/open-book2.png">
         </div>
       </a>
-      <div>
-        <form action="http://localhost:3000/classes/${this.id}/assignments/new" method="get">
-          <input name="utf8" type="hidden" value="✓">
-          <input type="submit" name="commit" value="+A" class="fancy-button" data-disable-with="+A">
-        </form>
+      <div class="add-assignment-button">
+        <button class="fancy-button">+A</button>
       </div>
-      <div>
+      <div class="add-lt-button">
         <form action="http://localhost:3000/classes/${this.id}/lts/new" method="get">
           <input name="utf8" type="hidden" value="✓">
           <input type="submit" name="commit" value="+LT" class="fancy-button" data-disable-with="+LT">
         </form>
       </div>
-      <div>
+      <div class="add-student-button">
         <form action="http://localhost:3000/classes/${this.id}/students" method="get">
           <input name="utf8" type="hidden" value="✓">
           <input type="submit" name="commit" value="+S" class="fancy-button" data-disable-with="+S">
