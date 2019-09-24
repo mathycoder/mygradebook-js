@@ -36,6 +36,8 @@ function renderStudentShowPage(){
   learningTargets.forEach(lt => lt.lineChart(currStudent))
   history.pushState(null, null, `http://localhost:3000/classes/${klass.id}/students/${currStudent.id}`)
   adjustHeader()
+  $(`.student-header option[value='${currStudent.id}'`)[0].selected = "selected"
+  $('.lt-target-label a').click(clickLt)
 }
 
 function switchSt(event){
@@ -52,18 +54,6 @@ function clickStudent(event){
   event.preventDefault()
   const klassId = this.href.split('/')[4]
   const stId = this.href.split('/')[6]
-  const st = Student.find(parseInt(stId))
- $(`.student-header option[value='${st.id}'`)[0].selected = "selected"
   clearData()
   getStudentShowData(klassId, stId)
 }
-
-// function clickLt(event){
-//   event.preventDefault()
-  // const klassId = this.href.split('/')[4]
-  // const ltId = this.href.split('/')[6]
-  // const lt = LearningTarget.find(ltId)
-  // $(`.lt-header option[value='${lt.id}'`)[0].selected = "selected"
-  // clearData()
-  // getLtData(klassId, ltId)
-// }

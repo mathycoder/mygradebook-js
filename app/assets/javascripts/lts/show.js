@@ -42,6 +42,8 @@ function renderLtShowPage(){
   currLt.lineChart()
   history.pushState(null, null, `http://localhost:3000/classes/${klass.id}/lts/${currLt.id}`)
   adjustHeader()
+  $(`.lt-header option[value='${currLt.id}'`)[0].selected = "selected"
+  $('.student-column').parent().click(clickStudent)
 }
 
 function switchLt(event){
@@ -59,7 +61,6 @@ function clickLt(event){
   const klassId = this.href.split('/')[4]
   const ltId = this.href.split('/')[6]
   const lt = LearningTarget.find(ltId)
-  $(`.lt-header option[value='${lt.id}'`)[0].selected = "selected"
   clearData()
   getLtData(klassId, ltId)
 }

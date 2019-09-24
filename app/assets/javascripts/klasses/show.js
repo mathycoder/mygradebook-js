@@ -37,10 +37,9 @@ function renderShowPage(){
   Student.renderAverages()
   Assignment.renderAverages()
   conditionalFormatting()
-
-
   adjustHeader()
   history.pushState(null, null, `http://localhost:3000/classes/${klass.id}`)
+  $(`.class-header option[value='${klass.id}'`)[0].selected = "selected"
 }
 
 function enter_detector(e) {

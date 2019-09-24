@@ -154,7 +154,8 @@ class Student {
               <div class="lt-target-label-container">
                 <div class="lt-target-label">
                   ${lt.standard().standardNotationClean()}<br>
-                  ${lt.name}<br>
+                  <a href="/classes/${klass.id}/lts/${lt.id}">${lt.name}</a>
+                  <br>
                 </div>
                 <div class="assignment-label">
                   Assignments
