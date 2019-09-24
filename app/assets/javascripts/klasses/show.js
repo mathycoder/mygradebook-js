@@ -34,6 +34,7 @@ function renderShowPage(){
   $(`.score`).keyup(enter_detector)
   $('.lt-target-label-container a').click(clickLt)
   $('.student-name a').click(clickStudent)
+  $('.assignments a').click(clickAssignment)
   Student.renderAverages()
   Assignment.renderAverages()
   conditionalFormatting()

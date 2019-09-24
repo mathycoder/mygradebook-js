@@ -73,3 +73,12 @@ function deleteAssignment(e){
     getKlassData(klassId)
   })
 }
+
+function clickAssignment(e){
+  e.preventDefault()
+  const klassId = this.href.split('/')[4]
+  const assignmentId = this.href.split('/')[6]
+  clearData()
+  getIndexData(forHeader = true)
+  getAssignmentFormEditData(klassId, assignmentId)
+}
