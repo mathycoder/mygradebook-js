@@ -1,7 +1,7 @@
 $().ready(() => {
   $('.class-header select').change(switchClass)
   $('.header-logo').parent().click(goHome)
-  if (/^http:\/\/localhost:3000\/classes\/\d$/.test(window.location.href)){
+  if (/^http:\/\/localhost:3000\/classes\/\d+$/.test(window.location.href)){
     getIndexData(forHeader = true)
     getKlassData()
   }
@@ -102,6 +102,8 @@ function switchClass(event){
 
 function clearData(){
   klass = undefined
+  currLt = undefined
+  currAssignment = undefined
   klasses.length = 0
   learningTargets.length = 0
   assignments.length = 0

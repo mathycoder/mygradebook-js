@@ -25,16 +25,27 @@ class AssignmentsController < ApplicationController
   end
 
   def edit
+    respond_to do |format|
+      format.html
+      format.json {render json: @assignment, serializer: AssignmentSerializer}
+    end
   end
 
   def update
-    @assignment.update(assignment_params) ? (redirect_to(klass_path(@klass), alert: "Assignment successfully updated")) : (render 'edit')
+    #@assignment.update(assignment_params) ? (redirect_to(klass_path(@klass), alert: "Assignment successfully updated")) : (render 'edit')
+    if @assignment.update(assignment_params)
+      render json: @assignment, status: 201
+    else
+      render json: @assignment.errors.full_messages, status: 422
+    end
+
   end
 
   def destroy
     @assignment.grades.destroy_all
     @assignment.destroy
-    redirect_to(klass_path(@klass), alert: "Assignment deleted")
+    render json: @assignment, status: 201
+    #redirect_to(klass_path(@klass), alert: "Assignment deleted")
   end
 
   private

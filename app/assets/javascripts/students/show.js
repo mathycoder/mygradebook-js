@@ -1,6 +1,6 @@
 $().ready(() => {
   $('.student-header select').change(switchSt)
-  if (/http:\/\/localhost:3000\/classes\/\d\/students\/\d/.test(window.location.href)){
+  if (/http:\/\/localhost:3000\/classes\/\d+\/students\/\d+/.test(window.location.href)){
     getIndexData(forHeader = true)
     getStudentShowData()
   }

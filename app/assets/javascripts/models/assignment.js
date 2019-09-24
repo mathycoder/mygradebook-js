@@ -1,4 +1,5 @@
 const assignments = []
+let currAssignment
 class Assignment {
   constructor(attributes){
     this.id = attributes.id
@@ -30,6 +31,13 @@ class Assignment {
     return this.grades().find(grade => grade.student_id === student.id)
   }
 
+  jsDate(){
+    const date = new Date(this.date)
+    const month = ("0" + (date.getMonth() + 1)).slice(-2)
+    const day = ("0" + date.getDate()).slice(-2)
+    return `${date.getFullYear()}-${month}-${day}`
+  }
+
   dateDisplay(){
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const date = new Date(this.date)
@@ -54,7 +62,7 @@ class Assignment {
       <div class="paper-form assignment">
         <form action="/classes/${klass.id}/assignments" method="post" accept-charset="UTF-8">
           <input name="utf8" type="hidden" value="✓">
-          <h1>Add new assignment for ${klass.name}</h1>
+          <h1>${currAssignment ? 'Edit' : 'Add new'} assignment for ${klass.name}</h1>
 
           <div class="error-messages">
             <ul></ul>
@@ -63,14 +71,14 @@ class Assignment {
           <div>
             <label for="assignment_name">Name of assignment</label>
             <br>
-            <input class="text-field" maxlength="40" required="required" size="40" type="text" name="assignment[name]" id="assignment_name">
+            <input class="text-field" maxlength="40" value="${currAssignment ? currAssignment.name : ''}" required="required" size="40" type="text" name="assignment[name]" id="assignment_name">
             <br><br>
           </div>
 
           <div>
             <label for="assignment_date">Date of Assignment</label>
             <br>
-            <input required="required" type="date" name="assignment[date]"" id="assignment_date">
+            <input value="${currAssignment ? currAssignment.jsDate() : ''}" required="required" type="date" name="assignment[date]"" id="assignment_date">
             <br><br>
           </div>
 
@@ -92,9 +100,10 @@ class Assignment {
 
           <div class="big-button">
             <br>
-            <input type="submit" name="commit" value="Create Assignment" data-disable-with="Create Assignment">
+            <input class = "submit-assignment" type="submit" name="commit" value="${currAssignment ? 'Update' : 'Create'} Assignment" data-disable-with="Create Assignment">
           </div>
         </form>
+        ${currAssignment ? `<br><button class="big-button delete-assignment">Delete</button>` : ''}
       </div>
     `
     return html
@@ -104,6 +113,8 @@ class Assignment {
     let html = ''
 
     students.forEach((student, index) => {
+      let grade
+      if (currAssignment) {grade = currAssignment.grade(student) }
       html += `
         <tr>
           <td>
@@ -112,7 +123,7 @@ class Assignment {
 
           <td>
             <label for="assignment_grades_attributes_${index}_score">
-              <input class="text-field-grade" maxlength="3" size="3" type="text" name="assignment[grades_attributes][${index}][score]" id="assignment_grades_attributes_${index}_score">
+              <input class="text-field-grade" value="${currAssignment && grade.score ? grade.score : ''}" maxlength="3" size="3" type="text" name="assignment[grades_attributes][${index}][score]" id="assignment_grades_attributes_${index}_score">
             </label>
           </td>
 
@@ -127,7 +138,7 @@ class Assignment {
   static assignmentLearningTargetOptions() {
     let html = ''
     learningTargets.forEach(lt => {
-      html += `<option value="${lt.id}">${lt.name}</option>`
+      html += `<option ${currAssignment && lt.id === currAssignment.learning_target_id ? 'selected="selected"' : ''}value="${lt.id}">${lt.name}</option>`
     })
     return html
   }

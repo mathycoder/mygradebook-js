@@ -1,6 +1,6 @@
 $().ready(() => {
   $('.lt-header select').change(switchLt)
-  if (/^http:\/\/localhost:3000\/classes\/\d\/lts\/\d$/.test(window.location.href)){
+  if (/^http:\/\/localhost:3000\/classes\/\d+\/lts\/\d+$/.test(window.location.href)){
     getIndexData(forHeader = true)
     getLtData()
   }

@@ -1,5 +1,5 @@
 $().ready(() => {
-  if (/^http:\/\/localhost:3000\/classes\/\d\/assignments\/new$/.test(window.location.href) || /^http:\/\/localhost:3000\/classes\/\d\/assignments\/new\?utf8\=%E2%9C%93&commit\=%2BA$/.test(window.location.href)){
+  if (/^http:\/\/localhost:3000\/classes\/\d+\/assignments\/new$/.test(window.location.href) || /^http:\/\/localhost:3000\/classes\/\d+\/assignments\/new\?utf8\=%E2%9C%93&commit\=%2BA$/.test(window.location.href)){
     getIndexData(forHeader = true)
     getAssignmentFormData()
   }
@@ -8,7 +8,6 @@ $().ready(() => {
 function getAssignmentFormData(klassIdFromLink = undefined, assignmentIdFromLink = undefined){
   $('main')[0].innerHTML = ''
   const klassId = klassIdFromLink || window.location.href.split("/")[4]
-  //const assignmentId = assignmentIdFromLink || window.location.href.split("/")[6]
   $.get(`/classes/${klassId}/assignments/new.json`, function(json){
     klass = new Klass(json)
     createJSONObjects(json.students, Student)
@@ -19,15 +18,15 @@ function getAssignmentFormData(klassIdFromLink = undefined, assignmentIdFromLink
 
 function renderAssignmentForm(){
   $('main').append(Assignment.formatAssignmentForm())
-  $('.big-button').click(submitAssignment)
+  $('.submit-assignment').click(submitAssignment)
   history.pushState(null, null, `http://localhost:3000/classes/${klass.id}/assignments/new`)
 }
 
 function submitAssignment(e){
   e.preventDefault()
-  console.log("submitting!")
-  const values = $(this).parent().serialize()
-  $.post($(this).parent()[0].action, JSON.stringify(values))
+  console.log("creating new record")
+  const values = $(this).parent().parent().serialize()
+  $.post($(this).parent().parent()[0].action, JSON.stringify(values))
     .done(data => {
       $('main')[0].innerHTML = ''
       const klassId = klass.id
