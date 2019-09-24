@@ -56,6 +56,10 @@ class Assignment {
           <input name="utf8" type="hidden" value="✓">
           <h1>Add new assignment for ${klass.name}</h1>
 
+          <div class="error-messages">
+            <ul></ul>
+          </div>
+
           <div>
             <label for="assignment_name">Name of assignment</label>
             <br>

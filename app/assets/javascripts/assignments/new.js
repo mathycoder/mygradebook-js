@@ -19,18 +19,28 @@ function getAssignmentFormData(klassIdFromLink = undefined, assignmentIdFromLink
 
 function renderAssignmentForm(){
   $('main').append(Assignment.formatAssignmentForm())
-  $('.big-button').parent().submit(submitAssignment)
+  $('.big-button').click(submitAssignment)
+  history.pushState(null, null, `http://localhost:3000/classes/${klass.id}/assignments/new`)
 }
 
 function submitAssignment(e){
   e.preventDefault()
-  const values = $(this).serialize()
-  alert("submitting via ajax")
-  $.post(this.action, JSON.stringify(values))
+  console.log("submitting!")
+  const values = $(this).parent().serialize()
+  $.post($(this).parent()[0].action, JSON.stringify(values))
     .done(data => {
       $('main')[0].innerHTML = ''
       const klassId = klass.id
       clearData()
       getKlassData(klassId)
-   })
+   }).fail(data => {
+      renderErrorMessages(data.responseJSON)
+    })
+}
+
+function renderErrorMessages(array){
+  $('.error-messages ul').children().remove()
+  array.forEach(message => {
+    $('.error-messages ul').append(`<li style="color: red">${message}</li>`)
+  })
 }

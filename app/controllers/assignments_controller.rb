@@ -18,7 +18,7 @@ class AssignmentsController < ApplicationController
     if @assignment.save
       render json: @assignment, status: 201
     else
-      render json: @assignment, status: 422
+      render json: @assignment.errors.full_messages, status: 422
     end
 
     #@assignment.save ? (redirect_to(klass_path(@klass), alert: "Assignment successfully added")) : (render 'new')

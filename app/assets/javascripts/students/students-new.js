@@ -10,29 +10,6 @@ $(document).ready(function() {
 
 let stId
 
-function sortByName(){
-  $.ajax({
-  type: 'GET',
-  url: `/students/new.json`
-  }).done(data => {
-    data.sort(function(a, b) {
-      var nameA = a.first_name.toUpperCase();
-      var nameB = b.first_name.toUpperCase();
-      if (nameA < nameB) {
-        return -1;
-      } else if (nameA > nameB) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
-
-    students.length = 0
-    $('#student-list-header').nextAll().remove()
-    createJSONObjectsStudents(data, Student)
-  })
-}
-
 function getStudentsIndexData() {
   $.get('/students/new.json', function(json){
     createJSONObjectsStudents(json, Student)
@@ -124,4 +101,27 @@ function unhighlightAllTrs(){
   for (let i=0; i<trs.length; i++){
     trs[i].style.backgroundColor = "inherit"
   }
+}
+
+function sortByName(){
+  $.ajax({
+  type: 'GET',
+  url: `/students/new.json`
+  }).done(data => {
+    data.sort(function(a, b) {
+      var nameA = a.first_name.toUpperCase();
+      var nameB = b.first_name.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      } else if (nameA > nameB) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+
+    students.length = 0
+    $('#student-list-header').nextAll().remove()
+    createJSONObjectsStudents(data, Student)
+  })
 }
