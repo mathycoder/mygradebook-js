@@ -41,12 +41,18 @@ class KlassesController < ApplicationController
   end
 
   def update
-    @klass.update(klass_params) ? (redirect_to(klass_path(@klass), alert: "Class successfully updated")) : (render 'edit')
+    if @klass.update(klass_params)
+      render json: @klass, status: 201
+    else
+      render json: @klass.errors.full_messages, status: 422
+    end
+    #@klass.update(klass_params) ? (redirect_to(klass_path(@klass), alert: "Class successfully updated")) : (render 'edit')
   end
 
   def destroy
     @klass.destroy
-    redirect_to(klasses_path, alert: "Class successfully deleted")
+    render json: @klass, status: 201
+    #redirect_to(klasses_path, alert: "Class successfully deleted")
   end
 
   private

@@ -7,7 +7,6 @@ class Klass {
     this.subject = attributes.subject
     this.grade = attributes.grade
     this.period = attributes.period
-    klass = this
   }
 
   static find(klassId){
@@ -313,7 +312,7 @@ class Klass {
     let html = ''
     html += `
       <div class="paper-form">
-        <h1>Create a new class</h1>
+        <h1>${klass ? 'Edit' : 'Create a new'} class</h1>
         <form action="/classes" accept-charset="UFT-8" method="POST">
           <input name="utf8" type="hidden" value="✓">
 
@@ -324,35 +323,36 @@ class Klass {
           <div>
             <label for="klass_name">Class Name</label>
             <br>
-            <input maxlength="20" required class="text-field" size="20" type="text" name="klass[name]" id="klass_name">
+            <input maxlength="20" value="${klass ? klass.name : ''}" required class="text-field" size="20" type="text" name="klass[name]" id="klass_name">
             <br><br>
           </div>
 
           <div>
             <label for="klass_subject">Subject</label>
             <br>
-            <input maxlength="20" required class="text-field" size="20" type="text" name="klass[subject]" id="klass_subject">
+            <input maxlength="20" value="${klass ? klass.subject : ''}" required class="text-field" size="20" type="text" name="klass[subject]" id="klass_subject">
             <br><br>
           </div>
 
           <div>
             <label for="klass_grade">Enter the grade</label>
             <br>
-            <input maxlength="10" required class="text-field" size="10" type="text" name="klass[grade]" id="klass_grade">
+            <input maxlength="10" value="${klass ? klass.grade : ''}" required class="text-field" size="10" type="text" name="klass[grade]" id="klass_grade">
             <br><br>
           </div>
 
           <div>
             <label for="klass_period">Enter the class period</label>
             <br>
-            <input maxlength="2" required class="text-field" size="2" type="text" name="klass[period]" id="klass_period">
+            <input maxlength="2" value="${klass ? klass.period : ''}" required class="text-field" size="2" type="text" name="klass[period]" id="klass_period">
             <br><br>
           </div>
 
           <div class="big-button">
-            <input type="submit" class = "submit-klass" name="commit" value="Create Class">
+            <input type="submit" class = "submit-klass" name="commit" value="${klass ? 'Update': 'Create'} Class">
           </div>
         </form>
+        ${klass ? `<br><button class="big-button delete-klass">Delete Class</button>` : ''}
       </div>
     `
     return html

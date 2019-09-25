@@ -54,13 +54,6 @@ function updateAssignment(e){
   })
 }
 
-function renderErrorMessages(array){
-  $('.error-messages ul').children().remove()
-  array.forEach(message => {
-    $('.error-messages ul').append(`<li style="color: red">${message}</li>`)
-  })
-}
-
 function deleteAssignment(e){
   e.preventDefault()
   $.ajax({

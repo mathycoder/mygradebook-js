@@ -53,3 +53,10 @@ function renderFlash(flash){
   `
   $('main').prepend(html)
 }
+
+function renderErrorMessages(array){
+  $('.error-messages ul').children().remove()
+  array.forEach(message => {
+    $('.error-messages ul').append(`<li style="color: red">${message}</li>`)
+  })
+}
