@@ -1,6 +1,5 @@
 $().ready(() => {
   $('.class-header select').change(switchClass)
-  $('.header-logo').parent().click(goHome)
   if (/^http:\/\/localhost:3000\/classes\/\d+$/.test(window.location.href)){
     getIndexData(forHeader = true)
     getKlassData()
@@ -78,18 +77,6 @@ function modifyGrade(event){
   })
 }
 
-function goHome(event){
-  event.preventDefault()
-  const klassId = parseInt(window.location.href.split("/")[4])
-  if (klassId && window.location.href.split("/")[5] != "edit"){
-    clearData()
-    getKlassData()
-  } else {
-    clearData()
-    getIndexData()
-  }
-}
-
 function switchClass(event){
   event.preventDefault()
   const klassId = this.value
@@ -97,9 +84,7 @@ function switchClass(event){
   if (!klassId && !teacher) {
     window.location.replace("http://localhost:3000/classes")
   } else if (!klassId){
-    $('header')[0].innerHTML = ''
-    const headerHtml = Klass.renderIndexHeader()
-    $('header').append(headerHtml)
+    renderIndexHeader()
     getIndexData()
   } else {
     getKlassData(klassId)

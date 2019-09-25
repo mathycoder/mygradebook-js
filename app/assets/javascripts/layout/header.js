@@ -1,9 +1,3 @@
-function checkForShowHeader() {
-  if ($('header').children().length === 0 && klass) {
-    renderHeader()
-  }
-}
-
 function renderHeader(){
   $('header')[0].innerHTML = ''
   const headerHtml = klass.renderShowHeader()
@@ -17,6 +11,29 @@ function addShowHeaderListeners(){
   $('.class-header select').change(switchClass)
   $('.lt-header select').change(switchLt)
   $('.student-header select').change(switchSt)
+}
+
+function renderIndexHeader(){
+  $('header')[0].innerHTML = ''
+  const headerHtml = Klass.renderIndexHeader()
+  $('header').append(headerHtml)
+  addIndexHeaderListeners()
+}
+
+function addIndexHeaderListeners(){
+  $('.header-logo').parent().click(goHome)
+}
+
+function goHome(event){
+  event.preventDefault()
+  const klassId = parseInt(window.location.href.split("/")[4])
+  if (klassId && window.location.href.split("/")[5] != "edit"){
+    clearData()
+    getKlassData()
+  } else {
+    clearData()
+    getIndexData()
+  }
 }
 
 function addAssignment(e){

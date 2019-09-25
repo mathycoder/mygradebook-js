@@ -35,7 +35,7 @@ class Klass {
                 <a class="class-link" data-id="${klass.id}" href="/classes/${klass.id}">${klass.name}</a>
               </td>
               <td>
-                <a href="/classes/${klass.id}/edit">edit</a>
+                <a class="class-edit-link" href="/classes/${klass.id}/edit">edit</a>
               </td>
             </tr>`
           })
@@ -46,8 +46,8 @@ class Klass {
       </div>
 
       <div class="open-book-links">
-        <p><a href="/classes/new">Add a New Class</a></p>
-        <p><a href="/students/new">Add New Student to School</a></p>
+        <p><a class="index-new-klass-button" href="/classes/new">Add a New Class</a></p>
+        <p><a class="index-new-student-button" href="/students/new">Add New Student to School</a></p>
       </div>
     </div>`
 

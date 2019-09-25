@@ -12,11 +12,7 @@ function getIndexData(forHeader = false, forIndexHeader = false){
     }
     new Teacher(json[0].teachers[0])
     if (forIndexHeader) {
-      if ($('header').children().length === 0) {
-        $('header')[0].innerHTML = ''
-        const headerHtml = Klass.renderIndexHeader()
-        $('header').append(headerHtml)
-      }
+      renderIndexHeader()
     } else {
       klass = Klass.find(window.location.href.split("/")[4])
       forHeader ? renderHeader() : renderIndexPage()
@@ -28,11 +24,9 @@ function renderIndexPage(){
   const indexHtml = Klass.formatIndex()
   $('main').append(indexHtml)
   $('.class-link').click(clickOnClass)
-  if ($('header').children().length === 0) {
-    $('header')[0].innerHTML = ''
-    const headerHtml = Klass.renderIndexHeader()
-    $('header').append(headerHtml)
-  }
+  $('.index-new-klass-button').click(addNewKlass)
+  $('.class-edit-link').click(editKlass)
+  renderIndexHeader()
   history.pushState(null, null, `http://localhost:3000/classes`)
 }
 
@@ -42,4 +36,17 @@ function clickOnClass(e){
   $('main')[0].innerHTML = ''
   renderHeader()
   getKlassData(klass.id)
+}
+
+function addNewKlass(e){
+  e.preventDefault()
+  getIndexData(forHeader = false, forIndexHeader = true)
+  renderNewKlassForm()
+}
+
+function editKlass(e){
+  e.preventDefault()
+  const klassId = this.href.split('/')[4]
+  getIndexData(forHeader = false, forIndexHeader = true)
+  getKlassDataBeforeEdit(klassId)
 }
