@@ -240,4 +240,66 @@ class Student {
     let percentage = (targetScores.length / scores.length)*100
     return `${percentage.toFixed(1)}%`
   }
+
+  static renderIndexPage(){
+    let html = ''
+    html += `
+      <div id="new-students-title">
+        <div>
+          <h1>Students in the School</h1>
+        </div>
+        <div id="add-csv-link">
+          <h4>
+            <a href="/students/new/csv">Add Multiple Students with CSV File</a>
+          </h4>
+        </div>
+      </div>
+
+      <div class="student-list-container">
+        <div class="paper-form">
+          <h2 id="add-student-header">Add Student</h2>
+          <form class="new-student-form" action="/students/new" accept-charset="UTF-8" method="POST">
+            <input name="utf8" type="hidden" value="✓">
+            <input maxlength="20" class="text-field" id="text-field-first-name" placeholder="First Name" size="20" type="text" name="student[first_name]">
+            <br><br>
+            <input maxlength="20" class="text-field" id="text-field-last-name" placeholder="Last Name" size="20" type="text" name="student[last_name]">
+            <br><br>
+            <input maxlength="4" class="text-field" id="text-field-grade" placeholder="Grade" size="4" type="text" name="student[grade]">
+            <br><br>
+            <input maxlength="5" class="text-field" id="text-field-klass" placeholder="Homeroom" size="5" type="text" name="student[klass]">
+            <br><br><br>
+            <div>
+              <button class="big-button">Save Student</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="students-in-school paper-form">
+          <h3>Students in the school</h3>
+          <form class="filter-form" action="/students/new" accept-charset-"UTF-8" method="get">
+            <input name="utf8" type="hidden" value="✓">
+            <input type="text" name="query" id="query" placeholder="Filter by name or class">
+            <input type="submit" name="commit" value="Filter" class="filter-button little-button" data-disable-with="Filter">
+            <button class="little-button sort-by-name">Sort</button>
+          </form>
+          <br>
+          <div class="listed-students">
+            <table>
+              <tbody>
+                <tr id="student-list-header">
+                  <th>Last Name</th>
+                  <th>First Name</th>
+                  <th>Grade</th>
+                  <th>HR</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      `
+    return html
+  }
 }

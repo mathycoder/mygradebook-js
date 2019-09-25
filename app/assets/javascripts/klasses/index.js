@@ -25,6 +25,7 @@ function renderIndexPage(){
   $('main').append(indexHtml)
   $('.class-link').click(clickOnClass)
   $('.index-new-klass-button').click(addNewKlass)
+  $('.index-new-student-button').click(addNewStudentToSchool)
   $('.class-edit-link').click(editKlass)
   renderIndexHeader()
   history.pushState(null, null, `http://localhost:3000/classes`)
@@ -42,6 +43,12 @@ function addNewKlass(e){
   e.preventDefault()
   getIndexData(forHeader = false, forIndexHeader = true)
   renderNewKlassForm()
+}
+
+function addNewStudentToSchool(e){
+  e.preventDefault()
+  getIndexData(forHeader = false, forIndexHeader = true)
+  getStudentsIndexData()
 }
 
 function editKlass(e){

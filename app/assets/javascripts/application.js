@@ -25,7 +25,7 @@
 //= require klasses/new
 //= require klasses/edit
 
-//= require students/students-new
+//= require students/new
 //= require students/index
 //= require students/show
 

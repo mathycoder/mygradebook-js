@@ -1,10 +1,7 @@
 $(document).ready(function() {
   if (window.location.href === "http://localhost:3000/students/new"){
+    getIndexData(forHeader = false, forIndexHeader = true)
     getStudentsIndexData()
-    $('.big-button').click(addStudent)
-    $('.little-button').click(filterStudents)
-    $('.filter-form input:nth-child(2)').change(filterStudents)
-    $('.sort-by-name').click(sortByName)
   }
 })
 
@@ -20,6 +17,8 @@ function createJSONObjectsStudents(json, cla){
   for (i = 0; i<json.length; i++){
     new cla(json[i])
   }
+  $('main')[0].innerHTML = ''
+  $('main').append(Student.renderIndexPage())
   displayStudents()
 }
 
@@ -27,6 +26,9 @@ function displayStudents(){
   Student.displayStudentsInDOM()
   $('.delete-student-button').click(deleteStudent)
   $('.edit-student-button').click(editStudent)
+  $('.big-button').click(addStudent)
+  $('.filter-button').click(filterStudents)
+  $('.sort-by-name').click(sortByName)
 }
 
 function filterStudents(){
