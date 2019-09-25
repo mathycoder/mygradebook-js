@@ -37,7 +37,6 @@ function renderAssignmentEditForm(){
 }
 
 function updateAssignment(e){
-  console.log("updating...")
   e.preventDefault()
   const values = $(this).parent().parent().serialize()
   $.ajax({
@@ -49,6 +48,7 @@ function updateAssignment(e){
     const klassId = klass.id
     clearData()
     getKlassData(klassId)
+    renderFlash("Assignment updated")
  }).fail(data => {
     renderErrorMessages(data.responseJSON)
   })
@@ -71,6 +71,7 @@ function deleteAssignment(e){
     const klassId = klass.id
     clearData()
     getKlassData(klassId)
+    renderFlash("Assignment deleted")
   })
 }
 

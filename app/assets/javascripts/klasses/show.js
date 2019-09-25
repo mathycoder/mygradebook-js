@@ -65,6 +65,7 @@ function modifyGrade(event){
     currLt ? Student.renderAverages(currLt) : Student.renderAverages()
     Assignment.renderAverages()
     conditionalFormatting()
+
   }).fail(function(data){
     const grade = Grade.find(data.responseJSON.id)
     grade.update(data.responseJSON)

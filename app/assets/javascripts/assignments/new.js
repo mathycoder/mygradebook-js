@@ -32,6 +32,7 @@ function submitAssignment(e){
       const klassId = klass.id
       clearData()
       getKlassData(klassId)
+      renderFlash("New Assignment created")
    }).fail(data => {
       renderErrorMessages(data.responseJSON)
     })

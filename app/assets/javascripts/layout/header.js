@@ -42,3 +42,14 @@ function adjustHeader(){
   $('.select-students').parent()[0].action = `http://localhost:3000/classes/${klass.id}/students/redirect`
   students.forEach(st => $('.select-students option:first-child').parent().append(`<option value="${st.id}">${st.fullName()}</option>`))
 }
+
+function renderFlash(flash){
+  let html = ''
+  html += `
+    <div onclick="style.display='none'; return false;" data-alert class="flash error alert-box radius">
+      <a href="" class="close">x</a>
+      <span>${flash}</span>
+    </div>
+  `
+  $('main').prepend(html)
+}
