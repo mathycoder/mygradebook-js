@@ -1,6 +1,6 @@
 class KlassesController < ApplicationController
   before_action :find_klass, only: [:show, :edit, :update, :destroy]
-  before_action :require_lts, only: [:show]
+  # before_action :require_lts, only: [:show]
 
   def redirect
     @klass = Klass.find_by(id: params[:klass][:id])
@@ -15,9 +15,9 @@ class KlassesController < ApplicationController
     @klass = Klass.new(klass_params)
     if @klass.save
       current_user.klasses << @klass
-      redirect_to(klasses_path, alert: "Class successfully created")
+      render json: @klass, status: 201
     else
-      render 'new'
+      render json: @klass.errors.full_messages, status: 422
     end
   end
 

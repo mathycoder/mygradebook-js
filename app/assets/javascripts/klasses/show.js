@@ -18,7 +18,11 @@ function getKlassData(klassIdFromLink = undefined) {
     createJSONObjects(json.learning_targets, LearningTarget)
     createJSONObjects(json.standards, Standard)
     createJSONObjects(json.grades, Grade)
-    renderShowPage()
+    if (learningTargets.length === 0 ) {
+      window.location.replace(`http://localhost:3000/classes/${klass.id}/lts`)
+    } else {
+      renderShowPage()
+    }
   })
 }
 
