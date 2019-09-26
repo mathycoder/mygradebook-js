@@ -22,7 +22,7 @@ class LearningTargetsController < ApplicationController
   end
 
   def create
-
+    binding.pry
     @lt = @klass.learning_targets.build(lt_params)
     if @lt.save
       @klass.learning_targets << @lt
@@ -31,7 +31,7 @@ class LearningTargetsController < ApplicationController
       render json: @lt.errors.full_messages, status: 422
     end
 
-
+    # @lt = @klass.learning_targets.build(lt_params)
     # if @lt.save
     #   @klass.learning_targets << @lt
     #   redirect_to(klass_path(@klass), alert: "Learning Target successfully created")

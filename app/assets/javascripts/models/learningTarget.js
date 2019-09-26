@@ -51,6 +51,14 @@ class LearningTarget {
     else {return "blue"}
   }
 
+  static colorClass(){
+    // const ltIndex = learningTargets.indexOf(this)
+    const ltIndex = learningTargets.length
+    if (ltIndex % 3 === 0) {return "red"}
+    else if (ltIndex % 3 === 1) {return "green"}
+    else {return "blue"}
+  }
+
   formatShow(){
     let html = ''
     html += `
@@ -199,7 +207,7 @@ class LearningTarget {
           </div>
 
           <div class="lt-form-rubric">
-            <div class="rubric-title red">
+            <div class="rubric-title ${this.colorClass()}">
               <h2>
                 <input size="40" maxlength="50" placeholder="Enter a student-friendly name for this LT" type="text" name="learning_target[name]" id="learning_target_name">
               </h2>
@@ -251,7 +259,7 @@ class LearningTarget {
           <div class="lt-form-klasses">
             <p>Add LT to another class:</p>
             <p>
-
+              ${this.otherKlasses()}
             </p>
           </div>
 
@@ -264,6 +272,22 @@ class LearningTarget {
       </div>
     </form>
     `
+    return html
+  }
+
+  static otherKlasses(){
+    let html = '<input type="hidden" name="learning_target[klasses_attributes][0][id][]">'
+    const collection = klasses.filter(kl => kl.id !== klass.id)
+    collection.forEach((klass, index) => {
+
+      html += `
+      <input type="checkbox" value="${klass.id}" name="learning_target[klasses_attributes][0][id][]" id="learning_target_klasses_attributes_0_id_${klass.id}">
+      <label for="learning_target_klasses_attributes_0_id_${index}">${klass.name}</label>
+      `
+    })
+
+
+
     return html
   }
 
