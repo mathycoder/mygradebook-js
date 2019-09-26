@@ -168,6 +168,7 @@ class LearningTarget {
   static renderForm(){
     let html = ''
     html += `
+    <form class="new_learning_target" id="new_learning_target" action="/classes/1/lts" accept-charset="UTF-8" method="post">
       <h1>Add a new Learning Target</h1>
       <div class="lt-form-container-full">
         <div class="lt-form-container">
@@ -179,21 +180,20 @@ class LearningTarget {
             </select>
             <br>
 
-            <form class="new_learning_target" id="new_learning_target" action="/classes/1/lts" accept-charset="UTF-8" method="post">
-              <input name="utf8" type="hidden" value="✓">
-              <ul></ul>
-              <div class="standards-table">
-                <table>
-                  <tbody>
-                    <tr>
-                      <th></th>
-                      <th>Standard</th>
-                      <th>Description</th>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </form>
+            <input name="utf8" type="hidden" value="✓">
+            <ul></ul>
+            <div class="standards-table">
+              <table>
+                <tbody>
+                  <tr>
+                    <th></th>
+                    <th>Standard</th>
+                    <th>Description</th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
           </div>
 
           <div class="lt-form-rubric">
@@ -249,9 +249,7 @@ class LearningTarget {
           <div class="lt-form-klasses">
             <p>Add LT to another class:</p>
             <p>
-              <input type="hidden" name="learning_target[klasses_attributes][0][id][]" value="">
-              <input type="checkbox" value="2" name="learning_target[klasses_attributes][0][id][]" id="learning_target_klasses_attributes_0_id_2">
-              <label for="learning_target_klasses_attributes_0_id_2">702</label>
+              
             </p>
           </div>
 
@@ -262,6 +260,7 @@ class LearningTarget {
           </div>
         </div>
       </div>
+    </form>
     `
     return html
   }

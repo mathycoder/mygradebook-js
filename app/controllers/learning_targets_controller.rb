@@ -10,7 +10,7 @@ class LearningTargetsController < ApplicationController
   def new
     ApiScraper.scrape_math_standards if Standard.all.empty?
 
-    # @lt = LearningTarget.new
+    @lt = LearningTarget.new
     # @standard = @lt.build_standard
     # set_standards_based_on_search_query([])
 
@@ -22,12 +22,20 @@ class LearningTargetsController < ApplicationController
   end
 
   def create
+    # @lt = @klass.learning_targets.build(lt_params)
+    # if @lt.save
+    #   @klass.learning_targets << @lt
+    #   render json: @lt, status: 201
+    # else
+    #   render json: @lt.errors.full_messages, status: 422
+    # end
+
     @lt = @klass.learning_targets.build(lt_params)
+
     if @lt.save
       @klass.learning_targets << @lt
-      @klass.learning_targets.length > 1 ? redirect_to(klass_learning_target_path(@klass, @lt), alert: "Learning Target successfully created") : redirect_to(klass_path(@klass), alert: "Learning Target successfully created")
+      redirect_to(klass_path(@klass), alert: "Learning Target successfully created")
     else
-      set_standards_based_on_search_query([@lt.standard])
       render 'new'
     end
   end

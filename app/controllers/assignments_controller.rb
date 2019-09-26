@@ -14,7 +14,6 @@ class AssignmentsController < ApplicationController
 
   def create
     @assignment = Assignment.new(assignment_params)
-
     if @assignment.save
       render json: @assignment, status: 201
     else

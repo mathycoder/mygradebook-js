@@ -7,21 +7,21 @@ $().ready(() => {
   }
 })
 
-// function getLtFormData(klassIdFromLink = undefined, ltIdFromLink = undefined){
-//   $('main')[0].innerHTML = ''
-//   const klassId = klassIdFromLink || window.location.href.split("/")[4]
-//   $.get(`/classes/${klassId}.json`, function(json){
-//     klass = new Klass(json)
-//     // createJSONObjects(json.learning_targets, LearningTarget)
-//     // renderLtForm()
-//     requestStandardGradeBands()
-//   })
-// }
-//
-// function renderLtForm(){
-//   $('main').append(LearningTarget.renderForm())
-//   requestStandardGradeBands()
-// }
+function getLtFormData(klassIdFromLink = undefined, ltIdFromLink = undefined){
+  $('main')[0].innerHTML = ''
+  const klassId = klassIdFromLink || window.location.href.split("/")[4]
+  $.get(`/classes/${klassId}.json`, function(json){
+    klass = new Klass(json)
+    // createJSONObjects(json.learning_targets, LearningTarget)
+    // renderLtForm()
+    requestStandardGradeBands()
+  })
+}
+
+function renderLtForm(){
+  $('main').append(LearningTarget.renderForm())
+  requestStandardGradeBands()
+}
 
 function requestStandardGradeBands(){
   const klassId = window.location.href.split("/")[4]
@@ -59,4 +59,20 @@ function populateGradeStandards(){
       </tr>
       `)
   })
+}
+
+function submitLt(e){
+  e.preventDefault()
+  const values = $(this).parent().parent().parent().parent().serialize()
+  $.post($(this).parent().parent().parent().parent()[0].action, values)
+  $.post(`/classes/${klass.id}/lts`, values)
+    .done(data => {
+      $('main')[0].innerHTML = ''
+      const klassId = klass.id
+      clearData()
+      getKlassData(klassId)
+      renderFlash("New Learning Target created")
+   }).fail(data => {
+      // renderErrorMessages(data.responseJSON)
+    })
 }
