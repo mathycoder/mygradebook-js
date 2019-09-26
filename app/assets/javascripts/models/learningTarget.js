@@ -53,7 +53,7 @@ class LearningTarget {
 
   static colorClass(){
     // const ltIndex = learningTargets.indexOf(this)
-    const ltIndex = learningTargets.length
+    const ltIndex = currLt ? learningTargets.indexOf(learningTargets.find(lt => lt.id === currLt.id)) : learningTargets.length
     if (ltIndex % 3 === 0) {return "red"}
     else if (ltIndex % 3 === 1) {return "green"}
     else {return "blue"}

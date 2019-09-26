@@ -57,7 +57,7 @@ class LearningTargetsController < ApplicationController
   def destroy
     @lt.assignments.destroy_all
     @lt.destroy
-    redirect_to(klass_learning_targets_path(@klass), alert: "Learning Target successfully deleted")
+    render json: @lt, status: 201
   end
 
   private

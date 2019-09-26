@@ -21,5 +21,20 @@ function getLtEditFormData(klassId, ltIdFromLink){
     currLt = new LearningTarget(json)
     learningTargets.pop()
     renderLtForm()
+    $('.delete-lt').click(deleteLtButton)
+  })
+}
+
+function deleteLtButton(e){
+  e.preventDefault()
+  $.ajax({
+  type: 'DELETE',
+  url: `/classes/${klass.id}/lts/${currLt.id}`
+  }).done(data => {
+    $('main')[0].innerHTML = ''
+    const klassId = klass.id
+    clearData()
+    getKlassData(klassId)
+    renderFlash("Learning Target deleted")
   })
 }
