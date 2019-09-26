@@ -1,8 +1,0 @@
-<div class="gradebook-wrapper">
-  <table class="gradebook">
-    <%= render partial: "klasses/table_header_row", locals: {klass: klass, collection: collection} %>
-    <%= render partial: "klasses/table_assignments_row", locals: {klass: klass, collection: collection} %>
-    <%= render partial: "klasses/table_averages_row", locals: {klass: klass, collection: collection, klass_or_lt: klass_or_lt} %>
-    <%= render partial: "klasses/table_student_rows", locals: {klass: klass, collection: collection, klass_or_lt: klass_or_lt} %>
-  </table>
-</div>
