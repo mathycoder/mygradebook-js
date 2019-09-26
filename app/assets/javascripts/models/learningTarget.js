@@ -65,7 +65,7 @@ class LearningTarget {
       <h1>
         ${this.name}
         <div style="display: inline">
-          <a href="/classes/${klass.id}/lts/${currLt.id}/edit">edit</a>
+          <a class="link-edit-lt" href="/classes/${klass.id}/lts/${currLt.id}/edit">edit</a>
         </div>
       </h1>
 
@@ -219,7 +219,7 @@ class LearningTarget {
 
             <div class="rubric-score-desc">
               <p>
-                <textarea maxlength="160" value="${currLt ? currLt.level4 : ''}" placeholder="Optional: What does level 4 understanding look like?" name="learning_target[level4]" id="learning_target_level4"></textarea>
+                <textarea maxlength="160" placeholder="Optional: What does level 4 understanding look like?" name="learning_target[level4]" id="learning_target_level4">${currLt ? currLt.level4 : ''}</textarea>
               </p>
             </div>
 
@@ -229,7 +229,7 @@ class LearningTarget {
 
             <div class="rubric-score-desc">
               <p>
-                <textarea maxlength="160" value="${currLt ? currLt.level3 : ''}" placeholder="Optional: What does level 3 understanding look like?" name="learning_target[level3]" id="learning_target_level3"></textarea>
+                <textarea maxlength="160" placeholder="Optional: What does level 3 understanding look like?" name="learning_target[level3]" id="learning_target_level3">${currLt ? currLt.level3 : ''}</textarea>
               </p>
             </div>
 
@@ -239,7 +239,7 @@ class LearningTarget {
 
             <div class="rubric-score-desc">
             <p>
-              <textarea maxlength="160" value="${currLt ? currLt.level2 : ''}" placeholder="Optional: What does level 2 understanding look like?" name="learning_target[level2]" id="learning_target_level2"></textarea>
+              <textarea maxlength="160" placeholder="Optional: What does level 2 understanding look like?" name="learning_target[level2]" id="learning_target_level2">${currLt ? currLt.level2 : ''}</textarea>
             </p>
             </div>
 
@@ -249,7 +249,7 @@ class LearningTarget {
 
             <div class="rubric-score-desc">
               <p>
-                <textarea maxlength="160" value="${currLt ? currLt.level1 : ''}" placeholder="Optional: What does level 1 understanding look like?" name="learning_target[level1]" id="learning_target_level1"></textarea>
+                <textarea maxlength="160" placeholder="Optional: What does level 1 understanding look like?" name="learning_target[level1]" id="learning_target_level1">${currLt ? currLt.level1 : ''}</textarea>
               </p>
             </div>
           </div>

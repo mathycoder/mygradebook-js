@@ -17,6 +17,8 @@ function getLtFormData(klassIdFromLink = undefined, ltIdFromLink = undefined){
 
 function renderLtForm(){
   $('main').append(LearningTarget.renderForm())
+  if (!currLt) { history.pushState(null, null, `http://localhost:3000/classes/${klass.id}/lts/new`)
+ }
   requestStandardGradeBands()
 }
 

@@ -36,6 +36,7 @@ function renderLtShowPage(){
   $('.lt-show-gradebook').append(klass.formatShow(currLt))
   $('form.grade-input').submit(modifyGrade)
   $(`.score`).keyup(enter_detector)
+  $('.link-edit-lt').click(editLt)
   Student.renderAverages(currLt)
   Assignment.renderAverages()
   conditionalFormatting()
@@ -63,4 +64,11 @@ function clickLt(event){
   const lt = LearningTarget.find(ltId)
   clearData()
   getLtData(klassId, ltId)
+}
+
+function editLt(event){
+  event.preventDefault()
+  getIndexData(forHeader = true)
+  originalStandard = true
+  getKlassLtEditFormData(klass.id, currLt.id)
 }
