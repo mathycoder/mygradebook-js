@@ -32,6 +32,7 @@
 
 //= require lts/show
 //= require lts/new
+//= require lts/edit
 
 //= require assignments/new
 //= require assignments/edit

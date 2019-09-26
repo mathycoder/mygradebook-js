@@ -176,8 +176,8 @@ class LearningTarget {
   static renderForm(){
     let html = ''
     html += `
-    <form class="new_learning_target" id="new_learning_target" action="/classes/1/lts" accept-charset="UTF-8" method="post">
-      <h1>Add a new Learning Target</h1>
+    <form class="lt-form" id="new_learning_target" action="/classes/1/lts" accept-charset="UTF-8" method="post">
+      <h1>${currLt ? 'Edit' : 'Add a new'} Learning Target</h1>
       <div class="lt-form-container-full">
         <div class="lt-form-container">
           <div id="paper-lt" class="lt-form-standard paper-form">
@@ -209,7 +209,7 @@ class LearningTarget {
           <div class="lt-form-rubric">
             <div class="rubric-title ${this.colorClass()}">
               <h2>
-                <input size="40" maxlength="50" placeholder="Enter a student-friendly name for this LT" type="text" name="learning_target[name]" id="learning_target_name">
+                <input size="40" maxlength="50" value="${currLt ? currLt.name : ''}" placeholder="Enter a student-friendly name for this LT" type="text" name="learning_target[name]" id="learning_target_name">
               </h2>
             </div>
 
@@ -219,7 +219,7 @@ class LearningTarget {
 
             <div class="rubric-score-desc">
               <p>
-                <textarea maxlength="160" placeholder="Optional: What does level 4 understanding look like?" name="learning_target[level4]" id="learning_target_level4"></textarea>
+                <textarea maxlength="160" value="${currLt ? currLt.level4 : ''}" placeholder="Optional: What does level 4 understanding look like?" name="learning_target[level4]" id="learning_target_level4"></textarea>
               </p>
             </div>
 
@@ -229,7 +229,7 @@ class LearningTarget {
 
             <div class="rubric-score-desc">
               <p>
-                <textarea maxlength="160" placeholder="Optional: What does level 3 understanding look like?" name="learning_target[level3]" id="learning_target_level3"></textarea>
+                <textarea maxlength="160" value="${currLt ? currLt.level3 : ''}" placeholder="Optional: What does level 3 understanding look like?" name="learning_target[level3]" id="learning_target_level3"></textarea>
               </p>
             </div>
 
@@ -239,7 +239,7 @@ class LearningTarget {
 
             <div class="rubric-score-desc">
             <p>
-              <textarea maxlength="160" placeholder="Optional: What does level 2 understanding look like?" name="learning_target[level2]" id="learning_target_level2"></textarea>
+              <textarea maxlength="160" value="${currLt ? currLt.level2 : ''}" placeholder="Optional: What does level 2 understanding look like?" name="learning_target[level2]" id="learning_target_level2"></textarea>
             </p>
             </div>
 
@@ -249,24 +249,19 @@ class LearningTarget {
 
             <div class="rubric-score-desc">
               <p>
-                <textarea maxlength="160" placeholder="Optional: What does level 1 understanding look like?" name="learning_target[level1]" id="learning_target_level1"></textarea>
+                <textarea maxlength="160" value="${currLt ? currLt.level1 : ''}" placeholder="Optional: What does level 1 understanding look like?" name="learning_target[level1]" id="learning_target_level1"></textarea>
               </p>
             </div>
           </div>
         </div>
 
-        <div class="lt-form-submit-area">
-          <div class="lt-form-klasses">
-            <p>Add LT to another class:</p>
-            <p>
-              ${this.otherKlasses()}
-            </p>
-          </div>
+        ${currLt ? '' : this.otherKlasses()}
 
           <div class="lt-form-submit">
-            <div class="big-button">
-              <input type="submit" name="commit" value="Create Learning target" data-disable-with="Create Learning target">
+            <div class="big-button submit-lt">
+              <input type="submit" name="commit" value="${currLt ? 'Update' : 'Create'} Learning target" data-disable-with="Create Learning target">
             </div>
+            ${currLt ? '<button class="delete-lt big-button">Delete</button>' : ''}
           </div>
         </div>
       </div>
@@ -276,7 +271,14 @@ class LearningTarget {
   }
 
   static otherKlasses(){
-    let html = '<input type="hidden" name="learning_target[klasses_attributes][0][id][]">'
+    let html = `
+    <div class="lt-form-submit-area">
+      <div class="lt-form-klasses">
+        <p>Add LT to another class:</p>
+        <p>
+          <input type="hidden" name="learning_target[klasses_attributes][0][id][]">
+          `
+
     const collection = klasses.filter(kl => kl.id !== klass.id)
     collection.forEach((klass, index) => {
 
@@ -286,9 +288,11 @@ class LearningTarget {
       `
     })
 
-
+    html += `</p></div>`
 
     return html
   }
+
+
 
 }

@@ -29,21 +29,24 @@ function requestStandardGradeBands(){
 
 function populateGradesDropdown(){
   Standard.grades().forEach(grade => {
-    $('.grade-band').append(`<option value="${grade}">${grade}</option>`)
+    $('.grade-band').append(`<option ${currLt && currLt.standard().grade === grade ? 'selected="selected"' : ''} value="${grade}">${grade}</option>`)
   })
   $('.grade-band').change(populateGradeStandards)
-  $('.big-button').click(submitLt)
+  $('.submit-lt').click(submitLt)
+  if (currLt) { populateGradeStandards() }
 }
+
+let originalStandard = true
 
 function populateGradeStandards(){
   const grade = this.value
-  const standardsByGrade = Standard.byGrade(grade)
+  const collection = currLt && originalStandard ? [currLt.standard()] : Standard.byGrade(grade)
   $('tbody tr:first-child').nextAll().remove()
-  standardsByGrade.forEach(standard => {
+  collection.forEach(standard => {
     $('tbody').append(`
       <tr>
         <td>
-          <input type="radio" value="${standard.id}" name="learning_target[standard_attributes][id]"
+          <input type="radio" ${currLt && originalStandard ? 'checked="checked"' : ''} value="${standard.id}" name="learning_target[standard_attributes][id]"
         </td>
 
         <td>
@@ -56,19 +59,37 @@ function populateGradeStandards(){
       </tr>
       `)
   })
+  originalStandard = false
 }
 
 function submitLt(e){
   e.preventDefault()
-  const values = $(this).parent().parent().parent().parent().serialize()
-  $.post(`/classes/${klass.id}/lts`, values)
-    .done(data => {
+  const values = $('.lt-form').serialize()
+  if (!currLt) {
+    $.post(`/classes/${klass.id}/lts`, values)
+      .done(data => {
+        $('main')[0].innerHTML = ''
+        const klassId = klass.id
+        clearData()
+        getKlassData(klassId)
+        renderFlash("New Learning Target created")
+     }).fail(data => {
+        renderErrorMessages(data.responseJSON)
+     })
+  } else {
+    $.ajax({
+    type: 'PATCH',
+    url: `/classes/${klass.id}/lts/${currLt.id}`,
+    data: values
+    }).done(data => {
       $('main')[0].innerHTML = ''
       const klassId = klass.id
       clearData()
       getKlassData(klassId)
-      renderFlash("New Learning Target created")
+      renderFlash("Learning Target updated")
    }).fail(data => {
       renderErrorMessages(data.responseJSON)
     })
+  }
+
 }

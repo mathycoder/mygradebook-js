@@ -9,11 +9,7 @@ class LearningTargetsController < ApplicationController
 
   def new
     ApiScraper.scrape_math_standards if Standard.all.empty?
-
     @lt = LearningTarget.new
-    # @standard = @lt.build_standard
-    # set_standards_based_on_search_query([])
-
     @standards = Standard.all
     respond_to do |format|
       format.html
@@ -22,7 +18,6 @@ class LearningTargetsController < ApplicationController
   end
 
   def create
-    binding.pry
     @lt = @klass.learning_targets.build(lt_params)
     if @lt.save
       @klass.learning_targets << @lt
@@ -31,13 +26,6 @@ class LearningTargetsController < ApplicationController
       render json: @lt.errors.full_messages, status: 422
     end
 
-    # @lt = @klass.learning_targets.build(lt_params)
-    # if @lt.save
-    #   @klass.learning_targets << @lt
-    #   redirect_to(klass_path(@klass), alert: "Learning Target successfully created")
-    # else
-    #   render 'new'
-    # end
   end
 
   def index
@@ -52,15 +40,17 @@ class LearningTargetsController < ApplicationController
   end
 
   def edit
-    set_standards_based_on_search_query([@lt.standard])
+    respond_to do |format|
+      format.html
+      format.json {render json: @lt}
+    end
   end
 
   def update
     if @lt.update(lt_params)
-      redirect_to(klass_learning_target_path(@klass, @lt), alert: "Learning Target successfully updated")
+      render json: @lt, status: 201
     else
-      set_standards_based_on_search_query([@lt.standard])
-      render 'edit'
+      render json: @lt.errors.full_messages, status: 422
     end
   end
 
