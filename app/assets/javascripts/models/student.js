@@ -248,11 +248,6 @@ class Student {
         <div>
           <h1>Students in the School</h1>
         </div>
-        <div id="add-csv-link">
-          <h4>
-            <a href="/students/new/csv">Add Multiple Students with CSV File</a>
-          </h4>
-        </div>
       </div>
 
       <div class="student-list-container">
@@ -300,6 +295,57 @@ class Student {
         </div>
       </div>
       `
+    return html
+  }
+
+  static formatIndexPage(){
+    let html = ''
+    html += `
+      <div>
+        <h1>Add Students to Class ${klass.name}</h1>
+        <div class="student-list-container">
+          <div class="students-in-school paper-form">
+            <h3>Students in the school</h3>
+            <form action="/classes/1/students" accept-charset="UFT-8" method="get">
+              <input name="utf8" type="hidden" value="✓">
+              <input type="text" name="query" id="query" placeholder="Filter by name or class">
+              <input type="submit" name="commit" value="Filter" class="little-button" id="filter-students" data-disable-with="Filter">
+            </form>
+            <br>
+
+            <div id="students-in-school" class="listed-students">
+              <table>
+                <tbody>
+                  <tr>
+                    <th></th>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Grade</th>
+                    <th>HR</th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="students-in-class paper-form">
+            <h3>Students in this class</h3>
+            <div id="students-in-klass" class="listed-students">
+              <table>
+                <tbody>
+                  <tr>
+                    <th></th>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Grade</th>
+                    <th>HR</th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
     return html
   }
 }

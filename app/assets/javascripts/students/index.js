@@ -1,11 +1,26 @@
 $().ready(() => {
   if (/^http:\/\/localhost:3000\/classes\/\d+\/students$/.test(window.location.href) || /^http:\/\/localhost:3000\/classes\/\d+\/students\?utf8\=%E2%9C%93&commit\=%2BS$/.test(window.location.href)){
-
-    $('.listed-students tr:first-child').nextAll().remove()
-    getClassStudentsIndexData()
-    $('#filter-students').click(filterIndexStudents)
+    getIndexData(forHeader = true)
+    getStudentIndexPageData()
   }
 })
+
+function getStudentIndexPageData(klassIdFromLink = undefined){
+  $('main')[0].innerHTML = ''
+  const klassId = klassIdFromLink || window.location.href.split("/")[4]
+  $.get(`/classes/${klassId}.json`, function(json){
+    klass = new Klass(json)
+    renderStudentIndexPage()
+  })
+}
+
+function renderStudentIndexPage(){
+  $('main')[0].innerHTML = ''
+  $('main').append(Student.formatIndexPage())
+  $('.listed-students tr:first-child').nextAll().remove()
+  getClassStudentsIndexData()
+  $('#filter-students').click(filterIndexStudents)
+}
 
 function getClassStudentsIndexData() {
   const klassId = window.location.href.split("/")[4]

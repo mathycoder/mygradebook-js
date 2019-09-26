@@ -26,6 +26,7 @@
 //= require klasses/edit
 
 //= require students/new
+//= require students/new-csv
 //= require students/index
 //= require students/show
 

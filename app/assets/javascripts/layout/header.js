@@ -8,6 +8,7 @@ function renderHeader(){
 function addShowHeaderListeners(){
   $('.header-logo').parent().click(goHome)
   $('.add-assignment-button').click(addAssignment)
+  $('.add-student-button').click(addStudentPage)
   $('.class-header select').change(switchClass)
   $('.lt-header select').change(switchLt)
   $('.student-header select').change(switchSt)
@@ -29,6 +30,7 @@ function goHome(event){
   const klassId = parseInt(window.location.href.split("/")[4])
   if (klassId && window.location.href.split("/")[5] != "edit"){
     clearData()
+    getIndexData(forHeader = true)
     getKlassData()
   } else {
     clearData()
@@ -40,6 +42,13 @@ function addAssignment(e){
   clearData()
   getIndexData(forHeader = true)
   getAssignmentFormData()
+}
+
+function addStudentPage(e){
+  const klassId = klass.id
+  clearData()
+  getIndexData(forHeader = true)
+  getStudentIndexPageData(klassId)
 }
 
 function adjustHeader(){

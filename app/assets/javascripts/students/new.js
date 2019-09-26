@@ -10,6 +10,7 @@ let stId
 function getStudentsIndexData() {
   $.get('/students/new.json', function(json){
     createJSONObjectsStudents(json, Student)
+    displayStudents()
   })
 }
 
@@ -17,12 +18,11 @@ function createJSONObjectsStudents(json, cla){
   for (i = 0; i<json.length; i++){
     new cla(json[i])
   }
-  $('main')[0].innerHTML = ''
-  $('main').append(Student.renderIndexPage())
-  displayStudents()
 }
 
 function displayStudents(){
+  $('main')[0].innerHTML = ''
+  $('main').append(Student.renderIndexPage())
   Student.displayStudentsInDOM()
   $('.delete-student-button').click(deleteStudent)
   $('.edit-student-button').click(editStudent)

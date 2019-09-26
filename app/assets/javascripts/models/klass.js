@@ -232,10 +232,7 @@ class Klass {
         </form>
       </div>
       <div class="add-student-button">
-        <form action="http://localhost:3000/classes/${this.id}/students" method="get">
-          <input name="utf8" type="hidden" value="✓">
-          <input type="submit" name="commit" value="+S" class="fancy-button" data-disable-with="+S">
-        </form>
+        <button class="fancy-button">+S</button>
       </div>
       <div class="class-header">
       <form class="edit_klass" action="http://localhost:3000/classes/redirect" method="get">

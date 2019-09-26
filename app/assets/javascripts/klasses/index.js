@@ -13,9 +13,11 @@ function getIndexData(forHeader = false, forIndexHeader = false){
     new Teacher(json[0].teachers[0])
     if (forIndexHeader) {
       renderIndexHeader()
-    } else {
+    } else if (forHeader){
       klass = Klass.find(window.location.href.split("/")[4])
-      forHeader ? renderHeader() : renderIndexPage()
+      renderHeader()
+    } else {
+      renderIndexPage()
     }
   })
 }
