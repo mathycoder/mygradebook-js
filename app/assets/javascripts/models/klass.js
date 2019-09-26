@@ -226,9 +226,7 @@ class Klass {
         <button class="fancy-button">+A</button>
       </div>
       <div class="add-lt-button">
-        <a href=http://localhost:3000/classes/${this.id}/lts/new">
-          <button class="fancy-button">+LT</button>
-        </a>
+        <button class="fancy-button">+LT</button>
       </div>
       <div class="add-student-button">
         <button class="fancy-button">+S</button>

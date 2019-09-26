@@ -8,6 +8,7 @@ function renderHeader(){
 function addShowHeaderListeners(){
   $('.header-logo').parent().click(goHome)
   $('.add-assignment-button').click(addAssignment)
+  $('.add-lt-button').click(addLt)
   $('.add-student-button').click(addStudentPage)
   $('.class-header select').change(switchClass)
   $('.lt-header select').change(switchLt)
@@ -49,6 +50,13 @@ function addStudentPage(e){
   clearData()
   getIndexData(forHeader = true)
   getStudentIndexPageData(klassId)
+}
+
+function addLt(){
+  const klassId = klass.id
+  clearData()
+  getIndexData(forHeader = true)
+  getLtFormData(klassId)
 }
 
 function adjustHeader(){

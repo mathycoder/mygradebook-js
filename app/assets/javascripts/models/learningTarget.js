@@ -181,7 +181,9 @@ class LearningTarget {
             <br>
 
             <input name="utf8" type="hidden" value="✓">
-            <ul></ul>
+            <div class="error-messages">
+              <ul></ul>
+            </div>
             <div class="standards-table">
               <table>
                 <tbody>
@@ -249,7 +251,7 @@ class LearningTarget {
           <div class="lt-form-klasses">
             <p>Add LT to another class:</p>
             <p>
-              
+
             </p>
           </div>
 

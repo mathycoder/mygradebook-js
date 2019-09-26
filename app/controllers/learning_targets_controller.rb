@@ -22,22 +22,22 @@ class LearningTargetsController < ApplicationController
   end
 
   def create
-    # @lt = @klass.learning_targets.build(lt_params)
-    # if @lt.save
-    #   @klass.learning_targets << @lt
-    #   render json: @lt, status: 201
-    # else
-    #   render json: @lt.errors.full_messages, status: 422
-    # end
 
     @lt = @klass.learning_targets.build(lt_params)
-
     if @lt.save
       @klass.learning_targets << @lt
-      redirect_to(klass_path(@klass), alert: "Learning Target successfully created")
+      render json: @lt, status: 201
     else
-      render 'new'
+      render json: @lt.errors.full_messages, status: 422
     end
+
+
+    # if @lt.save
+    #   @klass.learning_targets << @lt
+    #   redirect_to(klass_path(@klass), alert: "Learning Target successfully created")
+    # else
+    #   render 'new'
+    # end
   end
 
   def index
