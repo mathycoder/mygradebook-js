@@ -165,15 +165,105 @@ class LearningTarget {
     return data
   }
 
-    // data = self.assignments.map do |assignment|
-    //   if student
-    //     student_score = assignment.grades.where("student_id = ?", student.id).limit(1).first
-    //     score = student_score.score if student_score
-    //   else
-    //     score = assignment.average(klass)
-    //   end
-    //   [assignment.date.strftime('%b %d, %Y'), score]
-    // end
-    // data.empty? ? [[0,0]] : data
+  static renderForm(){
+    let html = ''
+    html += `
+      <h1>Add a new Learning Target</h1>
+      <div class="lt-form-container-full">
+        <div class="lt-form-container">
+          <div id="paper-lt" class="lt-form-standard paper-form">
+            <h2>Select a Common Core Standard</h2>
+
+            <select class="select-css grade-band">
+              <option value>Select a Grade</option>
+            </select>
+            <br>
+
+            <form class="new_learning_target" id="new_learning_target" action="/classes/1/lts" accept-charset="UTF-8" method="post">
+              <input name="utf8" type="hidden" value="✓">
+              <ul></ul>
+              <div class="standards-table">
+                <table>
+                  <tbody>
+                    <tr>
+                      <th></th>
+                      <th>Standard</th>
+                      <th>Description</th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </form>
+          </div>
+
+          <div class="lt-form-rubric">
+            <div class="rubric-title red">
+              <h2>
+                <input size="40" maxlength="50" placeholder="Enter a student-friendly name for this LT" type="text" name="learning_target[name]" id="learning_target_name">
+              </h2>
+            </div>
+
+            <div class="rubric-score">
+              <h2>4</h2>
+            </div>
+
+            <div class="rubric-score-desc">
+              <p>
+                <textarea maxlength="160" placeholder="Optional: What does level 4 understanding look like?" name="learning_target[level4]" id="learning_target_level4"></textarea>
+              </p>
+            </div>
+
+            <div class="rubric-score">
+              <h2>3</h2>
+            </div>
+
+            <div class="rubric-score-desc">
+              <p>
+                <textarea maxlength="160" placeholder="Optional: What does level 3 understanding look like?" name="learning_target[level3]" id="learning_target_level3"></textarea>
+              </p>
+            </div>
+
+            <div class="rubric-score">
+              <h2>2</h2>
+            </div>
+
+            <div class="rubric-score-desc">
+            <p>
+              <textarea maxlength="160" placeholder="Optional: What does level 2 understanding look like?" name="learning_target[level2]" id="learning_target_level2"></textarea>
+            </p>
+            </div>
+
+            <div class="rubric-score">
+              <h2>1</h2>
+            </div>
+
+            <div class="rubric-score-desc">
+              <p>
+                <textarea maxlength="160" placeholder="Optional: What does level 1 understanding look like?" name="learning_target[level1]" id="learning_target_level1"></textarea>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lt-form-submit-area">
+          <div class="lt-form-klasses">
+            <p>Add LT to another class:</p>
+            <p>
+              <input type="hidden" name="learning_target[klasses_attributes][0][id][]" value="">
+              <input type="checkbox" value="2" name="learning_target[klasses_attributes][0][id][]" id="learning_target_klasses_attributes_0_id_2">
+              <label for="learning_target_klasses_attributes_0_id_2">702</label>
+            </p>
+          </div>
+
+          <div class="lt-form-submit">
+            <div class="big-button">
+              <input type="submit" name="commit" value="Create Learning target" data-disable-with="Create Learning target">
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+    return html
+  }
 
 }

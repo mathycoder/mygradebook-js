@@ -31,6 +31,7 @@
 //= require students/show
 
 //= require lts/show
+//= require lts/new
 
 //= require assignments/new
 //= require assignments/edit

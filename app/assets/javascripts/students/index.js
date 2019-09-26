@@ -20,6 +20,8 @@ function renderStudentIndexPage(){
   $('.listed-students tr:first-child').nextAll().remove()
   getClassStudentsIndexData()
   $('#filter-students').click(filterIndexStudents)
+  history.pushState(null, null, `http://localhost:3000/classes/${klass.id}/students`)
+
 }
 
 function getClassStudentsIndexData() {

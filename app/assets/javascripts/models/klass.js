@@ -226,10 +226,9 @@ class Klass {
         <button class="fancy-button">+A</button>
       </div>
       <div class="add-lt-button">
-        <form action="http://localhost:3000/classes/${this.id}/lts/new" method="get">
-          <input name="utf8" type="hidden" value="✓">
-          <input type="submit" name="commit" value="+LT" class="fancy-button" data-disable-with="+LT">
-        </form>
+        <a href=http://localhost:3000/classes/${this.id}/lts/new">
+          <button class="fancy-button">+LT</button>
+        </a>
       </div>
       <div class="add-student-button">
         <button class="fancy-button">+S</button>

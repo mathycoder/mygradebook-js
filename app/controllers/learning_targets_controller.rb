@@ -9,9 +9,16 @@ class LearningTargetsController < ApplicationController
 
   def new
     ApiScraper.scrape_math_standards if Standard.all.empty?
-    @lt = LearningTarget.new
-    @standard = @lt.build_standard
-    set_standards_based_on_search_query([])
+
+    # @lt = LearningTarget.new
+    # @standard = @lt.build_standard
+    # set_standards_based_on_search_query([])
+
+    @standards = Standard.all
+    respond_to do |format|
+      format.html
+      format.json {render json: @standards}
+    end
   end
 
   def create
