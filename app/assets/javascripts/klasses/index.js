@@ -1,5 +1,5 @@
 $().ready(() => {
-  if (/^http:\/\/localhost:3000\/classes$/.test(window.location.href)){
+  if (/^http:\/\/my-gradebook.herokuapp.com\/classes$/.test(window.location.href)){
     getIndexData()
   }
 })
