@@ -7,10 +7,10 @@ $().ready(() => {
 function getIndexData(forHeader = false, forIndexHeader = false){
   $('main')[0].innerHTML = ''
   $.get(`/classes.json`, function(json){
-    for (i = 0; i<json.length; i++){
-      klasses.push(new Klass(json[i]))
+    for (i = 0; i<json.klasses.length; i++){
+      klasses.push(new Klass(json.klasses[i]))
     }
-    new Teacher(json[0].teachers[0])
+    new Teacher(json.teacher)
     if (forIndexHeader) {
       renderIndexHeader()
     } else if (forHeader){

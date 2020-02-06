@@ -25,8 +25,14 @@ class KlassesController < ApplicationController
     @klasses = current_user.klasses.sorted_by_period
     respond_to do |format|
       format.html
-      format.json {render json: @klasses.to_json(only: [:id, :name, :subject, :grade, :period],
-                                                 include: [teachers: {only: [:name, :id, :picture_url]}])}
+      format.json {render json: {
+        klasses: @klasses,
+        teacher: {
+          name: current_user.name,
+          id: current_user.id,
+          picture_url: current_user.picture_url
+        }
+      }}
     end
   end
 
