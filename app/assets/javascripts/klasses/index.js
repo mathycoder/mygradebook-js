@@ -1,5 +1,5 @@
 $().ready(() => {
-  if (/^http:\/\/localhost:3000\/classes$/.test(window.location.href) || /^https:\/\/my-gradebook.herokuapp.com\/classes$/.test(window.location.href)){
+  if (/classes$/.test(window.location.href)){
     getIndexData()
   }
 })
@@ -30,12 +30,7 @@ function renderIndexPage(){
   $('.index-new-student-button').click(addNewStudentToSchool)
   $('.class-edit-link').click(editKlass)
   renderIndexHeader()
-  if (/^http:\/\/localhost:3000$/.test(window.location.href)) {
-    history.pushState(null, null, `http://localhost:3000/classes`)
-  } else {
-    history.pushState(null, null, `https://my-gradebook.herokuapp.com/classes`)
-  }
-
+  history.pushState(null, null, `/classes`)
 }
 
 function clickOnClass(e){

@@ -1,6 +1,6 @@
 $().ready(() => {
   $('.class-header select').change(switchClass)
-  if (/^http:\/\/localhost:3000\/classes\/\d+$/.test(window.location.href)){
+  if (/classes\/\d+$/.test(window.location.href)){
     getIndexData(forHeader = true)
     getKlassData()
   }
@@ -18,7 +18,7 @@ function getKlassData(klassIdFromLink = undefined) {
     createJSONObjects(json.standards, Standard)
     createJSONObjects(json.grades, Grade)
     if (learningTargets.length === 0 ) {
-      window.location.replace(`http://localhost:3000/classes/${klass.id}/lts`)
+      window.location.replace(`/classes/${klass.id}/lts`)
     } else {
       renderShowPage()
     }
@@ -42,7 +42,7 @@ function renderShowPage(){
   Assignment.renderAverages()
   conditionalFormatting()
   adjustHeader()
-  history.pushState(null, null, `http://localhost:3000/classes/${klass.id}`)
+  history.pushState(null, null, `/classes/${klass.id}`)
   $(`.class-header option[value='${klass.id}'`)[0].selected = "selected"
 }
 

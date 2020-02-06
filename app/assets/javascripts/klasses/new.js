@@ -1,5 +1,5 @@
 $().ready(() => {
-  if (/^http:\/\/localhost:3000\/classes\/new$/.test(window.location.href)){
+  if (/classes\/new$/.test(window.location.href)){
     getIndexData(forHeader = false, forIndexHeader = true)
     renderNewKlassForm()
   }
@@ -8,7 +8,7 @@ $().ready(() => {
 function renderNewKlassForm(){
   $('main').append(Klass.formatKlassForm())
   $('.submit-klass').click(submitClass)
-  history.pushState(null, null, `http://localhost:3000/classes/new`)
+  history.pushState(null, null, `/classes/new`)
 }
 
 function submitClass(e){
