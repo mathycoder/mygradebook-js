@@ -1,5 +1,5 @@
 $().ready(() => {
-  if (/^http:\/\/localhost:3000\/classes\/\d+\/lts\/\d+\/edit/.test(window.location.href)){
+  if (/classes\/\d+\/lts\/\d+\/edit/.test(window.location.href)){
     getIndexData(forHeader = true)
     getKlassLtEditFormData()
   }
@@ -21,7 +21,7 @@ function getLtEditFormData(klassId, ltIdFromLink){
     currLt = new LearningTarget(json)
     learningTargets.pop()
     renderLtForm()
-    history.pushState(null, null, `http://localhost:3000/classes/${klass.id}/lts/${currLt.id}/edit`)
+    history.pushState(null, null, `/classes/${klass.id}/lts/${currLt.id}/edit`)
     $('.delete-lt').click(deleteLtButton)
   })
 }

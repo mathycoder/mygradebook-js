@@ -1,5 +1,5 @@
 $().ready(() => {
-  if (/^http:\/\/localhost:3000\/classes\/\d+\/assignments\/\d+\/edit$/.test(window.location.href)){
+  if (/classes\/\d+\/assignments\/\d+\/edit$/.test(window.location.href)){
     console.log("running with JS")
     getIndexData(forHeader = true)
     getAssignmentFormEditData()
@@ -33,7 +33,7 @@ function renderAssignmentEditForm(){
   $('main').append(Assignment.formatAssignmentForm())
   $('.submit-assignment').click(updateAssignment)
   $('.delete-assignment').click(deleteAssignment)
-  history.pushState(null, null, `http://localhost:3000/classes/${klass.id}/assignments/${currAssignment.id}/edit`)
+  history.pushState(null, null, `/classes/${klass.id}/assignments/${currAssignment.id}/edit`)
 }
 
 function updateAssignment(e){

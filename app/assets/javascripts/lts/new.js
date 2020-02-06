@@ -1,5 +1,5 @@
 $().ready(() => {
-  if (/^http:\/\/localhost:3000\/classes\/\d+\/lts\/new$/.test(window.location.href)){
+  if (/classes\/\d+\/lts\/new$/.test(window.location.href)){
     getIndexData(forHeader = true)
     getLtFormData()
   }
@@ -17,7 +17,7 @@ function getLtFormData(klassIdFromLink = undefined, ltIdFromLink = undefined){
 
 function renderLtForm(){
   $('main').append(LearningTarget.renderForm())
-  if (!currLt) { history.pushState(null, null, `http://localhost:3000/classes/${klass.id}/lts/new`)
+  if (!currLt) { history.pushState(null, null, `/classes/${klass.id}/lts/new`)
  }
   requestStandardGradeBands()
 }

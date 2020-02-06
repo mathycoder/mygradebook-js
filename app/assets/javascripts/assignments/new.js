@@ -1,5 +1,5 @@
 $().ready(() => {
-  if (/^http:\/\/localhost:3000\/classes\/\d+\/assignments\/new$/.test(window.location.href) || /^http:\/\/localhost:3000\/classes\/\d+\/assignments\/new\?utf8\=%E2%9C%93&commit\=%2BA$/.test(window.location.href)){
+  if (/classes\/\d+\/assignments\/new$/.test(window.location.href) || /classes\/\d+\/assignments\/new\?utf8\=%E2%9C%93&commit\=%2BA$/.test(window.location.href)){
     getIndexData(forHeader = true)
     getAssignmentFormData()
   }
