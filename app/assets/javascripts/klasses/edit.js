@@ -1,5 +1,5 @@
 $().ready(() => {
-  if (/^http:\/\/localhost:3000\/classes\/\d+\/edit$/.test(window.location.href)){
+  if (/^http:\/\/localhost:3000\/classes\/\d+\/edit$/.test(window.location.href) || /^https:\/\/my-gradebook.herokuapp.com\/classes\/\d+\/edit$/.test(window.location.href)){
     getIndexData(forHeader = false, forIndexHeader = true)
     getKlassDataBeforeEdit()
   }
@@ -19,7 +19,11 @@ function renderKlassEditForm(){
   $('main').append(Klass.formatKlassForm())
   $('.submit-klass').click(updateKlass)
   $('.delete-klass').click(deleteKlass)
-  history.pushState(null, null, `http://localhost:3000/classes/${klass.id}/edit`)
+  if (/^http:\/\/localhost:3000$/.test(window.location.href)) {
+    history.pushState(null, null, `http://localhost:3000/classes/${klass.id}/edit`)
+  } else {
+    history.pushState(null, null, `https://my-gradebook.herokuapp.com/classes/${klass.id}/edit`)
+  }
 }
 
 function updateKlass(e){
