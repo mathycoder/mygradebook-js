@@ -1,5 +1,6 @@
 $(document).ready(function() {
   if (window.location.href === "http://localhost:3000/students/new"){
+    if (/students\/new/.test(window.location.href))
     getIndexData(forHeader = false, forIndexHeader = true)
     getStudentsIndexData()
   }

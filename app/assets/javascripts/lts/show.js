@@ -1,6 +1,6 @@
 $().ready(() => {
   $('.lt-header select').change(switchLt)
-  if (/^http:\/\/localhost:3000\/classes\/\d+\/lts\/\d+$/.test(window.location.href)){
+  if (/classes\/\d+\/lts\/\d+$/.test(window.location.href)){
     getIndexData(forHeader = true)
     getLtData()
   }
@@ -41,7 +41,7 @@ function renderLtShowPage(){
   Assignment.renderAverages()
   conditionalFormatting()
   currLt.lineChart()
-  history.pushState(null, null, `http://localhost:3000/classes/${klass.id}/lts/${currLt.id}`)
+  history.pushState(null, null, `/classes/${klass.id}/lts/${currLt.id}`)
   adjustHeader()
   $(`.lt-header option[value='${currLt.id}'`)[0].selected = "selected"
   $('.student-column').parent().click(clickStudent)

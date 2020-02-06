@@ -1,6 +1,6 @@
 $().ready(() => {
   $('.student-header select').change(switchSt)
-  if (/http:\/\/localhost:3000\/classes\/\d+\/students\/\d+/.test(window.location.href)){
+  if (/classes\/\d+\/students\/\d+/.test(window.location.href)){
     getIndexData(forHeader = true)
     getStudentShowData()
   }
@@ -34,7 +34,7 @@ function renderStudentShowPage(){
   $('main').append(currStudent.formatShow())
   currStudent.summaryChart()
   learningTargets.forEach(lt => lt.lineChart(currStudent))
-  history.pushState(null, null, `http://localhost:3000/classes/${klass.id}/students/${currStudent.id}`)
+  history.pushState(null, null, `/classes/${klass.id}/students/${currStudent.id}`)
   adjustHeader()
   $(`.student-header option[value='${currStudent.id}'`)[0].selected = "selected"
   $('.lt-target-label a').click(clickLt)

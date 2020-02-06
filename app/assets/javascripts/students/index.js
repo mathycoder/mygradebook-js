@@ -1,5 +1,5 @@
 $().ready(() => {
-  if (/^http:\/\/localhost:3000\/classes\/\d+\/students$/.test(window.location.href) || /^http:\/\/localhost:3000\/classes\/\d+\/students\?utf8\=%E2%9C%93&commit\=%2BS$/.test(window.location.href)){
+  if (/classes\/\d+\/students$/.test(window.location.href) || /classes\/\d+\/students\?utf8\=%E2%9C%93&commit\=%2BS$/.test(window.location.href)){
     getIndexData(forHeader = true)
     getStudentIndexPageData()
   }
@@ -20,7 +20,7 @@ function renderStudentIndexPage(){
   $('.listed-students tr:first-child').nextAll().remove()
   getClassStudentsIndexData()
   $('#filter-students').click(filterIndexStudents)
-  history.pushState(null, null, `http://localhost:3000/classes/${klass.id}/students`)
+  history.pushState(null, null, `/classes/${klass.id}/students`)
 
 }
 
